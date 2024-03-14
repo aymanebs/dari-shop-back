@@ -54,42 +54,37 @@ class AuthController extends Controller
 
     public function loginUser(LoginRequest $request){
 
-        $user=User::where('email','=',$request->email)->first();
-      
-        if($user){
+        $credentials = $request->only('email', 'password');
 
-            if(Hash::check($request->password,$user->password)){
-                session(['user_id' => $user->id]);
-                return redirect()->route('home');
-            }
-            else{
-                echo'invalid password';
-            }
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('home');
+        } else {
+            // return back()->withErrors([
+            //     'email' => 'Invalid email or password',
+            // ]);
+            echo('Invalid email or password');
         }
-        else{
-            echo'invalid email';
-        }
+
     }
 
     // logout method
 
-    public function logout(Request $request){
-
+    public function logout(Request $request)
+    {
         Auth::logout();
-
-
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-       
-        if (!$request->session()->has('user_id')) {
-            // User is successfully logged out and user_id session variable is unset
-            
+
+        if (!Auth::check()) {
             return redirect()->route('login');
         } else {
-            
-            echo'There might be an issue with logout'; 
-         
+           
+            // return back()->withErrors([
+            //     'error' => 'There might be an issue with logout',
+            // ]);
+            echo'There might be an issue with logout';
         }
     }
 

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
 {
@@ -13,7 +14,8 @@ class Controller extends BaseController
 
     function index(){
         
-        $user = User::find(session('user_id'));
-        return view('home', ['user' => $user]);
+        $user = Auth::user();
+        //dd($user);
+        return view('home', ['authUser' => $user]);
     }
 }

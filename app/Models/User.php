@@ -13,5 +13,24 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status'
     ];
+
+    public static $statusOptions=[
+        '1' => 'active',
+        '2' => 'banned'
+    ];
+
+    //function to get the status
+
+    public function getStatus(){
+        return self::$statusOptions[$this->status];
+    }
+
+
+    // Relations between models 
+
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController as AuthAuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
@@ -32,3 +34,8 @@ Route::middleware('authCheck')->group(function () {
 });
 
 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+// Admin routes 
+
+Route::resource('categories',CategoryController::class);
+Route::resource('users',UserController::class);
