@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController as AuthAuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -19,9 +20,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/login',[AuthAuthController::class,'login']);
 Route::get('/registration',[AuthAuthController::class,'registration']);
@@ -39,3 +40,7 @@ Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard')
 
 Route::resource('categories',CategoryController::class);
 Route::resource('users',UserController::class);
+
+// Home routes
+
+Route::get('/',[HomeController::class,'index'])->name('home');
