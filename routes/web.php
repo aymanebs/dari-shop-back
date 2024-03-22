@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController as AuthAuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Seller\ProductController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -44,3 +45,7 @@ Route::resource('users',UserController::class);
 // Home routes
 
 Route::get('/',[HomeController::class,'index'])->name('home');
+
+// Seller routes
+
+Route::resource('products',ProductController::class);

@@ -11,6 +11,8 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
-        "@moesaid/cleopatra": "^1.1.1"
+        "@moesaid/cleopatra": "^1.1.1",
+        "@splidejs/splide": "^4.1.4",
+        "alpinejs": "^3.13.7"
     }
 }
