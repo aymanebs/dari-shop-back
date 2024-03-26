@@ -14,6 +14,7 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#207891" />
     <meta name="msapplication-TileColor" content="#ffc40d" />
     <meta name="theme-color" content="#ffffff" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     
 
@@ -25,7 +26,7 @@
     <header
       class="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5"
     >
-      <a href="index.html">
+      <a href="{{route('home')}}">
         <img
           class="cursor-pointer sm:h-auto sm:w-auto"
           src="{{asset('img/logo1.png')}}"
@@ -74,14 +75,16 @@
           placeholder="Search"
         />
 
-        <button class="ml-auto h-full bg-amber-400 px-4 hover:bg-yellow-300">
+        <button class="ml-auto h-full bg-rose-500 px-4 hover:bg-rose-300">
           Search
         </button>
       </form>
 
+   
+
       <div class="hidden gap-3 md:!flex">
         <a
-          href="wishlist.html"
+          href="{{route('profile.wishlist')}}"
           class="flex cursor-pointer flex-col items-center justify-center"
         >
           <svg
@@ -123,7 +126,7 @@
         </a>
 
         <a
-          href="account-page.html"
+          href="{{route('profile')}}"
           class="relative flex cursor-pointer flex-col items-center justify-center"
         >
           <span class="absolute bottom-[33px] right-1 flex h-2 w-2">
@@ -166,7 +169,7 @@
       <div class="mx-auto">
         <div class="mx-auto flex w-full justify-center gap-3 py-4">
           <a
-            href="wishlist.html"
+            href="{{route('profile.wishlist')}}"
             class="flex cursor-pointer flex-col items-center justify-center"
           >
             <svg
@@ -263,16 +266,16 @@
 
           <button
             type="submit"
-            class="ml-auto h-full bg-amber-400 px-4 hover:bg-yellow-300"
+            class="ml-auto h-full bg-rose-500 px-4 hover:bg-rose-300"
           >
             Search
           </button>
         </form>
         <ul class="text-center font-medium">
-          <li class="py-2"><a href="index.html">Home</a></li>
+          <li class="py-2"><a href="{{route('home')}}">Home</a></li>
           <li class="py-2"><a href="catalog.html">Catalog</a></li>
-          <li class="py-2"><a href="about-us.html">About Us</a></li>
-          <li class="py-2"><a href="contact-us.html">Contact Us</a></li>
+          <li class="py-2"><a href="{{route('about')}}">About Us</a></li>
+          <li class="py-2"><a href="{{route('contact')}}">Contact Us</a></li>
         </ul>
       </div>
     </section>
@@ -287,7 +290,7 @@
       >
         <button
           @click="desktopMenuOpen = ! desktopMenuOpen"
-          class="ml-5 flex h-full w-40 cursor-pointer items-center justify-center bg-amber-400"
+          class="ml-5 flex h-full w-40 cursor-pointer items-center justify-center bg-rose-500"
         >
           <div class="flex justify-around" href="#">
             <svg
@@ -311,30 +314,30 @@
 
         <div class="mx-7 flex gap-8">
           <a
-            class="font-light text-white duration-100 hover:text-yellow-400 hover:underline"
-            href="index.html"
+            class="font-light text-white duration-100 hover:text-rose-400 hover:underline"
+            href="{{route('home')}}"
             >Home</a
           >
           <a
-            class="font-light text-white duration-100 hover:text-yellow-400 hover:underline"
+            class="font-light text-white duration-100 hover:text-rose-400 hover:underline"
             href="catalog.html"
             >Catalog</a
           >
           <a
-            class="font-light text-white duration-100 hover:text-yellow-400 hover:underline"
-            href="about-us.html"
+            class="font-light text-white duration-100 hover:text-rose-400 hover:underline"
+            href="{{route('about')}}"
             >About Us</a
           >
           <a
-            class="font-light text-white duration-100 hover:text-yellow-400 hover:underline"
-            href="contact-us.html"
+            class="font-light text-white duration-100 hover:text-rose-400 hover:underline"
+            href="{{route('contact')}}"
             >Contact Us</a
           >
         </div>
 
         <div class="ml-auto flex gap-4 px-5">
           <a
-            class="font-light text-white duration-100 hover:text-yellow-400 hover:underline"
+            class="font-light text-white duration-100 hover:text-rose-400 hover:underline"
             href="login.html"
             >Login</a
           >
@@ -342,7 +345,7 @@
           <span class="text-white">&#124;</span>
 
           <a
-            class="font-light text-white duration-100 hover:text-yellow-400 hover:underline"
+            class="font-light text-white duration-100 hover:text-rose-400 hover:underline"
             href="sign-up.html"
             >Sign Up</a
           >
@@ -362,7 +365,7 @@
         <div class="w-[300px] border-r">
           <ul class="px-5">
             <li
-              class="active:blue-900 flex items-center gap-2 bg-amber-400 py-2 px-3 active:bg-amber-400"
+              class="active:blue-900 flex items-center gap-2 bg-rose-500 py-2 px-3 active:bg-rose-500"
             >
               <img
                 width="15px"
@@ -390,7 +393,7 @@
             </li>
 
             <li
-              class="active:blue-900 flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-amber-400"
+              class="active:blue-900 flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-rose-500"
             >
               <img
                 width="15px"
@@ -418,7 +421,7 @@
             </li>
 
             <li
-              class="active:blue-900 flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-amber-400"
+              class="active:blue-900 flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-rose-500"
             >
               <img
                 width="15px"
@@ -446,7 +449,7 @@
             </li>
 
             <li
-              class="active:blue-900 flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-amber-400"
+              class="active:blue-900 flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-rose-500"
             >
               <img
                 width="15px"
@@ -474,7 +477,7 @@
             </li>
 
             <li
-              class="active:blue-900 flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-amber-400"
+              class="active:blue-900 flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-rose-500"
             >
               <img
                 width="15px"
@@ -502,7 +505,7 @@
             </li>
 
             <li
-              class="active:blue-900 flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-amber-400"
+              class="active:blue-900 flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-rose-500"
             >
               <img
                 width="15px"
@@ -588,6 +591,11 @@
         alt="Living room image"
       />
 
+      {{-- <div x-data="{ message: 'Hello, Alpine.js!' }">
+        <button @click="message = 'Goodbye, Alpine.js!'">Toggle Message</button>
+        <p x-text="message"></p>
+    </div> --}}
+
       <div
         class="absolute top-1/2 left-1/2 mx-auto flex w-11/12 max-w-[1200px] -translate-x-1/2 -translate-y-1/2 flex-col text-center text-white lg:ml-5"
       >
@@ -600,7 +608,7 @@
           ducimus pariatur eaque labore.
         </p>
         <button
-          class="mx-auto mt-5 w-1/2 bg-amber-400 px-3 py-1 text-black duration-100 hover:bg-yellow-300 lg:mx-0 lg:h-10 lg:w-2/12 lg:px-10"
+          class="mx-auto mt-5 w-1/2 bg-rose-500 px-3 py-1 text-black duration-100 hover:bg-rose-300 lg:mx-0 lg:h-10 lg:w-2/12 lg:px-10"
         >
           Order Now
         </button>
@@ -617,7 +625,7 @@
       <!-- 1 -->
 
       <div
-        class="mx-5 flex flex-row items-center justify-center border-2 border-yellow-400 py-4 px-5"
+        class="mx-5 flex flex-row items-center justify-center border-2 border-rose-400 py-4 px-5"
       >
         <div class="">
           <svg
@@ -647,7 +655,7 @@
       <!-- 2 -->
 
       <div
-        class="mx-5 flex flex-row items-center justify-center border-2 border-yellow-400 py-4 px-5"
+        class="mx-5 flex flex-row items-center justify-center border-2 border-rose-400 py-4 px-5"
       >
         <div class="">
           <svg
@@ -677,7 +685,7 @@
       <!-- 3 -->
 
       <div
-        class="mx-5 flex flex-row items-center justify-center border-2 border-yellow-400 py-4 px-5"
+        class="mx-5 flex flex-row items-center justify-center border-2 border-rose-400 py-4 px-5"
       >
         <div class="">
           <svg
@@ -858,7 +866,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -871,7 +879,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -884,7 +892,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -897,7 +905,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -953,7 +961,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -966,7 +974,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -979,7 +987,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -992,7 +1000,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1048,7 +1056,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1061,7 +1069,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1074,7 +1082,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1087,7 +1095,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1144,7 +1152,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1157,7 +1165,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1170,7 +1178,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1183,7 +1191,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1240,7 +1248,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1253,7 +1261,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1266,7 +1274,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1279,7 +1287,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1336,7 +1344,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1349,7 +1357,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1362,7 +1370,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1375,7 +1383,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-4 w-4 text-yellow-400"
+                    class="h-4 w-4 text-rose-400"
                   >
                     <path
                       fill-rule="evenodd"
@@ -1419,14 +1427,14 @@
       >
         <div class="py-8 px-3 lg:px-16">
           <p class="text-white">ONLINE EXCLUSIVE</p>
-          <h2 class="pt-6 text-5xl font-bold text-yellow-400">15% OFF</h2>
+          <h2 class="pt-6 text-5xl font-bold text-rose-400">15% OFF</h2>
           <p class="pt-4 text-white">
             ACCENT CHAIRS, <br />
             TABLES & OTTOMANS
           </p>
           <button
             href="#"
-            class="mt-6 bg-amber-400 px-4 py-2 duration-100 hover:bg-yellow-300"
+            class="mt-6 bg-rose-500 px-4 py-2 duration-100 hover:bg-rose-300"
           >
             Shop now
           </button>
@@ -1462,7 +1470,7 @@
           >
             <a href="product-overview.html">
               <span
-                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1481,7 +1489,7 @@
               </span>
             </a>
             <span
-              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1497,7 +1505,7 @@
           </div>
 
           <div
-            class="absolute right-1 mt-3 flex items-center justify-center bg-amber-400"
+            class="absolute right-1 mt-3 flex items-center justify-center bg-rose-500"
           >
             <p class="px-2 py-2 text-sm">&minus; 25&percnt; OFF</p>
           </div>
@@ -1515,7 +1523,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1528,7 +1536,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1541,7 +1549,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1554,7 +1562,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1601,7 +1609,7 @@
           >
             <a href="product-overview.html">
               <span
-                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1620,7 +1628,7 @@
               </span>
             </a>
             <span
-              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1636,7 +1644,7 @@
           </div>
 
           <div
-            class="absolute right-1 mt-3 flex items-center justify-center bg-amber-400"
+            class="absolute right-1 mt-3 flex items-center justify-center bg-rose-500"
           >
             <p class="px-2 py-2 text-sm">&minus; 25&percnt; OFF</p>
           </div>
@@ -1654,7 +1662,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1667,7 +1675,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1680,7 +1688,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1693,7 +1701,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1735,7 +1743,7 @@
           >
             <a href="product-overview.html">
               <span
-                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1754,7 +1762,7 @@
               </span>
             </a>
             <span
-              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1770,7 +1778,7 @@
           </div>
 
           <div
-            class="absolute right-1 mt-3 flex items-center justify-center bg-amber-400"
+            class="absolute right-1 mt-3 flex items-center justify-center bg-rose-500"
           >
             <p class="px-2 py-2 text-sm">&minus; 25&percnt; OFF</p>
           </div>
@@ -1788,7 +1796,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1801,7 +1809,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1814,7 +1822,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1827,7 +1835,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1873,7 +1881,7 @@
           >
             <a href="product-overview.html">
               <span
-                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1892,7 +1900,7 @@
               </span>
             </a>
             <span
-              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1908,7 +1916,7 @@
           </div>
 
           <div
-            class="absolute right-1 mt-3 flex items-center justify-center bg-amber-400"
+            class="absolute right-1 mt-3 flex items-center justify-center bg-rose-500"
           >
             <p class="px-2 py-2 text-sm">&minus; 25&percnt; OFF</p>
           </div>
@@ -1926,7 +1934,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1939,7 +1947,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1952,7 +1960,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -1965,7 +1973,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2007,7 +2015,7 @@
           >
             <a href="product-overview.html">
               <span
-                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -2026,7 +2034,7 @@
               </span>
             </a>
             <span
-              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -2042,7 +2050,7 @@
           </div>
 
           <div
-            class="absolute right-1 mt-3 flex items-center justify-center bg-amber-400"
+            class="absolute right-1 mt-3 flex items-center justify-center bg-rose-500"
           >
             <p class="px-2 py-2 text-sm">&minus; 25&percnt; OFF</p>
           </div>
@@ -2060,7 +2068,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2073,7 +2081,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2086,7 +2094,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2099,7 +2107,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2145,7 +2153,7 @@
           >
             <a href="product-overview.html">
               <span
-                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -2164,7 +2172,7 @@
               </span>
             </a>
             <span
-              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -2180,7 +2188,7 @@
           </div>
 
           <div
-            class="absolute right-1 mt-3 flex items-center justify-center bg-amber-400"
+            class="absolute right-1 mt-3 flex items-center justify-center bg-rose-500"
           >
             <p class="px-2 py-2 text-sm">&minus; 25&percnt; OFF</p>
           </div>
@@ -2198,7 +2206,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2211,7 +2219,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2224,7 +2232,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2237,7 +2245,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2283,7 +2291,7 @@
           >
             <a href="product-overview.html">
               <span
-                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -2302,7 +2310,7 @@
               </span>
             </a>
             <span
-              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -2318,7 +2326,7 @@
           </div>
 
           <div
-            class="absolute right-1 mt-3 flex items-center justify-center bg-amber-400"
+            class="absolute right-1 mt-3 flex items-center justify-center bg-rose-500"
           >
             <p class="px-2 py-2 text-sm">&minus; 25&percnt; OFF</p>
           </div>
@@ -2336,7 +2344,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2349,7 +2357,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2362,7 +2370,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2375,7 +2383,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2421,7 +2429,7 @@
           >
             <a href="product-overview.html">
               <span
-                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -2440,7 +2448,7 @@
               </span>
             </a>
             <span
-              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
+              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -2456,7 +2464,7 @@
           </div>
 
           <div
-            class="absolute right-1 mt-3 flex items-center justify-center bg-amber-400"
+            class="absolute right-1 mt-3 flex items-center justify-center bg-rose-500"
           >
             <p class="px-2 py-2 text-sm">&minus; 25&percnt; OFF</p>
           </div>
@@ -2474,7 +2482,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2487,7 +2495,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2500,7 +2508,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2513,7 +2521,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="h-4 w-4 text-yellow-400"
+              class="h-4 w-4 text-rose-400"
             >
               <path
                 fill-rule="evenodd"
@@ -2632,11 +2640,11 @@
 
     <!-- Payment and copyright  -->
 
-    <section class="h-11 bg-amber-400">
+    <section class="h-11 bg-rose-500">
       <div
         class="mx-auto flex max-w-[1200px] items-center justify-between px-4 pt-2"
       >
-        <p>&copy; Bogdan Bulakh, 2023</p>
+        <p>&copy; Dari Shop, 2024</p>
         <div class="flex items-center space-x-3">
           <img
             class="h-8"
@@ -2657,6 +2665,7 @@
       </div>
     </section>
     <!-- /Payment and copyright  -->
+    
     <script type="module" src="{{asset('js/script.js')}}"></script>
   </body>
 </html>
