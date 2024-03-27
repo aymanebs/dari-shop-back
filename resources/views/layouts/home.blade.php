@@ -14,9 +14,18 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#207891" />
     <meta name="msapplication-TileColor" content="#ffc40d" />
     <meta name="theme-color" content="#ffffff" />
+    {{-- Alpine js CDN --}}
+    <script
+    src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+    defer
+    ></script>
+    {{-- Tailwind CDN --}}
     <script src="https://cdn.tailwindcss.com"></script>
-    
-
+    {{-- Splide js CDN --}}
+    <link href="
+    https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
+    " rel="stylesheet">
+    {{-- title --}}
     <title>@yield('title','Dari shop')</title>
   </head>
 
@@ -25,6 +34,8 @@
     <header
       class="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5"
     >
+    
+    {{-- logo --}}
       <a href="{{route('home')}}">
         <img
           class="cursor-pointer sm:h-auto sm:w-auto"
@@ -51,6 +62,8 @@
           </svg>
         </button>
       </div>
+
+      {{-- serach form --}}
 
       <form class="hidden h-9 w-2/5 items-center border md:flex">
         <svg
@@ -79,6 +92,11 @@
         </button>
       </form>
 
+      {{-- /serach form --}}
+
+   
+      {{-- wishlist Cart Account --}}
+      
       <div class="hidden gap-3 md:!flex">
         <a
           href="{{route('profile.wishlist')}}"
@@ -103,7 +121,7 @@
         </a>
 
         <a
-          href="cart.html"
+          href="{{route('cart')}}"
           class="flex cursor-pointer flex-col items-center justify-center"
         >
           <svg
@@ -153,6 +171,8 @@
           <p class="text-xs">Account</p>
         </a>
       </div>
+      {{-- /wishlist Cart Account --}}
+
     </header>
     <!-- /Header -->
 
@@ -188,7 +208,7 @@
           </a>
 
           <a
-            href="cart.html"
+            href="{{route('cart')}}"
             class="flex cursor-pointer flex-col items-center justify-center"
           >
             <svg
@@ -208,7 +228,7 @@
           </a>
 
           <a
-            href="account-page.html"
+            href="{{route('profile')}}"
             class="relative flex cursor-pointer flex-col items-center justify-center"
           >
             <span class="absolute bottom-[33px] right-1 flex h-2 w-2">
@@ -269,10 +289,10 @@
           </button>
         </form>
         <ul class="text-center font-medium">
-            <li class="py-2"><a href="{{route('home')}}">Home</a></li>
-            <li class="py-2"><a href="catalog.html">Catalog</a></li>
-            <li class="py-2"><a href="{{route('about')}}">About Us</a></li>
-            <li class="py-2"><a href="{{route('contact')}}">Contact Us</a></li>
+          <li class="py-2"><a href="{{route('home')}}">Home</a></li>
+          <li class="py-2"><a href="catalog.html">Catalog</a></li>
+          <li class="py-2"><a href="{{route('about')}}">About Us</a></li>
+          <li class="py-2"><a href="{{route('contact')}}">Contact Us</a></li>
         </ul>
       </div>
     </section>
@@ -351,7 +371,7 @@
     </nav>
     <!-- /Nav bar -->
 
-    <!-- Menu  -->
+    <!-- Categories Menu  -->
     <section
       x-show="desktopMenuOpen"
       @click.outside="desktopMenuOpen = false"
@@ -577,119 +597,124 @@
       </div>
     </section>
 
+    <!-- /Menu  -->
+
     @yield('content')
 
   
-    <!-- Desktop Footer  -->
+  <!-- Desktop Footer  -->
 
-    <footer
-      class="mx-auto w-full max-w-[1200px] justify-between pb-10 flex flex-col lg:flex-row"
-    >
-      <div class="ml-5">
+  <footer
+  class="mx-auto w-full max-w-[1200px] justify-between pb-10 flex flex-col lg:flex-row"
+>
+  <div class="ml-5">
+    <img
+      class="mt-10 mb-5"
+      src="{{asset('img/logo.png')}}"
+      alt="company logo"
+    />
+    <p class="pl-0">
+      Lorem ipsum dolor sit amet consectetur <br />
+      adipisicing elit.
+    </p>
+    <div class="mt-10 flex gap-3">
+      <a href="https://github.com/bbulakh">
         <img
-          class="mt-10 mb-5"
-          src="{{asset('img/logo.png')}}"
-          alt="company logo"
+          class="h-5 w-5 cursor-pointer"
+          src="{{asset('img/github.svg')}}"
         />
-        <p class="pl-0">
-          Lorem ipsum dolor sit amet consectetur <br />
-          adipisicing elit.
-        </p>
-        <div class="mt-10 flex gap-3">
-          <a href="https://github.com/bbulakh">
-            <img
-              class="h-5 w-5 cursor-pointer"
-              src="{{asset('img/github.svg')}}"
-            />
-          </a>
-          <a href="https://t.me/b_bulakh">
-            <img
-              class="h-5 w-5 cursor-pointer"
-              src="{{asset('img/telegram.svg')}}"
-              alt="telegram icon"
-            />
-          </a>
-          <a href="https://www.linkedin.com/in/bogdan-bulakh-393284190/">
-            <img
-              class="h-5 w-5 cursor-pointer"
-              src="{{asset('img/linkedin.svg')}}"
-              alt="twitter icon"
-            />
-          </a>
-        </div>
-      </div>
+      </a>
+      <a href="https://t.me/b_bulakh">
+        <img
+          class="h-5 w-5 cursor-pointer"
+          src="{{asset('img/telegram.svg')}}"
+          alt="telegram icon"
+        />
+      </a>
+      <a href="https://www.linkedin.com/in/bogdan-bulakh-393284190/">
+        <img
+          class="h-5 w-5 cursor-pointer"
+          src="{{asset('img/linkedin.svg')}}"
+          alt="twitter icon"
+        />
+      </a>
+    </div>
+  </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="mx-5 mt-10">
-          <p class="font-medium text-gray-500">FEATURES</p>
-          <ul class="text-sm leading-8">
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Commerce</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Merchendise</a></li>
-          </ul>
-        </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div class="mx-5 mt-10">
+      <p class="font-medium text-gray-500">FEATURES</p>
+      <ul class="text-sm leading-8">
+        <li><a href="#">Marketing</a></li>
+        <li><a href="#">Commerce</a></li>
+        <li><a href="#">Analytics</a></li>
+        <li><a href="#">Merchendise</a></li>
+      </ul>
+    </div>
 
-        <div class="mx-5 mt-10">
-          <p class="font-medium text-gray-500">SUPPORT</p>
-          <ul class="text-sm leading-8">
-            <li><a href="#">Pricing</a></li>
-            <li><a href="#">Docs</a></li>
-            <li><a href="#">Audition</a></li>
-            <li><a href="#">Art Status</a></li>
-          </ul>
-        </div>
+    <div class="mx-5 mt-10">
+      <p class="font-medium text-gray-500">SUPPORT</p>
+      <ul class="text-sm leading-8">
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Docs</a></li>
+        <li><a href="#">Audition</a></li>
+        <li><a href="#">Art Status</a></li>
+      </ul>
+    </div>
 
-        <div class="mx-5 mt-10">
-          <p class="font-medium text-gray-500">DOCUMENTS</p>
-          <ul class="text-sm leading-8">
-            <li><a href="#">Terms</a></li>
-            <li><a href="#">Conditions</a></li>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">License</a></li>
-          </ul>
-        </div>
+    <div class="mx-5 mt-10">
+      <p class="font-medium text-gray-500">DOCUMENTS</p>
+      <ul class="text-sm leading-8">
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Conditions</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">License</a></li>
+      </ul>
+    </div>
 
-        <div class="mx-5 mt-10">
-          <p class="font-medium text-gray-500">DELIVERY</p>
-          <ul class="text-sm leading-8">
-            <li><a href="#">List of countries</a></li>
-            <li><a href="#">Special information</a></li>
-            <li><a href="#">Restrictions</a></li>
-            <li><a href="#">Payment</a></li>
-          </ul>
-        </div>
-      </div>
-    </footer>
-    <!-- /Desktop Footer  -->
+    <div class="mx-5 mt-10">
+      <p class="font-medium text-gray-500">DELIVERY</p>
+      <ul class="text-sm leading-8">
+        <li><a href="#">List of countries</a></li>
+        <li><a href="#">Special information</a></li>
+        <li><a href="#">Restrictions</a></li>
+        <li><a href="#">Payment</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<!-- /Desktop Footer  -->
 
-    <!-- Payment and copyright  -->
+<!-- Payment and copyright  -->
 
-    <section class="h-11 bg-rose-500">
-      <div
-        class="mx-auto flex max-w-[1200px] items-center justify-between px-4 pt-2"
-      >
-        <p>&copy; Dari Shop, 2024</p>
-        <div class="flex items-center space-x-3">
-          <img
-            class="h-8"
-            src="https://cdn-icons-png.flaticon.com/512/5968/5968299.png"
-            alt="Visa icon"
-          />
-          <img
-            class="h-8"
-            src="https://cdn-icons-png.flaticon.com/512/349/349228.png"
-            alt="AE icon"
-          />
-          <img
-            class="h-8"
-            src="https://cdn-icons-png.flaticon.com/512/5968/5968144.png"
-            alt="Apple pay icon"
-          />
-        </div>
-      </div>
-    </section>
-    <!-- /Payment and copyright  -->
-    <script type="module" src="{{asset('js/script.js')}}"></script>
-  </body>
+<section class="h-11 bg-rose-500">
+  <div
+    class="mx-auto flex max-w-[1200px] items-center justify-between px-4 pt-2"
+  >
+    <p>&copy; Dari Shop, 2024</p>
+    <div class="flex items-center space-x-3">
+      <img
+        class="h-8"
+        src="https://cdn-icons-png.flaticon.com/512/5968/5968299.png"
+        alt="Visa icon"
+      />
+      <img
+        class="h-8"
+        src="https://cdn-icons-png.flaticon.com/512/349/349228.png"
+        alt="AE icon"
+      />
+      <img
+        class="h-8"
+        src="https://cdn-icons-png.flaticon.com/512/5968/5968144.png"
+        alt="Apple pay icon"
+      />
+    </div>
+  </div>
+</section>
+<!-- /Payment and copyright  -->
+<script src="
+https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
+"></script>
+<script type="module" src="{{asset('js/script.js')}}"></script>
+</body>
 </html>

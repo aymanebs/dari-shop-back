@@ -1,7 +1,7 @@
 
-import '@splidejs/splide/dist/css/splide.min.css';
-import Splide from '@splidejs/splide';
-import Alpine from 'alpinejs';
+// import '@splidejs/splide/dist/css/splide.min.css';
+// import Splide from '@splidejs/splide';
+// import Alpine from 'alpinejs';
  
 // Start AlpineJS
 window.Alpine = Alpine;
