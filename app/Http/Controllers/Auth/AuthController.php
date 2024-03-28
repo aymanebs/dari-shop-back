@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest as AuthRegisterRequest;
+use App\Models\Customer;
+use App\Models\Seller;
 use App\Models\User;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -30,11 +33,37 @@ class AuthController extends Controller
       try {
         DB::beginTransaction();
 
-        $user = User::create([
-            'name' => $request ->name,
+        $user = User::create([ 
             'email' => $request ->email,
             'password' => Hash::make($request->password),
         ]);
+
+        if($request->role == '1'){
+
+           $user->roles()->attach(3);
+
+           Customer::create([
+               'user_id' => $user->id,
+               'name' => $request ->name,
+               'phone' => $request->phone,
+               'adress' => $request->adress,
+           ]);
+
+        }
+
+        else if($request->role == '2'){
+
+            $user->roles()->attach(4);
+
+            $seller=Seller::create([
+                'user_id' => $user->id,
+                'name' => $request ->name,
+                'phone' => $request->phone,
+                'adress' => $request->adress,
+            ]);
+            $seller->addMediaFromRequest('justify')->toMediaCollection('justifications');
+ 
+         }
 
         DB::commit();
       

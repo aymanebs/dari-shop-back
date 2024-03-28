@@ -33,4 +33,12 @@ class User extends Authenticatable
     public function roles(){
         return $this->belongsToMany(Role::class);
     }
+
+    public function customer(){
+        return $this->hasOne(Customer::class);
+    }
+
+    public function seller(){
+        return $this->hasOne(Seller::class);
+    }
 }
