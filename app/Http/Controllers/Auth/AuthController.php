@@ -16,72 +16,70 @@ use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
-    public function login(){
+    public function login()
+    {
         return view('auth.login');
     }
 
-    public function registration(){
+    public function registration()
+    {
         return view('auth.registration');
     }
 
 
-    public function register(AuthRegisterRequest $request ){
-       
+    public function register(AuthRegisterRequest $request)
+    {
+
         /*
        Database Insert
        */
-      try {
-        DB::beginTransaction();
+        try {
+            DB::beginTransaction();
 
-        $user = User::create([ 
-            'email' => $request ->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        if($request->role == '1'){
-
-           $user->roles()->attach(3);
-
-           Customer::create([
-               'user_id' => $user->id,
-               'name' => $request ->name,
-               'phone' => $request->phone,
-               'adress' => $request->adress,
-           ]);
-
-        }
-
-        else if($request->role == '2'){
-
-            $user->roles()->attach(4);
-
-            $seller=Seller::create([
-                'user_id' => $user->id,
-                'name' => $request ->name,
-                'phone' => $request->phone,
-                'adress' => $request->adress,
+            $user = User::create([
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
             ]);
-            $seller->addMediaFromRequest('justify')->toMediaCollection('justifications');
- 
-         }
 
-        DB::commit();
-      
-        return back();
-    }
+            if ($request->role == '1') {
 
-    catch (\Exception $e) {
+                $user->roles()->attach(3);
 
-        DB::rollBack();
+                Customer::create([
+                    'user_id' => $user->id,
+                    'name' => $request->name,
+                    'phone' => $request->phone,
+                    'adress' => $request->adress,
+                ]);
+            } else if ($request->role == '2') {
 
-       
-        return back()->withInput()->with('error', 'Une erreur s\'est produite lors de la création de votre compte. Veuillez réessayer plus tard.');
-    }
+                $user->roles()->attach(4);
+
+                $seller = Seller::create([
+                    'user_id' => $user->id,
+                    'name' => $request->name,
+                    'phone' => $request->phone,
+                    'adress' => $request->adress,
+                ]);
+                $seller->addMediaFromRequest('justify')->toMediaCollection('justifications');
+            }
+
+            DB::commit();
+
+            return redirect()->route('home');
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+
+            return back()->withInput()->with('error', 'Une erreur s\'est produite lors de la création de votre compte. Veuillez réessayer plus tard.');
+        }
     }
 
     // login user
 
-    public function loginUser(LoginRequest $request){
+    public function loginUser(LoginRequest $request)
+    {
 
         $credentials = $request->only('email', 'password');
 
@@ -92,9 +90,8 @@ class AuthController extends Controller
             // return back()->withErrors([
             //     'email' => 'Invalid email or password',
             // ]);
-            echo('Invalid email or password');
+            echo ('Invalid email or password');
         }
-
     }
 
     // logout method
@@ -109,14 +106,11 @@ class AuthController extends Controller
         if (!Auth::check()) {
             return redirect()->route('login');
         } else {
-           
+
             // return back()->withErrors([
             //     'error' => 'There might be an issue with logout',
             // ]);
-            echo'There might be an issue with logout';
+            echo 'There might be an issue with logout';
         }
     }
-
-
-        
 }
