@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -45,13 +46,21 @@ class AuthController extends Controller
 
                 $user->roles()->attach(3);
 
-                Customer::create([
+                $customer=Customer::create([
                     'user_id' => $user->id,
                     'name' => $request->name,
                     'phone' => $request->phone,
                     'adress' => $request->adress,
                 ]);
-            } else if ($request->role == '2') {
+                try{
+                    $customer->addMedia('img/default_avatar.png')->toMediaCollection('avatars');
+                }
+                catch(\Exception $e){
+                    dd($e->getMessage());
+                }
+
+            } 
+            else if ($request->role == '2') {
 
                 $user->roles()->attach(4);
 
@@ -60,13 +69,17 @@ class AuthController extends Controller
                     'name' => $request->name,
                     'phone' => $request->phone,
                     'adress' => $request->adress,
+                    'city' => '',
+                    'region' => '',
                 ]);
                 $seller->addMediaFromRequest('justify')->toMediaCollection('justifications');
             }
 
             DB::commit();
 
+            Auth::login($user);
             return redirect()->route('home');
+
         } catch (\Exception $e) {
 
             DB::rollBack();

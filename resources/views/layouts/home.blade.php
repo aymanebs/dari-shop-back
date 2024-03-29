@@ -355,7 +355,7 @@
         <div class="ml-auto flex gap-4 px-5">
           <a
             class="font-light text-white duration-100 hover:text-rose-400 hover:underline"
-            href="login.html"
+            href="{{route('login_page')}}"
             >Login</a
           >
 
@@ -363,7 +363,7 @@
 
           <a
             class="font-light text-white duration-100 hover:text-rose-400 hover:underline"
-            href="sign-up.html"
+            href="{{route('registration')}}"
             >Sign Up</a
           >
         </div>

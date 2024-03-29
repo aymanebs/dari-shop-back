@@ -27,8 +27,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 //     return view('welcome');
 // });
 
-Route::get('/login',[AuthAuthController::class,'login']);
-Route::get('/registration',[AuthAuthController::class,'registration']);
+Route::get('/login',[AuthAuthController::class,'login'])->name('login_page');
+Route::get('/registration',[AuthAuthController::class,'registration'])->name('registration');
 Route::post('/register',[AuthAuthController::class,'register'])->name('register');
 Route::post('/login',[AuthAuthController::class,'loginUser'])->name('login');
 
@@ -62,3 +62,6 @@ Route::get('/profile',[ProfileController::class,'index'])->name('profile');
 Route::get('/profile/edit',[ProfileController::class,'edit'])->name('profile.edit');
 Route::get('/profile/wishlist',[ProfileController::class,'wishlist'])->name('profile.wishlist');
 Route::resource('orders',OrderController::class);
+Route::get('/profile/edit-adress',[ProfileController::class,'editAdress'])->name('profile.edit-adress');
+Route::get('/profile/edit-password',[ProfileController::class,'editPassword'])->name('profile.edit-password');
+Route::patch('/profile/update/{customer}',[ProfileController::class,'update'])->name('profile.update');

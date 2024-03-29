@@ -5,12 +5,12 @@
           width="40px"
           height="40px"
           class="rounded-full object-cover"
-          src="./assets/images/avatar-photo.png"
+          src="{{auth()->user()->customer->getFirstMediaUrl('avatars')}}"
           alt="Red woman portrait"
         />
         <div class="ml-5">
           <p class="font-medium text-gray-500">Hello,</p>
-          <p class="font-bold">Sarah Johnson</p>
+          <p class="font-bold">{{auth()->user()->customer->name}}</p>
         </div>
       </div>
     </div>
@@ -45,12 +45,12 @@
               >Profile information</a
             >
             <a
-              href="#"
+              href="{{route('profile.edit-adress')}}"
               class="text-gray-500 duration-100 hover:text-rose-400"
               >Manage Addresses</a
             >
             <a
-              href="#"
+              href="{{route('profile.edit-password')}}"
               class="text-gray-500 duration-100 hover:text-rose-400"
               >Change password</a
             >
