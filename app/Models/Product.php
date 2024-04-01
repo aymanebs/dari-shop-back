@@ -38,4 +38,9 @@ class Product extends Model implements HasMedia
         
         return $this->belongsTo(Category::class);
     }
+
+    public function seller(){
+        
+        return $this->belongsTo(Seller::class);
+    }
 }

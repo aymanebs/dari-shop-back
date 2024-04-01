@@ -15,7 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $seller = auth()->user()->seller;
+        $products = $seller->products()->with('category')->get();
+        return view('seller/products/index',compact('products'));
     }
 
     /**
@@ -50,10 +52,12 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        return view('seller/products/edit',compact('product','categories'));
     }
+  
 
     /**
      * Update the specified resource in storage.

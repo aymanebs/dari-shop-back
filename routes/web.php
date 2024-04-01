@@ -43,6 +43,7 @@ Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard')
 
 Route::resource('categories',CategoryController::class);
 Route::resource('users',AdminUserController::class);
+Route::get('/admin/products',[ProductController::class,'index'])->name('admin.products');
 
 // Home routes
 
