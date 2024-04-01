@@ -14,51 +14,69 @@
                   <p>Veuiller remplir tous les champs</p>
                 </div>
 
-                <form action="{{route('products.store')}}" method="POST">
+                <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
                     
                     @csrf
 
-                
+                <input type="hidden" name="seller_id" value="{{Auth::user()->seller->id}}">
 
                 <div class="lg:col-span-2">
                   <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                     <div class="md:col-span-5">
                       <label for="full_name">Nom du produit</label>
                       <input type="text" name="name" id="name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                      @error('name')
+                      <span class="text-red-500 text-xs">{{$message}}</span>
+                      @enderror
                     </div>
 
                     <div class="md:col-span-3">
                         <label for="price">Prix du produit</label>
                         <input type="number" name="price" id="price" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="0.00" step="1" />
+                        @error('price')
+                        <span class="text-red-500 text-xs">{{$message}}</span>
+                        @enderror
                       </div>
 
                       <div class="md:col-span-2">
                         <label for="price">Quantité</label>
                         <input type="number" name="quantity" id="quantity" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="00" step="1" />
+                        @error('quantity')
+                        <span class="text-red-500 text-xs">{{$message}}</span>
+                        @enderror
                       </div>
 
                      <!-- Add select field for categories -->
                      <div class="md:col-span-5">
                         <label for="category">Catégorie</label>
-                        <select name="category" id="category" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
+                        <select name="category_id" id="category" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
                           <option value="">Sélectionner une catégorie</option>
-                          <option value="category1">Catégorie 1</option>
-                          <option value="category2">Catégorie 2</option>
-                          <option value="category3">Catégorie 3</option>
+                          @foreach ($categories as $category)
+                          <option value="{{$category->id}}">{{$category->name}}</option>
+                          @endforeach
                           <!-- Add more options as needed -->
                         </select>
+                        @error('category_id')
+                        <span class="text-red-500 text-xs">{{$message}}</span>
+                        @enderror
                       </div>
 
                       <!-- Add field to submit an image -->
                       <div class="md:col-span-5">
                         <label for="image">Image du produit</label>
                         <input type="file" name="image" id="image" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" accept="image/*" />
+                        @error('image')
+                        <span class="text-red-500 text-xs">{{$message}}</span>
+                        @enderror
                       </div>
         
                       <!-- Add description field -->
                       <div class="md:col-span-5">
                         <label for="description">Description du produit</label>
                         <textarea name="description" id="description" class="h-32 border mt-1 rounded px-4 w-full bg-gray-50"></textarea>
+                        @error('description')
+                        <span class="text-red-500 text-xs">{{$message}}</span>
+                        @enderror
                       </div>
             
                     <div class="md:col-span-5 text-right">

@@ -872,13 +872,15 @@
       class="mx-auto grid max-w-[1200px] grid-cols-2 gap-3 px-5 pb-10 lg:grid-cols-4"
     >
       <!-- 1 -->
+    @foreach($products as $product)
+
 
       <div class="flex flex-col">
         <div class="relative flex">
           <img
             class=""
-            src="{{asset('img/product-chair.png')}}"
-            alt="sofa image"
+            src="{{$product->getFirstMediaUrl('products')}}"
+            alt="product image"
           />
           <div
             class="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100"
@@ -927,9 +929,9 @@
         </div>
 
         <div>
-          <p class="mt-2">CHAIR</p>
+          <p class="mt-2">{{$product->name}}</p>
           <p class="font-medium text-violet-900">
-            $45.00
+            {{$product->price}}
             <span class="text-sm text-gray-500 line-through">$500.00</span>
           </p>
 
@@ -1009,9 +1011,13 @@
         </div>
       </div>
 
+
+   
+    @endforeach  
+  
       <!-- 2 -->
 
-      <div class="flex flex-col">
+      {{-- <div class="flex flex-col">
         <div class="relative flex">
           <img
             class=""
@@ -1146,11 +1152,11 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <!-- 3 -->
 
-      <div class="flex flex-col">
+      {{-- <div class="flex flex-col">
         <div class="relative flex">
           <img class="" src="{{asset('img/kitchen.png')}}" alt="kitchen image" />
           <div
@@ -1280,11 +1286,11 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <!-- 4 -->
 
-      <div class="flex flex-col">
+      {{-- <div class="flex flex-col">
         <div class="relative flex">
           <img
             class=""
@@ -1418,11 +1424,11 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <!-- 5 -->
 
-      <div class="flex flex-col">
+      {{-- <div class="flex flex-col">
         <div class="relative flex">
           <img class="" src="{{asset('img/bedroom.png')}}" alt="Bedroom image" />
           <div
@@ -1552,11 +1558,11 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <!-- 6 -->
 
-      <div class="flex flex-col">
+      {{-- <div class="flex flex-col">
         <div class="relative flex">
           <img
             class=""
@@ -1690,11 +1696,11 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <!-- 7 -->
 
-      <div class="flex flex-col">
+      {{-- <div class="flex flex-col">
         <div class="relative flex">
           <img
             class=""
@@ -1828,11 +1834,11 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <!-- 8 -->
 
-      <div class="flex flex-col">
+      {{-- <div class="flex flex-col">
         <div class="relative flex">
           <img
             class=""
@@ -1966,7 +1972,8 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> --}}
+
     </section>
     <!-- /Recommendations -->
 

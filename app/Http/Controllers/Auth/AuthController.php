@@ -41,7 +41,7 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
-
+            dd($request->address);
             if ($request->role == '1') {
 
                 $user->roles()->attach(3);
@@ -52,12 +52,12 @@ class AuthController extends Controller
                     'phone' => $request->phone,
                     'adress' => $request->adress,
                 ]);
-                try{
-                    $customer->addMedia('img/default_avatar.png')->toMediaCollection('avatars');
-                }
-                catch(\Exception $e){
-                    dd($e->getMessage());
-                }
+                // try{
+                //     $customer->addMedia(public_path('img/default_avatar.png'))->preservingOriginal()->toMediaCollection('avatars');
+                // }
+                // catch(\Exception $e){
+                //     dd($e->getMessage());
+                // }
 
             } 
             else if ($request->role == '2') {

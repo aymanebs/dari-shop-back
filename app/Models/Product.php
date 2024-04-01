@@ -12,7 +12,7 @@ class Product extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
 
-    protected $fillabe =[
+    protected $fillable =[
 
         'name',
         'price',

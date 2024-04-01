@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -19,16 +22,21 @@ class ProductController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('seller/products/create');
+    {   
+        $categories = Category::all();
+        return view('seller/products/create',compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        //
+        $product=Product::create($request->all());
+        $product->addMediaFromRequest('image')->toMediaCollection('products');
+        return redirect()->route('products.index');
+        
+
     }
 
     /**

@@ -12,7 +12,7 @@
 
 <body>
   <div id="loading-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-60" style="display: none">
-
+    
     <svg class="animate-spin h-8 w-8 text-white mr-3" xmlns="http://www.w3.org/2000/svg" fill="none"
         viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -44,23 +44,32 @@
 
 
             <div class="mb-6">
-                <input type="email" placeholder="Email Address" name="email"
-                    class="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
+                <input type="email" placeholder="Email Address" name="email" id="email"
+                    class=" w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'"
                     value="{{ old('email') }}" />
+                    @error('email')
+                    <span class="text-red-500 text-xs">{{$message}}</span>
+                    @enderror
             </div>
 
 
             <div class="mb-6">
-                <input type="password" placeholder="Password" name="password"
-                    class="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
+                <input  type="password" placeholder="Password" name="password" id="password"
+                    class=" w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'"
                     value="{{ old('password') }}" />
+                    @error('password')
+                    <span class="text-red-500 text-xs">{{$message}}</span>
+                    @enderror
             </div>
             <div class="mb-6">
-                <input type="password" placeholder="Confirm Password" name="password_confirmation"
-                    class="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
+                <input type="password" placeholder="Confirm Password" name="password_confirmation" id="password_confirmation"
+                    class=" w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'" />
+                    @error('password_confirmation')
+                    <span class="text-red-500 text-xs">{{$message}}</span>
+                    @enderror
             </div>
 
         </div>
@@ -111,6 +120,9 @@
                             <div class="w-full text-sm"></div>
                         </div>
                     </label>
+                    @error('role')
+                    <span class="text-red-500 text-xs">{{$message}}</span>
+                    @enderror
                 </li>
 
             </ul>
@@ -129,11 +141,14 @@
             <div class="mb-6" id="sellerFields" style="display: none">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="file_input">Upload
                     file</label>
-                <input type="file" name="justify"
+                <input type="file" name="justify" id="justify"
                     class="w-full  rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'" />
                 <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PDF, SVG, PNG, JPG or
                     GIF (MAX. 800x400px).</p>
+                    @error('justify')
+                    <span class="text-red-500 text-xs">{{$message}}</span>
+                    @enderror
             </div>
 
             <div class="mb-6">
@@ -141,21 +156,31 @@
                     class="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'"
                     value="{{ old('name') }}" />
+                    @error('name')
+                    <span class="text-red-500 text-xs">{{$message}}</span>
+                    @enderror
             </div>
             <div class="mb-6">
                 <input type="text" placeholder="Mobile" name="phone"
                     class="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'" />
+                    @error('phone')
+                    <span class="text-red-500 text-xs">{{$message}}</span>
+                    @enderror
             </div>
-            <div class="mb-6">
+            <div class="mb-8">
                 <input type="text" placeholder="Address" name="adress"
                     class="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'" />
+                    @error('adress')
+                    <span class="text-red-500 text-xs">{{$message}}</span>
+                    @enderror
+                 
             </div>
         </div>
 
         <!-- start previous / next buttons -->
-        <div class="form-footer flex gap-3">
+        <div class="form-footer flex gap-3 ">
             <button type="button" id="prevBtn"
                 class="flex-1 focus:outline-none border border-gray-300 py-2 px-5 rounded-lg shadow-sm text-center text-gray-700 bg-white hover:bg-gray-100 text-lg"
                 onclick="nextPrev(-1)">Previous</button>
@@ -165,6 +190,7 @@
         </div>
         <!-- end previous / next buttons -->
     </form>
+
 
 
     <!-- tailwind css -->
@@ -197,8 +223,10 @@
       function nextPrev(n) {
           // This function will figure out which tab to display
           var x = document.getElementsByClassName("step");
+
+        
           // Exit the function if any field in the current tab is invalid:
-          // if (n == 1 && !validateForm()) return false;
+        //   if (n == 1 && !validateForm()) return false;
           // Hide the current tab:
           x[currentTab].style.display = "none";
           // Increase or decrease the current tab by 1:
@@ -207,6 +235,7 @@
           if (currentTab == 2) {
               toggleSellerFields();
           }
+         
           // if you have reached the end of the form...
           if (currentTab >= x.length) {
               // ... the form gets submitted:
@@ -220,27 +249,56 @@
           showTab(currentTab);
       }
 
-      // function validateForm() {
-      //   // This function deals with validation of the form fields
-      //   var x, y, i, valid = true;
-      //   x = document.getElementsByClassName("step");
-      //   y = x[currentTab].getElementsByTagName("input");
-      //   // A loop that checks every input field in the current tab:
-      //   for (i = 0; i < y.length; i++) {
-      //     // If a field is empty...
-      //     if (y[i].value == "") {
-      //       // add an "invalid" class to the field:
-      //       y[i].className += " invalid";
-      //       // and set the current valid status to false
-      //       valid = false;
-      //     }
-      //   }
-      //   // If the valid status is true, mark the step as finished and valid:
-      //   if (valid) {
-      //     document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
-      //   }
-      //   return valid; // return the valid status
-      // }
+    //   function validateForm() {
+    //     // This function deals with validation of the form fields
+    //     var pass = document.getElementById("password");
+    //     var confirmPass = document.getElementById("password_confirmation");
+    //     var email = document.getElementById("email");
+    //     var x, y, i, valid = true;
+    //     x = document.getElementsByClassName("step");
+    //     y = x[currentTab].getElementsByTagName("input");
+
+
+
+    //      // Check the selected role
+    //      var buyerRadio = document.getElementById("buyer-radio");
+    //     if (buyerRadio.checked) {
+    //     var justifyInput = document.getElementById("justify");
+        
+    //     y = Array.from(y).filter(function(input) {
+    //         return input !== justifyInput;
+    //     });
+    //     console.log(y);
+    // }
+
+    //     // A loop that checks every input field in the current tab:
+    //     for (i = 0; i < y.length; i++) {
+           
+    //       // If a field is empty...
+    //       if (y[i].value == "") {
+    //         // console.log("invalid field");
+    //         // add an "invalid" class to the field:
+    //         y[i].className += " invalid";
+    //         // and set the current valid status to false
+    //         valid = false;
+    //       }
+    //     }
+        
+    //     if(pass.value.length < 8 || pass.value != confirmPass.value){
+    //       pass.className += " invalid";
+    //       valid = false;
+    //     }
+
+    //     if(! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)){
+    //       email.className += " invalid";
+    //       valid = false;
+    //     }
+    //     // If the valid status is true, mark the step as finished and valid:
+    //     if (valid) {
+    //       document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
+    //     }
+    //     return valid; // return the valid status
+    //   }
 
       function fixStepIndicator(n) {
           // This function removes the "active" class of all steps...
