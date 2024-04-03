@@ -226,7 +226,7 @@
 
         
           // Exit the function if any field in the current tab is invalid:
-        //   if (n == 1 && !validateForm()) return false;
+          if (n == 1 && !validateForm()) return false;
           // Hide the current tab:
           x[currentTab].style.display = "none";
           // Increase or decrease the current tab by 1:
@@ -249,56 +249,56 @@
           showTab(currentTab);
       }
 
-    //   function validateForm() {
-    //     // This function deals with validation of the form fields
-    //     var pass = document.getElementById("password");
-    //     var confirmPass = document.getElementById("password_confirmation");
-    //     var email = document.getElementById("email");
-    //     var x, y, i, valid = true;
-    //     x = document.getElementsByClassName("step");
-    //     y = x[currentTab].getElementsByTagName("input");
+      function validateForm() {
+        // This function deals with validation of the form fields
+        var pass = document.getElementById("password");
+        var confirmPass = document.getElementById("password_confirmation");
+        var email = document.getElementById("email");
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("step");
+        y = x[currentTab].getElementsByTagName("input");
 
 
 
-    //      // Check the selected role
-    //      var buyerRadio = document.getElementById("buyer-radio");
-    //     if (buyerRadio.checked) {
-    //     var justifyInput = document.getElementById("justify");
+         // Check the selected role
+         var buyerRadio = document.getElementById("buyer-radio");
+        if (buyerRadio.checked) {
+        var justifyInput = document.getElementById("justify");
         
-    //     y = Array.from(y).filter(function(input) {
-    //         return input !== justifyInput;
-    //     });
-    //     console.log(y);
-    // }
+        y = Array.from(y).filter(function(input) {
+            return input !== justifyInput;
+        });
+        console.log(y);
+    }
 
-    //     // A loop that checks every input field in the current tab:
-    //     for (i = 0; i < y.length; i++) {
+        // A loop that checks every input field in the current tab:
+        for (i = 0; i < y.length; i++) {
            
-    //       // If a field is empty...
-    //       if (y[i].value == "") {
-    //         // console.log("invalid field");
-    //         // add an "invalid" class to the field:
-    //         y[i].className += " invalid";
-    //         // and set the current valid status to false
-    //         valid = false;
-    //       }
-    //     }
+          // If a field is empty...
+          if (y[i].value == "") {
+            // console.log("invalid field");
+            // add an "invalid" class to the field:
+            y[i].className += " invalid";
+            // and set the current valid status to false
+            valid = false;
+          }
+        }
         
-    //     if(pass.value.length < 8 || pass.value != confirmPass.value){
-    //       pass.className += " invalid";
-    //       valid = false;
-    //     }
+        if(pass.value.length < 8 || pass.value != confirmPass.value){
+          pass.className += " invalid";
+          valid = false;
+        }
 
-    //     if(! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)){
-    //       email.className += " invalid";
-    //       valid = false;
-    //     }
-    //     // If the valid status is true, mark the step as finished and valid:
-    //     if (valid) {
-    //       document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
-    //     }
-    //     return valid; // return the valid status
-    //   }
+        if(! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)){
+          email.className += " invalid";
+          valid = false;
+        }
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+          document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
+        }
+        return valid; // return the valid status
+      }
 
       function fixStepIndicator(n) {
           // This function removes the "active" class of all steps...

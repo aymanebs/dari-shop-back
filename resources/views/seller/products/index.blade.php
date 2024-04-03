@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.seller-dashboard')
 @section('title','Produits')
 @section('content')
 </header>

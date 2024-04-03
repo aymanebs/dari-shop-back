@@ -6,7 +6,8 @@ use App\Http\Controllers\Auth\AuthController as AuthAuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Seller\ProductController;
+use App\Http\Controllers\Seller\ProductController as SellerProductController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -40,14 +41,20 @@ Route::middleware('authCheck')->group(function () {
 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
 // Admin routes 
+Route::prefix('admin')->group(function(){
+    Route::resource('categories',CategoryController::class);
+    Route::post('/users/ban/{user}',[AdminUserController::class,'banUser'])->name('users.ban');
+    Route::post('/users/unban/{user}',[AdminUserController::class,'unbanUser'])->name('users.unban');
+    Route::resource('users',AdminUserController::class);
+    Route::get('/products',[AdminProductController::class,'index'])->name('admin.products');
+    Route::post('/products/accept/{product}',[AdminProductController::class,'accept'])->name('products.accept');
+    Route::delete('/products/delete/{product}',[AdminProductController::class,'destroy'])->name('products.destroy');
+});
 
-Route::resource('categories',CategoryController::class);
-Route::resource('users',AdminUserController::class);
-Route::get('/admin/products',[ProductController::class,'index'])->name('admin.products');
 
 // Home routes
 
-Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('/',[HomeController::class,'index'])->name('home')->middleware('banCheck');
 Route::get('/about',[HomeController::class,'about'])->name('about');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::get('/cart',[HomeController::class,'cart'])->name('cart');
@@ -55,7 +62,7 @@ Route::get('/cart',[HomeController::class,'cart'])->name('cart');
 
 // Seller routes
 
-Route::resource('products',ProductController::class);
+Route::resource('products',SellerProductController::class);
 
 // User routes
 

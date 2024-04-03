@@ -19,11 +19,7 @@ class UserSeeder extends Seeder
                 'email' => 'admin@mail.com',
                 'password' => bcrypt('12345678'),     
             ],
-            [
-                
-                'email' => 'user@mail.com',
-                'password' => bcrypt('12345678'),
-            ],
+      
             [
                 
                 'email' => 'buyer@mail.com',

@@ -13,4 +13,18 @@ class ProductController extends Controller
         $products = Product::all();
         return view('admin/products/index',compact('products'));
     }
+
+    public function accept(Product $product){
+
+        if($product->status == 1){
+            $product->update(['status'=>2]);
+        }
+        return redirect()->back();
+
+    }
+
+    public function destroy(Product $product){
+        $product->delete();
+        return redirect()->back();
+    }
 }

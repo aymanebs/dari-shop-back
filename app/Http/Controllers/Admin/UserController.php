@@ -13,8 +13,24 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::whereDoesntHave('roles', function ($query) {
+            $query->where('roles.id', 1); 
+        })->get();
         return view('admin.users.index',compact('users'));
+    }
+
+    public function banUser(User $user){
+        if($user->status == 1){
+        $user->update(['status'=>2]);
+        }
+        return redirect()->back();
+    }
+
+    public function unbanUser(User $user){
+        if($user->status == 2){
+        $user->update(['status'=>1]);
+        }
+        return redirect()->back();
     }
 
     /**

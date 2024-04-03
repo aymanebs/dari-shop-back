@@ -45,7 +45,7 @@
                       <th class="px-4 py-3 text-center">Product ID </th>
                       <th class="px-4 py-3 text-center">Image</th>
                       <th class="px-4 py-3 text-center">Product Name </th>
-                      
+                      <th class="px-4 py-3 text-center">Seller Name </th>
                       <th class="px-4 py-3 text-center">Price</th>
                       <th class="px-4 py-3 text-center">Quantity</th>
                       <th class="px-4 py-3 text-center">Category</th>
@@ -82,7 +82,7 @@
                       {{$product->name}}
                     </td>
                     <td class="px-4 py-3 text-sm text-center">
-                        {{$product->seller->}}
+                        {{$product->seller->name}}
                       </td>
                     <td class="px-4 py-3 text-sm text-center">
                       {{$product->price}}
@@ -96,31 +96,44 @@
 
 
                     <td class="px-4 py-3 text-xs text-center">
+                      @switch($product->status)
+                      @case(1)
                       <span
-                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                        class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:bg-orange-700 dark:text-orange-100"
                       >
+                      @break
+                      @case(2)
+                      <span
+                      class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                      >
+                      @break
+                      @endswitch
+
                        {{$product->getStatus()}}
                       </span>
                     </td>
                  
                     <td class="px-4 py-3 ">
                       <div class="flex items-center space-x-4 text-sm">
-                        <a type="button" href="{{route('products.edit',['product'=>$product->id])}}"
+                        <form action="{{route('products.accept',['product' => $product->id])}}" method="POST">
+                          @csrf
+                        <button type="submit"
                           class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                           aria-label="Edit"
                         >
-                          <svg
-                            class="w-5 h-5"
-                            aria-hidden="true"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
-                            ></path>
-                          </svg>
-                        </a>
-                        <button
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                          <path d="M9 12l2 2l4 -4" />
+                        </svg>
+                        </button>
+                        </form>
+                        
+                        <form action="{{route('products.destroy',['product' => $product->id])}}" method="POST">
+                          @method('DELETE')
+                          @csrf
+                          
+                        <button type="submit"
                           class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                           aria-label="Delete"
                         >
@@ -137,6 +150,7 @@
                             ></path>
                           </svg>
                         </button>
+                        </form>
                       </div>
                     </td>
                   </tr>
