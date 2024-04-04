@@ -52,7 +52,7 @@
                         <select name="category_id" id="category" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
                           <option value="">Sélectionner une catégorie</option>
                           @foreach ($categories as $category)
-                          <option value="{{$category->id}}">{{$category->name}}</option>
+                          <option value="{{$category->id}}" {{$category->id == $product->category_id ? 'selected' : ''}}>{{$category->name}}</option>
                           @endforeach
                           <!-- Add more options as needed -->
                         </select>

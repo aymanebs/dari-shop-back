@@ -129,7 +129,7 @@
                         </button>
                         </form>
                         
-                        <form action="{{route('products.destroy',['product' => $product->id])}}" method="POST">
+                        <form action="{{ url('admin/products/destroy/' . $product->id) }}" method="POST">
                           @method('DELETE')
                           @csrf
                           

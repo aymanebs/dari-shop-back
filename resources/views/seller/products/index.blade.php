@@ -13,7 +13,7 @@
       <!-- CTA -->
       <a
         class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-        href="https://github.com/estevanmaito/windmill-dashboard"
+        href="{{route('products.create')}}"
       >
         <div class="flex items-center">
           <svg
@@ -27,7 +27,7 @@
           </svg>
           <span>Star this project on GitHub</span>
         </div>
-        <span>View more &RightArrow;</span>
+        <span>Add product</span>
       </a>
             <!-- With actions -->
             <h4

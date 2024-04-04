@@ -48,7 +48,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('users',AdminUserController::class);
     Route::get('/products',[AdminProductController::class,'index'])->name('admin.products');
     Route::post('/products/accept/{product}',[AdminProductController::class,'accept'])->name('products.accept');
-    Route::delete('/products/delete/{product}',[AdminProductController::class,'destroy'])->name('products.destroy');
+    Route::delete('/products/destroy/{product}',[AdminProductController::class,'destroy'])->name('products.destroy');
 });
 
 
@@ -62,7 +62,7 @@ Route::get('/cart',[HomeController::class,'cart'])->name('cart');
 
 // Seller routes
 
-Route::resource('products',SellerProductController::class);
+Route::resource('seller/products',SellerProductController::class);
 
 // User routes
 

@@ -28,8 +28,9 @@ class RegisterRequest extends FormRequest
             'password_confirmation' => 'required|min:8',
             'role' => 'required',
             'phone' => 'required',
-            'address' => 'required',
-            'city' => 'required',
+            'adress' => 'required',
+            'justify' => 'required|max:10240',
+            // 'city' => 'required',
             
 
         ];

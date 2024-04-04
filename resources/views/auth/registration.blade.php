@@ -79,7 +79,7 @@
             <p class="text-md text-gray-700 leading-tight text-center mt-8 mb-5">Your presence on the social network</p>
             <ul class="grid w-full gap-6 md:grid-cols-2 mt-8 mb-5">
                 <li>
-                    <input type="radio" id="buyer-radio" name="role" value="1" class="hidden peer"
+                    <input type="radio" id="buyer-radio" name="role" value="1" {{old('role') == 1 ? 'checked' : ''}} class="hidden peer"
                         required="">
                     <label for="buyer-radio"
                         class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -100,7 +100,7 @@
                 </li>
                 <li>
                     <input type="radio" id="seller-radio" name="role" onchange="toggleSellerFields()"
-                        value="2" class="  hidden peer">
+                        value="2" {{old('role') == 2 ? 'checked' : ''}}  class="hidden peer">
                     <label for="seller-radio"
                         class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                         <div class="block">
@@ -163,7 +163,8 @@
             <div class="mb-6">
                 <input type="text" placeholder="Mobile" name="phone"
                     class="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
-                    oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'" />
+                    oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'"
+                    value="{{ old('phone')}}" />
                     @error('phone')
                     <span class="text-red-500 text-xs">{{$message}}</span>
                     @enderror
@@ -171,7 +172,8 @@
             <div class="mb-8">
                 <input type="text" placeholder="Address" name="adress"
                     class="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
-                    oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'" />
+                    oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'" 
+                    value="{{old('adress')}}"/>
                     @error('adress')
                     <span class="text-red-500 text-xs">{{$message}}</span>
                     @enderror

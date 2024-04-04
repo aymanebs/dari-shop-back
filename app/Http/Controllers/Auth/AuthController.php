@@ -41,7 +41,7 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
-            dd($request->address);
+            // dd($request->address);
             if ($request->role == '1') {
 
                 $user->roles()->attach(3);
