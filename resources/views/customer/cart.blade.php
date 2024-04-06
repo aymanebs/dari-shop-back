@@ -2,7 +2,7 @@
 @section('title', 'Cart')
 @section('content')
 
-@if(session('success'))
+{{-- @if(session('success'))
 
     <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
       <p>{{ session('success') }}</p>
@@ -15,7 +15,7 @@
         ></path>
       </svg>
   </div>
-  @endif
+  @endif --}}
 
     <section
       class="container mx-auto flex-grow max-w-[1200px] border-b py-5 lg:flex lg:flex-row lg:py-10"

@@ -76,3 +76,4 @@ Route::patch('/profile/update/{customer}',[ProfileController::class,'update'])->
 Route::get('/cart',[CartController::class,'index'])->name('cart.index');
 Route::post('/cart/add/{product}',[CartController::class,'store'])->name('cart.store');
 Route::delete('/cart/remove/{product}',[CartController::class,'removeFromCart'])->name('cart.remove');
+Route::get('/details/{product}',[SellerProductController::class,'show'])->name('product.details');

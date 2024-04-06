@@ -13,7 +13,7 @@
             <p>{{ session('error') }}</p>
         </div>
     @endif
-        
+
     <div class="relative">
       <img
         class="w-full object-cover brightness-50 filter lg:h-[500px]"
@@ -895,7 +895,7 @@
           <div
             class="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100"
           >
-            <a href="product-overview.html">
+            <a href="{{route('product.details',['product'=>$product->id])}}">
               <span
                 class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-500"
               >
