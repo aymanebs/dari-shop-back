@@ -18,16 +18,13 @@ class RoleSeeder extends Seeder
                 'id'=> 1,
                 'title' =>'Admin'
             ],
+           
             [
-                'id'=>2,
-                'title' => 'User'
+                'id' =>2,
+                'title' =>'Customer',
             ],
             [
-                'id' =>3,
-                'title' =>'Buyer',
-            ],
-            [
-                'id' => 4,
+                'id' => 3,
                 'title' =>'Seller'
             ]
             ];

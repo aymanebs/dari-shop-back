@@ -45,4 +45,8 @@ class Product extends Model implements HasMedia
         
         return $this->belongsTo(Seller::class);
     }
+
+    public function carts(){
+        return $this->belongsToMany(Cart::class);
+    }
 }

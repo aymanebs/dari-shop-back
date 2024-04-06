@@ -2,10 +2,26 @@
 @section('title', 'Cart')
 @section('content')
 
+@if(session('success'))
+
+    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+      <p>{{ session('success') }}</p>
+      <svg onclick="this.parentElement.parentElement.style.display='none'" class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <title>Close</title>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M14.95 5.05a.75.75 0 01-1.06 1.06L10 11.06 6.05 7.11a.75.75 0 00-1.06 1.06L8.94 12l-4.95 4.95a.75.75 0 101.06 1.06L10 13.06l3.95 3.95a.75.75 0 001.06-1.06L11.06 12l4.95-4.95z"
+        ></path>
+      </svg>
+  </div>
+  @endif
 
     <section
       class="container mx-auto flex-grow max-w-[1200px] border-b py-5 lg:flex lg:flex-row lg:py-10"
     >
+
+    
       <!-- Mobile cart table  -->
       <section
         class="container mx-auto my-3 flex w-full flex-col gap-3 px-4 md:hidden"
@@ -19,9 +35,12 @@
             src="./assets/images/bedroom.png"
             alt="bedroom image"
           />
+          @foreach ($cart->products as $product)
+              
+          
           <div class="ml-3 flex w-full flex-col justify-center">
             <div class="flex items-center justify-between">
-              <p class="text-xl font-bold">ITALIAN BED</p>
+              <p class="text-xl font-bold">{{$product->name}}</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
@@ -68,11 +87,12 @@
               </svg>
             </div>
           </div>
+          @endforeach
         </div>
 
         <!-- 2 -->
 
-        <div class="flex w-full border px-4 py-4">
+        {{-- <div class="flex w-full border px-4 py-4">
           <img
             class="self-start object-contain"
             width="90px"
@@ -128,11 +148,11 @@
               </svg>
             </div>
           </div>
-        </div>
+        </div> --}}
 
         <!-- 3 -->
 
-        <div class="flex w-full border px-4 py-4">
+        {{-- <div class="flex w-full border px-4 py-4">
           <img
             class="self-start object-contain"
             width="90px"
@@ -188,11 +208,11 @@
               </svg>
             </div>
           </div>
-        </div>
+        </div> --}}
 
         <!-- 4 -->
 
-        <div class="flex w-full border px-4 py-4">
+        {{-- <div class="flex w-full border px-4 py-4">
           <img
             class="self-start object-contain"
             width="90px"
@@ -248,7 +268,7 @@
               </svg>
             </div>
           </div>
-        </div>
+        </div> --}}
       </section>
       <!-- /Mobile cart table  -->
 
@@ -256,6 +276,7 @@
       <section
         class="hidden h-[600px] w-full max-w-[1200px] grid-cols-1 gap-3 px-5 pb-10 md:grid"
       >
+    
         <table class="table-fixed">
           <thead class="h-16 bg-neutral-100">
             <tr>
@@ -268,22 +289,24 @@
           </thead>
           <tbody>
             <!-- 1 -->
-
+            @foreach ($cart->products as $product)
+                
+           
             <tr class="h-[100px] border-b">
               <td class="align-middle">
                 <div class="flex">
                   <img
                     class="w-[90px]"
-                    src="./assets/images/bedroom.png"
+                    src="{{$product->getFirstMediaUrl('products')}}"
                     alt="bedroom image"
                   />
                   <div class="ml-3 flex flex-col justify-center">
-                    <p class="text-xl font-bold">ITALIAN BED</p>
+                    <p class="text-xl font-bold">{{$product->name}}</p>
                     <p class="text-sm text-gray-400">Size: XL</p>
                   </div>
                 </div>
               </td>
-              <td class="mx-auto text-center">&#36;320</td>
+              <td class="mx-auto text-center">&#36;{{$product->price}}</td>
               <td class="align-middle">
                 <div class="flex items-center justify-center">
                   <button
@@ -305,6 +328,10 @@
               </td>
               <td class="mx-auto text-center">&#36;320</td>
               <td class="align-middle">
+                <form action="{{route('cart.remove',['product'=>$product->id])}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -317,12 +344,16 @@
                     clip-rule="evenodd"
                   />
                 </svg>
+              </button>
+              </form>
               </td>
             </tr>
 
+            @endforeach
+
             <!-- 2 -->
 
-            <tr class="h-[100px] border-b">
+            {{-- <tr class="h-[100px] border-b">
               <td class="align-middle">
                 <div class="flex">
                   <img
@@ -371,11 +402,11 @@
                   />
                 </svg>
               </td>
-            </tr>
+            </tr> --}}
 
             <!-- 3 -->
 
-            <tr class="h-[100px] border-b">
+            {{-- <tr class="h-[100px] border-b">
               <td class="align-middle">
                 <div class="flex">
                   <img
@@ -424,11 +455,11 @@
                   />
                 </svg>
               </td>
-            </tr>
+            </tr> --}}
 
             <!-- 4 -->
 
-            <tr class="h-[100px]">
+            {{-- <tr class="h-[100px]">
               <td class="align-middle">
                 <div class="flex">
                   <img
@@ -477,7 +508,7 @@
                   />
                 </svg>
               </td>
-            </tr>
+            </tr> --}}
           </tbody>
         </table>
       </section>

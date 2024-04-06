@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Seller\CartController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -59,12 +60,11 @@ Route::get('/about',[HomeController::class,'about'])->name('about');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::get('/cart',[HomeController::class,'cart'])->name('cart');
 
-
 // Seller routes
 
 Route::resource('seller/products',SellerProductController::class);
 
-// User routes
+// Customer routes
 
 Route::get('/profile',[ProfileController::class,'index'])->name('profile');
 Route::get('/profile/edit',[ProfileController::class,'edit'])->name('profile.edit');
@@ -73,3 +73,6 @@ Route::resource('orders',OrderController::class);
 Route::get('/profile/edit-adress',[ProfileController::class,'editAdress'])->name('profile.edit-adress');
 Route::get('/profile/edit-password',[ProfileController::class,'editPassword'])->name('profile.edit-password');
 Route::patch('/profile/update/{customer}',[ProfileController::class,'update'])->name('profile.update');
+Route::get('/cart',[CartController::class,'index'])->name('cart.index');
+Route::post('/cart/add/{product}',[CartController::class,'store'])->name('cart.store');
+Route::delete('/cart/remove/{product}',[CartController::class,'removeFromCart'])->name('cart.remove');

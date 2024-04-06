@@ -44,7 +44,7 @@ class AuthController extends Controller
             // dd($request->address);
             if ($request->role == '1') {
 
-                $user->roles()->attach(3);
+                $user->roles()->attach(2);
 
                 $customer=Customer::create([
                     'user_id' => $user->id,
@@ -62,7 +62,7 @@ class AuthController extends Controller
             } 
             else if ($request->role == '2') {
 
-                $user->roles()->attach(4);
+                $user->roles()->attach(3);
 
                 $seller = Seller::create([
                     'user_id' => $user->id,

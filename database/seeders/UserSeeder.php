@@ -13,27 +13,36 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = [
-            [
-                
-                'email' => 'admin@mail.com',
-                'password' => bcrypt('12345678'),     
-            ],
-      
-            [
-                
-                'email' => 'buyer@mail.com',
-                'password' =>bcrypt('12345678')
-            ],
-            [
-              
-                'email' => 'seller@mail.com',
-                'password' => bcrypt('12345678')
-            ]
-            ];
 
-            foreach($users as $user){
-                User::create($user);
-            }
+
+        User::create([
+            'email' => 'admin@mail.com',
+            'password' => bcrypt('12345678'),
+        ]);
+        
+        User::create([
+            'email' => 'buyer@mail.com',
+            'password' =>bcrypt('12345678')
+        ])->customer()->create([    
+            'name' => 'Fake buyer',
+            'phone' => '123456789',
+            'adress' => '123 Main St',
+            'region' => 'Souss Massa',
+            'city' => 'Agadir',
+            'user_id' => 2,
+            
+        ]);
+           
+        User::create([
+            'email' => 'seller@mail.com',
+            'password' => bcrypt('12345678'),
+        ])->seller()->create([ 
+            'name' => 'Fake seller',
+            'phone' => '123456789',
+            'adress' => '123 Main St',
+            'user_id' => 3,
+        ]);   
+
+           
     }
 }

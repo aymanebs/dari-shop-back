@@ -20,8 +20,6 @@ class HomeController extends Controller
       return view('contact');   
    }
 
-   public function cart(){
-      return view('cart');   
-   }
+   
 
 }

@@ -121,7 +121,7 @@
         </a>
 
         <a
-          href="{{route('cart')}}"
+          href="{{route('cart.index')}}"
           class="flex cursor-pointer flex-col items-center justify-center"
         >
           <svg
@@ -208,7 +208,7 @@
           </a>
 
           <a
-            href="{{route('cart')}}"
+            href="{{route('cart.index')}}"
             class="flex cursor-pointer flex-col items-center justify-center"
           >
             <svg

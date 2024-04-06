@@ -3,7 +3,17 @@
 @section('content')
 
     <!-- Offer image  -->
-
+    @if (session('success'))
+        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+            <p>{{ session('error') }}</p>
+        </div>
+    @endif
+        
     <div class="relative">
       <img
         class="w-full object-cover brightness-50 filter lg:h-[500px]"
@@ -1004,9 +1014,12 @@
           </div>
 
           <div>
-            <button class="my-5 h-10 w-full bg-violet-900 text-white">
+            <form action="{{route('cart.store',['product'=>$product->id])}}" method="POST">
+              @csrf
+            <button type="submit" class="my-5 h-10 w-full bg-violet-900 text-white">
               Add to cart
             </button>
+            </form>
           </div>
         </div>
       </div>
