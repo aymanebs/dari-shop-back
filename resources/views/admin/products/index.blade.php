@@ -88,7 +88,7 @@
                       {{$product->price}}
                     </td>
                     <td class="px-4 py-3 text-sm text-center">
-                      {{$product->quantity}}
+                      {{$product->stock}}
                     </td>
                     <td class="px-4 py-3 text-sm text-center">
                       {{$product->category->name}}

@@ -40,8 +40,8 @@
 
                       <div class="md:col-span-2">
                         <label for="price">Quantité</label>
-                        <input type="number" name="quantity" id="quantity" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="00" step="1" />
-                        @error('quantity')
+                        <input type="number" name="stock" id="stock" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="00" step="1" />
+                        @error('stock')
                         <span class="text-red-500 text-xs">{{$message}}</span>
                         @enderror
                       </div>

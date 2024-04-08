@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('cart_product', function (Blueprint $table) {
             $table->id();
+            $table->integer('quantity')->default(1);
             $table->foreignId('cart_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('product_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
@@ -26,4 +27,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('cart_product');
     }
+
+    
 };

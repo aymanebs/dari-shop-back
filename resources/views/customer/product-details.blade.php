@@ -40,8 +40,8 @@
           <div class="container mx-auto px-4">
             <img
               class="w-full"
-              src="./assets/images/product-bigsofa.png"
-              alt="Sofa image"
+              src="{{$product->getFirstMediaUrl('products')}}"
+              alt="image"
             />
   
             <div class="mt-3 grid grid-cols-4 gap-4">
@@ -83,7 +83,7 @@
           <!-- description  -->
   
           <div class="mx-auto px-5 lg:px-5">
-            <h2 class="pt-3 text-2xl font-bold lg:pt-0">BIG ITALIAN SOFA</h2>
+            <h2 class="pt-3 text-2xl font-bold lg:pt-0">{{$product->name}}</h2>
             <div class="mt-1">
               <div class="flex items-center">
                 <svg
@@ -158,16 +158,15 @@
             <p class="mt-5 font-bold">
               Availability: <span class="text-green-600">In Stock</span>
             </p>
-            <p class="font-bold">Brand: <span class="font-normal">Apex</span></p>
+            {{-- <p class="font-bold">Brand: <span class="font-normal">Apex</span></p> --}}
             <p class="font-bold">
-              Cathegory: <span class="font-normal">Sofa</span>
-            </p>
+              Cathegory: <span class="font-normal">{{$product->category->name}}
             <p class="font-bold">
               SKU: <span class="font-normal">BE45VGTRK</span>
             </p>
   
             <p class="mt-4 text-4xl font-bold text-violet-900">
-              $450 <span class="text-xs text-gray-400 line-through">$550</span>
+              {{$product->price}} $ <span class="text-xs text-gray-400 line-through">$550</span>
             </p>
   
             <p class="pt-5 text-sm leading-5 text-gray-500">
