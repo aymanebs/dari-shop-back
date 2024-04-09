@@ -10,6 +10,7 @@ use App\Http\Controllers\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Seller\CartController;
 use App\Http\Controllers\User\CartController as UserCartController;
+use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -79,4 +80,12 @@ Route::post('/cart/add/{product}',[UserCartController::class,'store'])->name('ca
 Route::delete('/cart/remove/{product}',[UserCartController::class,'removeFromCart'])->name('cart.remove');
 Route::patch('/cart/update/{product}',[UserCartController::class,'update']);
 Route::get('/details/{product}',[SellerProductController::class,'show'])->name('product.details');
+
+// Checkout routes
+Route::get('/checkout/adress',[CheckoutController::class,'adressIndex'])->name('checkout.adress');
+Route::get('/checkout/delivery',[CheckoutController::class,'deliveryIndex'])->name('checkout.delivery');
+Route::get('/checkout/payment',[CheckoutController::class,'paymentIndex'])->name('checkout.payment');
+Route::get('/checkout/review',[CheckoutController::class,'reviewIndex'])->name('checkout.review');
+Route::get('/checkout/confirm',[CheckoutController::class,'confirmIndex'])->name('checkout.confirmation');
+
 

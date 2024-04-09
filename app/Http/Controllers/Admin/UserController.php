@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         $users = User::whereDoesntHave('roles', function ($query) {
             $query->where('roles.id', 1); 
-        })->get();
+        })->paginate(1);
         return view('admin.users.index',compact('users'));
     }
 
