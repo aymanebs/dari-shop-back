@@ -12,6 +12,7 @@ use App\Http\Controllers\Seller\CartController;
 use App\Http\Controllers\User\CartController as UserCartController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\OrderController;
+use App\Http\Controllers\User\PayementController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -87,5 +88,6 @@ Route::get('/checkout/delivery',[CheckoutController::class,'deliveryIndex'])->na
 Route::get('/checkout/payment',[CheckoutController::class,'paymentIndex'])->name('checkout.payment');
 Route::get('/checkout/review',[CheckoutController::class,'reviewIndex'])->name('checkout.review');
 Route::get('/checkout/confirm',[CheckoutController::class,'confirmIndex'])->name('checkout.confirmation');
+Route::post('/payment',[PayementController::class,'payment'])->name('payment');
 
 

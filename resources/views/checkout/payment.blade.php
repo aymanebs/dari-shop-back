@@ -55,13 +55,15 @@
               </table>
   
               <div class="py-5">
-                <form class="flex w-full flex-col gap-3" action="">
+                <form class="flex w-full flex-col gap-3" action="{{route('payment')}}" method="POST">
+                  @csrf
                   <div class="flex w-full flex-col">
                     <label class="flex" for="name">Payment Card Number</label>
                     <input
                       x-mask="9999 9999 9999 9999"
                       class="w-full border px-4 py-2 lg:w-1/2"
                       placeholder="1223 4568 7644 4839"
+                      name="card_number"
                     />
                   </div>
   
@@ -82,7 +84,7 @@
                         <input
                           x-mask="99"
                           class="w-1/2 border px-4 py-2 text-center"
-                          name=""
+                          name="exp_month"
                           id=""
                           placeholder="10"
                         />
@@ -92,7 +94,7 @@
                         <input
                           x-mask="99"
                           class="w-1/2 border px-4 py-2 text-center"
-                          name=""
+                          name="exp_year"
                           id=""
                           placeholder="36"
                         />
@@ -100,8 +102,9 @@
                     </div>
   
                     <div class="flex flex-col w-[60px] lg:w-[110px]">
-                      <label class="flex" for="">CVV/CVC</label>
+                      <label class="flex" for="">CVC</label>
                       <input
+                        name="cvc"
                         x-mask="999"
                         class="w-full border py-2 text-center lg:w-1/2"
                         type="password"
@@ -145,6 +148,10 @@
                     />
                   </section>
                   <!-- another payment-methods -->
+
+                  <button type="submit"  class="bg-pink-400 px-4 py-2"
+                  >Checkout review</button
+                >
                 </form>
               </div>
   
@@ -162,9 +169,7 @@
                     >Previous step</a
                   >
   
-                  <a href="{{route('checkout.review')}}" class="bg-pink-400 px-4 py-2"
-                    >Checkout review</a
-                  >
+                 
                 </div>
               </div>
             </section>
