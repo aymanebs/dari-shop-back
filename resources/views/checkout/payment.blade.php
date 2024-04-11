@@ -48,8 +48,9 @@
                   <tr>
                     <th>ADDRESS</th>
                     <th>DELIVERY METHOD</th>
-                    <th class="bg-neutral-600 text-white">PAYMENT METHOD</th>
                     <th>ORDER REVIEW</th>
+                    <th class="bg-neutral-600 text-white">PAYMENT METHOD</th>
+                    
                   </tr>
                 </thead>
               </table>
@@ -123,27 +124,27 @@
                   >
                     <img
                       class="w-[100px] cursor-pointer"
-                      src="./assets/images/payment-method-bitcoin.svg"
+                      src="{{asset('img/payment-method-bitcoin.svg')}}"
                       alt="bitcoin icon"
                     />
                     <img
                       class="w-[100px] cursor-pointer"
-                      src="./assets/images/payment-method-paypal.svg"
+                      src="{{asset('img/payment-method-paypal.svg')}}"
                       alt="paypal icon"
                     />
                     <img
                       class="w-[100px] cursor-pointer"
-                      src="./assets/images/payment-method-stripe.svg"
+                      src="{{asset('img/payment-method-stripe.svg')}}"
                       alt="stripe icon"
                     />
                     <img
                       class="w-[100px] cursor-pointer"
-                      src="./assets/images/payment-method-visa.svg"
+                      src="{{asset('img/payment-method-visa.svg')}}"
                       alt="visa icon"
                     />
                     <img
                       class="w-[100px] cursor-pointer"
-                      src="./assets/images/payment-method-mastercard.svg"
+                      src="{{asset('img/payment-method-mastercard.svg')}}"
                       alt="mastercard icon"
                     />
                   </section>

@@ -164,7 +164,7 @@
                         <p>$1280</p>
                     </div>
 
-                    <a href="{{route("checkout.adress")}}">
+                    <a href="{{route('checkout.create')}}">
                         <button class="w-full bg-violet-900 px-5 py-2 text-white">
                             Proceed to checkout
                         </button>

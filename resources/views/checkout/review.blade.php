@@ -48,8 +48,9 @@
                   <tr>
                     <th>ADDRESS</th>
                     <th>DELIVERY METHOD</th>
-                    <th>PAYMENT METHOD</th>
+                  
                     <th class="bg-neutral-600 text-white">ORDER REVIEW</th>
+                    <th>PAYMENT METHOD</th>
                   </tr>
                 </thead>
               </table>
@@ -221,88 +222,29 @@
                 </thead>
                 <tbody>
                   <!-- 1 -->
-  
+                  @foreach($order->products as $product)
+
                   <tr class="h-[100px] border-b">
                     <td class="align-middle">
                       <div class="flex">
                         <img
                           class="w-[90px]"
-                          src="./assets/images/bedroom.png"
+                          src="{{$product->getFirstMediaUrl('products')}}"
                           alt="bedroom image"
                         />
                         <div class="ml-3 flex flex-col justify-center">
-                          <p class="text-xl font-bold">ITALIAN BED</p>
+                          <p class="text-xl font-bold">{{$product->name}}</p>
                           <p class="text-sm text-gray-400">Size: XL</p>
                         </div>
                       </div>
                     </td>
-                    <td class="mx-auto text-center">&#36;320</td>
+                    <td class="mx-auto text-center">&#36;{{$product->price}}</td>
                     <td class="text-center align-middle">1</td>
                     <td class="mx-auto text-center">&#36;320</td>
                   </tr>
   
-                  <!-- 2 -->
-  
-                  <tr class="h-[100px] border-b">
-                    <td class="align-middle">
-                      <div class="flex">
-                        <img
-                          class="w-[90px]"
-                          src="./assets/images/product-chair.png"
-                          alt="Chair Image"
-                        />
-                        <div class="ml-3 flex flex-col justify-center">
-                          <p class="text-xl font-bold">GUYER CHAIR</p>
-                          <p class="text-sm text-gray-400">Size: XL</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="mx-auto text-center">&#36;320</td>
-                    <td class="text-center align-middle">1</td>
-                    <td class="mx-auto text-center">&#36;320</td>
-                  </tr>
-  
-                  <!-- 3 -->
-  
-                  <tr class="h-[100px] border-b">
-                    <td class="align-middle">
-                      <div class="flex">
-                        <img
-                          class="w-[90px]"
-                          src="./assets/images/outdoors.png"
-                          alt="Outdoor furniture"
-                        />
-                        <div class="ml-3 flex flex-col justify-center">
-                          <p class="text-xl font-bold">OUTDOOR CHAIR</p>
-                          <p class="text-sm text-gray-400">Size: XL</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="mx-auto text-center">&#36;320</td>
-                    <td class="text-center align-middle">1</td>
-                    <td class="mx-auto text-center">&#36;320</td>
-                  </tr>
-  
-                  <!-- 4 -->
-  
-                  <tr class="h-[100px]">
-                    <td class="align-middle">
-                      <div class="flex">
-                        <img
-                          class="w-[90px]"
-                          src="./assets/images/matrass.png"
-                          alt="Matrass Image"
-                        />
-                        <div class="ml-3 flex flex-col justify-center">
-                          <p class="text-xl font-bold">MATRASS COMFORT &plus;</p>
-                          <p class="text-sm text-gray-400">Size: XL</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="mx-auto text-center">&#36;320</td>
-                    <td class="text-center align-middle">1</td>
-                    <td class="mx-auto text-center">&#36;320</td>
-                  </tr>
+                  @endforeach
+                 
                 </tbody>
               </table>
               <!-- /Product table  -->
@@ -322,7 +264,7 @@
                   >
   
                   <a
-                    href="{{route('checkout.confirmation')}}"
+                    href="{{route('checkout.payment')}}"
                     class="bg-pink-400 px-4 py-2"
                     >Place Order</a
                   >

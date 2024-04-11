@@ -32,5 +32,9 @@ class Customer extends Model implements HasMedia
         return $this->hasOne(Cart::class);
     }
 
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
+
 
 }

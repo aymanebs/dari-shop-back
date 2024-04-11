@@ -86,8 +86,13 @@ Route::get('/details/{product}',[SellerProductController::class,'show'])->name('
 Route::get('/checkout/adress',[CheckoutController::class,'adressIndex'])->name('checkout.adress');
 Route::get('/checkout/delivery',[CheckoutController::class,'deliveryIndex'])->name('checkout.delivery');
 Route::get('/checkout/payment',[CheckoutController::class,'paymentIndex'])->name('checkout.payment');
-Route::get('/checkout/review',[CheckoutController::class,'reviewIndex'])->name('checkout.review');
+
 Route::get('/checkout/confirm',[CheckoutController::class,'confirmIndex'])->name('checkout.confirmation');
 Route::post('/payment',[PayementController::class,'payment'])->name('payment');
+
+Route::get('/checkout/create',[CheckoutController::class,'create'])->name('checkout.create');
+Route::post('/checkout/save-adress',[CheckoutController::class,'saveAdress'])->name('checkout.save-adress');
+Route::post('/checkout/save-delivery',[CheckoutController::class,'saveDelivery'])->name('checkout.save-delivery');
+Route::get('/checkout/review/{orderId}',[CheckoutController::class,'review'])->name('checkout.review');
 
 

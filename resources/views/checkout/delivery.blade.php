@@ -49,8 +49,9 @@
                   <tr>
                     <th>ADDRESS</th>
                     <th class="bg-neutral-600 text-white">DELIVERY METHOD</th>
-                    <th>PAYMENT METHOD</th>
                     <th>ORDER REVIEW</th>
+                    <th>PAYMENT METHOD</th>
+                   
                   </tr>
                 </thead>
               </table>
@@ -58,12 +59,14 @@
               <div class="py-5">
                 <form
                   class="grid w-full grid-cols-1 gap-3 lg:grid-cols-2"
-                  action=""
+                  action="{{route('checkout.save-delivery')}}" method="POST"
                 >
+                @csrf
+                <input type="hidden" name="orderId" value='{{$orderId}}'>
                   <div class="flex w-full justify-between gap-2">
                     <div class="flex w-full cursor-pointer flex-col border">
                       <div class="flex bg-pink-400 px-4 py-2">
-                        <input class="outline-pink-400" type="radio" />
+                        <input class="outline-pink-400" type="radio" name="delivery_method" value="2" />
   
                         <p class="ml-3 font-bold">Livraison a domicile</p>
                       </div>
@@ -81,7 +84,7 @@
   
                   <div class="flex w-full cursor-pointer flex-col border">
                     <div class="flex bg-pink-400 px-4 py-2">
-                      <input class="outline-pink-400" type="radio" />
+                      <input class="outline-pink-400" type="radio" name="delivery_method" value="2"/>
   
                       <p class="ml-3 cursor-pointer font-bold">Point relais</p>
                     </div>
@@ -97,7 +100,7 @@
                   </div>
   
                
-                </form>
+                
               </div>
   
               <div class="flex w-full items-center justify-between">
@@ -114,10 +117,13 @@
                     >Previous step</a
                   >
   
-                  <a href="{{route('checkout.payment')}}" class="bg-pink-400 px-4 py-2"
-                    >Payment method</a
-                  >
+                  <button  class="bg-pink-400 px-4 py-2" type="submit"
+                    >Order review
+                </button>
+                
                 </div>
+
+              </form>
               </div>
             </section>
             <!-- /form  -->
