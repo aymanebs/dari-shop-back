@@ -40,8 +40,7 @@
                         <div class="mt-2 flex w-full items-center justify-between">
                             <div class="flex items-center justify-center">
                                 <button
-                                    class="flex h-8 w-8 cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500"
-                                    >
+                                    class="flex h-8 w-8 cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500">
                                     &minus;
                                 </button>
                                 <div
@@ -65,7 +64,7 @@
                 @endforeach
             </div>
 
-             </section>
+        </section>
         <!-- /Mobile cart table  -->
 
         <!-- Desktop cart table  -->
@@ -105,8 +104,8 @@
                                         &minus;
                                     </button>
                                     <div class="flex h-8 w-8 cursor-text items-center justify-center border-t border-b active:ring-gray-500 quantity"
-                                    id="quantity_{{ $product->id }}" data-product-id="{{ $product->id }}">
-                                        1
+                                        id="quantity_{{ $product->id }}" data-product-id="{{ $product->id }}">
+                                       {{ $product->pivot->quantity }}
                                     </div>
 
                                     <button
@@ -164,7 +163,7 @@
                         <p>$1280</p>
                     </div>
 
-                    <a href="{{route('checkout.create')}}">
+                    <a href="{{ route('checkout.create') }}">
                         <button class="w-full bg-violet-900 px-5 py-2 text-white">
                             Proceed to checkout
                         </button>
@@ -184,50 +183,72 @@
 
 
     <script>
-
-(function() {
-    document.querySelectorAll('.quantity').forEach(quantityElement => {
-        const productId = quantityElement.dataset.productId;
-        const quantityStored = localStorage.getItem("product_" + productId + "_quantity");
-        if (quantityStored) {
-            quantityElement.innerText = quantityStored;
-        }
-    });
-})();
-
         document.querySelectorAll('.increment-btn').forEach(button => {
-
             button.addEventListener('click', function() {
+                const productId = this.dataset.productId;
+                const quantityElement = document.getElementById('quantity_' + productId);
+                let quantity = parseInt(quantityElement.innerText);
+                quantity++;
+                quantityElement.innerText = quantity;
+                localStorage.setItem("product_" + productId + "_quantity", quantity);
 
-              const productId = this.dataset.productId;
-              const quantityElement = document.getElementById('quantity_' + productId );
-              let quantity = parseInt(quantityElement.innerText);
-              quantity ++;
-              quantityElement.innerText=quantity;
-              localStorage.setItem("product_" + productId + "_quantity" , quantity );
              
-            })
 
-        })
+                // Send AJAX request to update quantity on the server after a delay
+                setTimeout(() => {
+                    updateQuantity(productId, quantity);
+                }, 500); // Delay in milliseconds (adjust as needed)
+            });
+        });
 
-        document.querySelectorAll('.decrement-btn').forEach(button=>{
+        document.querySelectorAll('.decrement-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.dataset.productId;
+                const quantityElement = document.getElementById('quantity_' + productId);
+                let quantity = parseInt(quantityElement.innerText);
+                if (quantity > 1) {
+                    quantity--;
+                    quantityElement.innerText = quantity;
+                    localStorage.setItem("product_" + productId + "_quantity", quantity);
 
-          button.addEventListener('click',function(){
+                    // Send AJAX request to update quantity on the server after a delay
+                    setTimeout(() => {
+                        updateQuantity(productId, quantity);
+                    }, 500); // Delay in milliseconds (adjust as needed)
+                }
+            });
+        });
 
-            const productId = this.dataset.productId;
-            const quantityElement = document.getElementById('quantity_' + productId);
-            let quantity = parseInt(quantityElement.innerText);
-            if(quantity>1){
-              quantity --;
-              quantityElement.innerText=quantity;
-              localStorage.setItem("product_" + productId + "_quantity" , quantity);
-            }
-           
-          })
+        function updateQuantity(productId, quantity)
 
+        {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            // Send an AJAX request to update quantity on the server
+            fetch('/update-cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify({
+                        productId: productId,
+                        quantity: quantity
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to update quantity');
+                    }
+                    // Handle success if needed
+
+                })
+                .catch(error => {
+                    console.error('Error updating quantity:', error);
+                });
         }
 
-        )
+
+
 
 
 

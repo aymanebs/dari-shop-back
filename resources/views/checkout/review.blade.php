@@ -239,7 +239,7 @@
                       </div>
                     </td>
                     <td class="mx-auto text-center">&#36;{{$product->price}}</td>
-                    <td class="text-center align-middle">1</td>
+                    <td class="text-center align-middle"></td>
                     <td class="mx-auto text-center">&#36;320</td>
                   </tr>
   

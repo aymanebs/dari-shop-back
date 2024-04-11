@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\CartProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -58,6 +59,22 @@ class CartController extends Controller
         ]);
     }
 
+    public function updateCart(Request $request)
+    {
+        $productId = $request->productId;
+        $quantity = $request->quantity;
+
+        // Update the quantity in the database
+        $cartProduct = CartProduct::where('product_id', $productId)->first();
+
+        if ($cartProduct) {
+            $cartProduct->quantity = $quantity;
+            $cartProduct->save();
+        }
+
+        // You can return a response if needed
+        return response()->json(['message' => 'Quantity updated successfully']);
+    }
 
     public function removeFromCart(Product $product)
     {

@@ -79,8 +79,9 @@ Route::patch('/profile/update/{customer}',[ProfileController::class,'update'])->
 Route::get('/cart',[UserCartController::class,'index'])->name('cart.index');
 Route::post('/cart/add/{product}',[UserCartController::class,'store'])->name('cart.store');
 Route::delete('/cart/remove/{product}',[UserCartController::class,'removeFromCart'])->name('cart.remove');
-Route::patch('/cart/update/{product}',[UserCartController::class,'update']);
+// Route::patch('/cart/update/{product}',[UserCartController::class,'update']);
 Route::get('/details/{product}',[SellerProductController::class,'show'])->name('product.details');
+Route::post('/update-cart',[UserCartController::class,'updateCart'])->name('cart.update');
 
 // Checkout routes
 Route::get('/checkout/adress',[CheckoutController::class,'adressIndex'])->name('checkout.adress');

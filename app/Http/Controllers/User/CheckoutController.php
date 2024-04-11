@@ -30,7 +30,7 @@ class CheckoutController extends Controller
             $orderProduct->order_id = $order->id;
             $orderProduct->product_id = $cartProduct->product_id;
             $orderProduct->price = $cartProduct->product->price;
-            // $orderProduct->quantity = $cartProduct->quantity;
+            $orderProduct->quantity = $cartProduct->quantity;
             $orderProduct->save();
 
         }

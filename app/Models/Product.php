@@ -51,6 +51,6 @@ class Product extends Model implements HasMedia
     }
 
     public function orders(){
-        return $this->belongsToMany(Order::class);
+        return $this->belongsToMany(Order::class)->withPivot('quantity');
     }
 }
