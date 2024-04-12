@@ -63,7 +63,7 @@
                     <input
                       x-mask="9999 9999 9999 9999"
                       class="w-full border px-4 py-2 lg:w-1/2"
-                      placeholder="1223 4568 7644 4839"
+                      placeholder="4242 4242 4242 4242"
                       name="card_number"
                     />
                   </div>
@@ -74,7 +74,11 @@
                       class="w-full border px-4 py-2 lg:w-1/2"
                       type="text"
                       placeholder="SARAH JOHNSON"
+                      name="card_holder"
                     />
+                    @error('card_holder')
+                    <span class="text-red-500">{{ $message }}</span>
+                    @enderror
                   </div>
   
                   <div class="flex items-center gap-5 lg:w-1/2">
@@ -89,6 +93,9 @@
                           id=""
                           placeholder="10"
                         />
+                        @error('exp_month')
+                        <span class="text-red-500">{{ $message }}</span>
+                        @enderror
   
                         <span>&bsol;</span>
   
@@ -99,6 +106,10 @@
                           id=""
                           placeholder="36"
                         />
+                        @error('exp_year')
+                        <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+
                       </div>
                     </div>
   
@@ -111,6 +122,9 @@
                         type="password"
                         placeholder="&bull;&bull;&bull;"
                       />
+                      @error('cvc')
+                      <span class="text-red-500">{{ $message }}</span>
+                      @enderror
                     </div>
                   </div>
   

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Checkout\PaymentRequest;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 
 class PayementController extends Controller
 {
-    public function payment(Request $request)
+    public function payment(PaymentRequest $request)
     {
         
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -25,6 +26,8 @@ class PayementController extends Controller
 
                 
             $paymentIntent->confirm();
+            auth()->user()->customer->cart->products()->detach();
+            auth()->user()->customer->cart->delete();
             return redirect()->route('checkout.confirmation');
        }
          catch(\Exception $e){

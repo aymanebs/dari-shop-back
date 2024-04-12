@@ -223,7 +223,7 @@
                 <tbody>
                   <!-- 1 -->
                   @foreach($order->products as $product)
-
+                 
                   <tr class="h-[100px] border-b">
                     <td class="align-middle">
                       <div class="flex">
@@ -239,8 +239,8 @@
                       </div>
                     </td>
                     <td class="mx-auto text-center">&#36;{{$product->price}}</td>
-                    <td class="text-center align-middle"></td>
-                    <td class="mx-auto text-center">&#36;320</td>
+                    <td class="text-center align-middle">{{$product->pivot->quantity}}</td>
+                    <td class="mx-auto text-center">&#36;{{$totals[$product->id]}}</td>
                   </tr>
   
                   @endforeach
@@ -282,7 +282,7 @@
   
                   <div class="flex justify-between border-b py-5">
                     <p>Subtotal</p>
-                    <p>$1280</p>
+                    <p>{{$subtotal}}</p>
                   </div>
   
                   <div class="flex justify-between border-b py-5">
@@ -292,7 +292,7 @@
   
                   <div class="flex justify-between py-5">
                     <p>Total</p>
-                    <p>$1280</p>
+                    <p>{{$subtotal}}</p>
                   </div>
                 </div>
               </div>

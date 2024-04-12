@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Checkout\AdressRequest;
+use App\Http\Requests\Checkout\DeliveryRequest;
 use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\Order;
@@ -42,7 +44,7 @@ class CheckoutController extends Controller
     }
 
 
-    public function saveAdress(Request $request)
+    public function saveAdress(AdressRequest $request)
     {   
         // dd($request->all());
         $orderId = $request->orderId;
@@ -58,7 +60,7 @@ class CheckoutController extends Controller
         return view('checkout.delivery', ['orderId' => $order->id]);
     }
 
-    public function saveDelivery(Request $request){
+    public function saveDelivery(DeliveryRequest $request){
         // dd($request->all());
         $orderId = $request->orderId;
         $order = Order::findOrFail($orderId);
@@ -71,7 +73,16 @@ class CheckoutController extends Controller
     public function review($orderId)
     {
         $order=Order::findOrFail($orderId);
-        return view('checkout.review',compact('order'));
+
+        $orderProducts = OrderProduct::where('order_id', $orderId)->get();
+        $totals =[];
+        foreach($orderProducts as $orderProduct){
+            $price = $orderProduct->price;
+            $quantity = $orderProduct->quantity;
+            $totals[$orderProduct->product_id] = $price * $quantity;
+        }
+        $subtotal = array_sum($totals);
+        return view('checkout.review',compact('order','totals','subtotal'));
     }
 
 

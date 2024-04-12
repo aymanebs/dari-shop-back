@@ -117,7 +117,7 @@
 
                                 </div>
                             </td>
-                            <td class="mx-auto text-center">&#36;320</td>
+                            <td class="mx-auto text-center">&#36;{{$totals[$product->id]}}</td>
                             <td class="align-middle">
                                 <form action="{{ route('cart.remove', ['product' => $product->id]) }}" method="POST">
                                     @csrf
@@ -146,22 +146,6 @@
         <section class="mx-auto w-full px-4 md:max-w-[400px]">
             <div class="">
                 <div class="border py-5 px-4 shadow-md">
-                    <p class="font-bold">ORDER SUMMARY</p>
-
-                    <div class="flex justify-between border-b py-5">
-                        <p>Subtotal</p>
-                        <p>$1280</p>
-                    </div>
-
-                    <div class="flex justify-between border-b py-5">
-                        <p>Shipping</p>
-                        <p>Free</p>
-                    </div>
-
-                    <div class="flex justify-between py-5">
-                        <p>Total</p>
-                        <p>$1280</p>
-                    </div>
 
                     <a href="{{ route('checkout.create') }}">
                         <button class="w-full bg-violet-900 px-5 py-2 text-white">
@@ -190,7 +174,7 @@
                 let quantity = parseInt(quantityElement.innerText);
                 quantity++;
                 quantityElement.innerText = quantity;
-                localStorage.setItem("product_" + productId + "_quantity", quantity);
+                // localStorage.setItem("product_" + productId + "_quantity", quantity);
 
              
 
@@ -209,7 +193,7 @@
                 if (quantity > 1) {
                     quantity--;
                     quantityElement.innerText = quantity;
-                    localStorage.setItem("product_" + productId + "_quantity", quantity);
+                    // localStorage.setItem("product_" + productId + "_quantity", quantity);
 
                     // Send AJAX request to update quantity on the server after a delay
                     setTimeout(() => {

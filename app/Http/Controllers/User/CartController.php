@@ -13,7 +13,17 @@ class CartController extends Controller
     public function index()
     {
         $cart = auth()->user()->customer->cart;
-        return view('customer.cart', compact('cart'));
+        $cartProducts = $cart->products()->withPivot('quantity')->get();
+        $totals =[];
+
+        foreach($cartProducts as $cartProduct){
+            $price = $cartProduct->price;
+            $quantity = $cartProduct->pivot->quantity;
+            $total =  $price * $quantity;
+            $totals[$cartProduct->pivot->product_id] = $total;
+        }
+        
+        return view('customer.cart', compact('cart','totals'));
     }
 
     public function store(Product $product)

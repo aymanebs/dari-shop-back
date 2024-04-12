@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('shipping_adress')->default('N/A');
             $table->string('shipping_city')->default('N/A');
             $table->string('shipping_region')->default('N/A');
-            $table->text('additional_info')->default('N/A');
+            $table->text('additional_info')->nullable();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->integer('delivery_method')->default(1);
             $table->integer('payement_status')->default(1);

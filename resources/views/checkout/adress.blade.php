@@ -39,37 +39,25 @@
                             <th>DELIVERY METHOD</th>
                             <th>ORDER REVIEW</th>
                             <th>PAYMENT METHOD</th>
-                            
+
                         </tr>
                     </thead>
                 </table>
 
                 <div class="py-5">
-                    <form class="flex w-full flex-col gap-3" action="{{route('checkout.save-adress')}}" method="POST">
+                    <form class="flex w-full flex-col gap-3" action="{{ route('checkout.save-adress') }}" method="POST">
                         @csrf
-                        {{-- <div class="flex w-full justify-between gap-2">
-                            <div class="flex w-1/2 flex-col">
-                                <label class="flex" for="name">Prenom<span
-                                        class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
-                                <input class=" w-full border px-4 py-2 outline-pink-400" type="text" placeholder="Prenom"
-                                    name="first_name" />
-                            </div>
-                            <div class="flex w-1/2 flex-col">
-                                <label class="flex" for="name">Nom<span
-                                        class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
-                                <input class=" w-full border px-4 py-2 outline-pink-400" type="text" placeholder="Nom"
-                                    name="last_name" />
-                            </div>
-
-
-                        </div> --}}
-
-                        <input type="hidden" name="orderId" value='{{$orderId}}'>
+                       
+                        <input type="hidden" name="orderId" value='{{ $orderId }}'>
                         <div class="flex  flex-col">
                             <label class="flex" for="name">Adresse<span
                                     class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
                             <input class="w-full border px-4 py-2 outline-pink-400" type="text" placeholder="Adresse"
-                                name="shipping_adress" />
+                                name="shipping_adress" value="{{old('shipping_adress')}}" />
+                        @error('shipping_adress')
+                                <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+
                         </div>
 
 
@@ -80,14 +68,20 @@
                                 <label class="flex" for="name">Region<span
                                         class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
                                 <input x-mask="999999" class="w-full border px-4 py-2 outline-pink-400" placeholder="176356"
-                                    name="shipping_region" />
+                                    name="shipping_region" value="{{old('shipping_region')}}"/>
+                                @error('shipping_region')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="flex w-1/2 flex-col">
                                 <label class="flex" for="name">Ville<span
                                         class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
                                 <input class="w-full border px-4 py-2 outline-pink-400" type="text" placeholder="Ville"
-                                    name="shipping_city" id="" />
+                                    name="shipping_city" id="" value="{{old('shipping_city')}}"/>
+                                @error('shipping_city')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                @enderror   
                             </div>
 
 
@@ -97,9 +91,12 @@
 
                         <div class="flex flex-col">
                             <label for="">Information supplémentaire</label>
-                            <textarea class="border px-4 py-2 outline-pink-400" type="text" name="additional_info"></textarea>
+                            <textarea class="border px-4 py-2 outline-pink-400" type="text" name="additional_info">{{old('additional_info')}}</textarea>
+                            @error('additional_info')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror    
                         </div>
-                   
+
                 </div>
 
                 <div class="flex w-full items-center justify-between">
@@ -115,28 +112,7 @@
 
             <!-- Summary  -->
 
-            <section class="mx-auto w-full px-4 md:max-w-[400px]">
-                <div class="">
-                    <div class="border py-5 px-4 shadow-md">
-                        <p class="font-bold">ORDER SUMMARY</p>
 
-                        <div class="flex justify-between border-b py-5">
-                            <p>Subtotal</p>
-                            <p>$1280</p>
-                        </div>
-
-                        <div class="flex justify-between border-b py-5">
-                            <p>Shipping</p>
-                            <p>Free</p>
-                        </div>
-
-                        <div class="flex justify-between py-5">
-                            <p>Total</p>
-                            <p>$1280</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </section>
 
         <!-- /Summary -->
