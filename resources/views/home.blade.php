@@ -140,119 +140,33 @@
 
     <!-- /Cons bages  -->
 
-    <h2 class="mx-auto mb-5 max-w-[1200px] px-5">SHOP BY CATHEGORY</h2>
+    <h2 class="mx-auto mb-5 max-w-[1200px] px-5">SHOP BY CATEGORY</h2>
 
     <!-- Cathegories -->
     <section
       class="mx-auto grid max-w-[1200px] grid-cols-2 px-5 lg:grid-cols-3 lg:gap-5"
     >
       <!-- 1 -->
+    @foreach($categories as $key => $category)
 
       <a href="#">
         <div class="relative cursor-pointer">
           <img
             class="mx-auto h-auto w-auto brightness-50 duration-300 hover:brightness-100"
-            src="{{asset('img/bedroom.png')}}"
-            alt="bedroom cathegory image"
+            src="{{ asset('img/'.$categoryImages[$key]) }}"
+            alt=" cathegory image"
           />
 
           <p
             class="pointer-events-none absolute top-1/2 left-1/2 w-11/12 -translate-x-1/2 -translate-y-1/2 text-center text-white lg:text-xl"
           >
-            Bedroom
+            {{$category->name}}
           </p>
         </div>
       </a>
 
-      <!-- 2 -->
-
-      <a href="#">
-        <div class="relative cursor-pointer">
-          <img
-            class="mx-auto h-auto w-auto brightness-50 duration-300 hover:brightness-100"
-            src="{{asset('img/matrass.png')}}"
-            alt="Matrass cathegory image"
-          />
-
-          <p
-            class="pointer-events-none absolute top-1/2 left-1/2 w-11/12 -translate-x-1/2 -translate-y-1/2 text-center text-white lg:text-xl"
-          >
-            Matrass
-          </p>
-        </div>
-      </a>
-
-      <!-- 3  -->
-
-      <a href="#">
-        <div class="relative cursor-pointer">
-          <img
-            class="mx-auto h-auto w-auto brightness-50 duration-300 hover:brightness-100"
-            src="{{asset('img/outdoor.png')}}"
-            alt="kitchen cathegory image"
-          />
-
-          <p
-            class="pointer-events-none absolute top-1/2 left-1/2 w-11/12 -translate-x-1/2 -translate-y-1/2 text-center text-white lg:text-xl"
-          >
-            Outdoor
-          </p>
-        </div>
-      </a>
-
-      <!-- 4 -->
-
-      <a href="#">
-        <div class="relative cursor-pointer">
-          <img
-            class="mx-auto h-auto w-auto brightness-50 duration-300 hover:brightness-100"
-            src="{{asset('img/sofa.png')}}"
-            alt="bedroom cathegory image"
-          />
-
-          <p
-            class="pointer-events-none absolute top-1/2 left-1/2 w-11/12 -translate-x-1/2 -translate-y-1/2 text-center text-white lg:text-xl"
-          >
-            Sofa
-          </p>
-        </div>
-      </a>
-
-      <!-- 5  -->
-
-      <a href="#">
-        <div class="relative cursor-pointer">
-          <img
-            class="mx-auto h-auto w-auto brightness-50 duration-300 hover:brightness-100"
-            src="{{asset('img/kitchen.png')}}"
-            alt="bedroom cathegory image"
-          />
-
-          <p
-            class="pointer-events-none absolute top-1/2 left-1/2 w-11/12 -translate-x-1/2 -translate-y-1/2 text-center text-white lg:text-xl"
-          >
-            Kitchen
-          </p>
-        </div>
-      </a>
-
-      <!-- 6 -->
-
-      <a href="#">
-        <div class="relative cursor-pointer">
-          <img
-            class="mx-auto h-auto w-auto brightness-50 duration-300 hover:brightness-100"
-            src="{{asset('img/living-room.png')}}"
-            alt="bedroom cathegory image"
-          />
-
-          <p
-            class="pointer-events-none absolute top-1/2 left-1/2 w-11/12 -translate-x-1/2 -translate-y-1/2 text-center text-white lg:text-xl"
-          >
-            Living room
-          </p>
-        </div>
-      </a>
+     
+      @endforeach
     </section>
     <!-- /Cathegories  -->
 
@@ -268,22 +182,21 @@
     >
       <div class="splide__track">
         <ul class="splide__list mx-auto max-w-[1200px]">
-          <!-- 1 -->
+        
+          @foreach($latestProducts as $product)
           <li class="splide__slide">
             <div class="flex flex-col">
               <img
-                class=""
-                src="{{asset('img/sofa-1.jpg')}}"
-                alt="sofa image"
+                class="w-full h-60 object-cover"
+                src="{{$product->getFirstMediaUrl('products')}}"
+                alt="product image"
               />
 
               <div>
-                <p class="mt-2">GUYER CHAIR</p>
+                <p class="mt-2">{{$product->name}}</p>
                 <p class="font-medium text-violet-900">
-                  $45.00
-                  <span class="text-sm text-gray-500 line-through"
-                    >$500.00</span
-                  >
+                 ${{$product->price}}
+                 
                 </p>
 
                 <div class="flex items-center">
@@ -362,484 +275,9 @@
               </div>
             </div>
           </li>
+          @endforeach
 
-          <!-- 2 -->
-          <li class="splide__slide">
-            <div class="flex flex-col">
-              <img
-                class=""
-                src="{{asset('img/sofa-2.jpg')}}"
-                alt="Chair image"
-              />
-
-              <div>
-                <p class="mt-2">PURPLE CHAIR</p>
-                <p class="font-medium text-violet-900">
-                  $45.00
-                  <span class="text-sm text-gray-500 line-through"
-                    >$500.00</span
-                  >
-                </p>
-
-                <div class="flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-gray-200"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <p class="text-sm text-gray-400">(38)</p>
-                </div>
-
-                <div>
-                  <button class="my-5 h-10 w-full bg-violet-900 text-white">
-                    Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <!-- 3 -->
-          <li class="splide__slide">
-            <div class="flex flex-col">
-              <img
-                class=""
-                src="{{asset('img/product-sofa.png')}}"
-                alt="Sofa image"
-              />
-
-              <div>
-                <p class="mt-2">LARGE SOFA</p>
-                <p class="font-medium text-violet-900">
-                  $45.00
-                  <span class="text-sm text-gray-500 line-through"
-                    >$500.00</span
-                  >
-                </p>
-
-                <div class="flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-gray-200"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <p class="text-sm text-gray-400">(38)</p>
-                </div>
-
-                <div>
-                  <button class="my-5 h-10 w-full bg-violet-900 text-white">
-                    Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <!-- 4 -->
-
-          <li class="splide__slide">
-            <div class="flex flex-col">
-              <img
-                class=""
-                src="{{asset('img/kitchen.png')}}"
-                alt="Kitchen image"
-              />
-
-              <div>
-                <p class="mt-2">PERFECTO KITCHEN</p>
-                <p class="font-medium text-violet-900">
-                  $45.00
-                  <span class="text-sm text-gray-500 line-through"
-                    >$500.00</span
-                  >
-                </p>
-
-                <div class="flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-gray-200"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <p class="text-sm text-gray-400">(38)</p>
-                </div>
-
-                <div>
-                  <button class="my-5 h-10 w-full bg-violet-900 text-white">
-                    Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <!-- 5 -->
-
-          <li class="splide__slide">
-            <div class="flex flex-col">
-              <img
-                class=""
-                src="{{asset('img/matrass.png')}}"
-                alt="Matrass image"
-              />
-
-              <div>
-                <p class="mt-2">MATRASS COMFORT +</p>
-                <p class="font-medium text-violet-900">
-                  $45.00
-                  <span class="text-sm text-gray-500 line-through"
-                    >$500.00</span
-                  >
-                </p>
-
-                <div class="flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-gray-200"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <p class="text-sm text-gray-400">(38)</p>
-                </div>
-
-                <div>
-                  <button class="my-5 h-10 w-full bg-violet-900 text-white">
-                    Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <!-- 6 -->
-
-          <li class="splide__slide">
-            <div class="flex flex-col">
-              <img
-                class=""
-                src="{{asset('img/bedroom.png')}}"
-                alt="Bedroom image"
-              />
-
-              <div>
-                <p class="mt-2">QUEEN SIZE BED</p>
-                <p class="font-medium text-violet-900">
-                  $45.00
-                  <span class="text-sm text-gray-500 line-through"
-                    >$500.00</span
-                  >
-                </p>
-
-                <div class="flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-rose-400"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-4 w-4 text-gray-200"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <p class="text-sm text-gray-400">(38)</p>
-                </div>
-
-                <div>
-                  <button class="my-5 h-10 w-full bg-violet-900 text-white">
-                    Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </li>
+         
         </ul>
       </div>
     </section>
@@ -875,20 +313,20 @@
 
     <!-- /Special offer card -->
 
-    <p class="mx-auto mt-10 mb-5 max-w-[1200px] px-5">RECOMMENDED FOR YOU</p>
+    <p class="mx-auto mt-10 mb-5 max-w-[1200px] px-5">RECOMMENDED PRODUCTS</p>
 
-    <!-- Recommendations -->
+    <!-- Best sellers -->
     <section
-      class="mx-auto grid max-w-[1200px] grid-cols-2 gap-3 px-5 pb-10 lg:grid-cols-4"
+      class="mx-auto  grid max-w-[1200px] grid-cols-2 gap-3 px-5 pb-10 lg:grid-cols-4"
     >
       <!-- 1 -->
-    @foreach($products as $product)
+    @foreach($bestSellingProducts as $product)
 
 
       <div class="flex flex-col">
         <div class="relative flex">
           <img
-            class=""
+            class="w-full h-60 object-cover"
             src="{{$product->getFirstMediaUrl('products')}}"
             alt="product image"
           />

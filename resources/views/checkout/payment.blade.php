@@ -66,6 +66,9 @@
                       placeholder="4242 4242 4242 4242"
                       name="card_number"
                     />
+                    @error('card_number')
+                    <span class="text-red-500">{{ $message }}</span>
+                    @enderror
                   </div>
   
                   <div class="flex w-full flex-col">
@@ -93,9 +96,7 @@
                           id=""
                           placeholder="10"
                         />
-                        @error('exp_month')
-                        <span class="text-red-500">{{ $message }}</span>
-                        @enderror
+                       
   
                         <span>&bsol;</span>
   
@@ -106,11 +107,8 @@
                           id=""
                           placeholder="36"
                         />
-                        @error('exp_year')
-                        <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-
                       </div>
+                    
                     </div>
   
                     <div class="flex flex-col w-[60px] lg:w-[110px]">
@@ -122,11 +120,22 @@
                         type="password"
                         placeholder="&bull;&bull;&bull;"
                       />
-                      @error('cvc')
-                      <span class="text-red-500">{{ $message }}</span>
-                      @enderror
+                 
                     </div>
+
+             
                   </div>
+
+                  @error('exp_month')
+                  <span class="text-red-500">{{ $message }}</span>
+                  @enderror
+                  
+                  @error('exp_year')
+                  <span class="text-red-500">{{ $message }}</span>
+                  @enderror
+                  @error('cvc')
+                  <span class="text-red-500">{{ $message }}</span>
+                  @enderror
   
                   <!-- another payment-methods -->
   
@@ -178,11 +187,7 @@
                 >
   
                 <div class="mx-auto flex justify-center gap-2 lg:mx-0">
-                  <a
-                    href="checkout-delivery.html"
-                    class="bg-purple-900 px-4 py-2 text-white"
-                    >Previous step</a
-                  >
+                 
   
                  
                 </div>

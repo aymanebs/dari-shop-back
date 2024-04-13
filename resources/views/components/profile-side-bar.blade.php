@@ -63,7 +63,7 @@
       <div class="flex w-full">
         <div class="flex flex-col gap-2">
           <a
-            href="{{route('orders.index')}}"
+            href="{{route('profile.orders')}}"
             class="flex items-center gap-2 font-medium active:text-violet-900"
           >
             <svg

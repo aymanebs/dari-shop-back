@@ -117,11 +117,7 @@
                 >
   
                 <div class="mx-auto flex justify-center gap-2 lg:mx-0">
-                  <a
-                    href="checkout-address.html"
-                    class="bg-purple-900 px-4 py-2 text-white"
-                    >Previous step</a
-                  >
+                  
   
                   <button  class="bg-pink-400 px-4 py-2" type="submit"
                     >Order review
@@ -358,4 +354,6 @@
         </section>
       </main>
       <!-- /Payment and copyright  -->
+
+   
 @endsection

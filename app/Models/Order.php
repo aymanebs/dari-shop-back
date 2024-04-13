@@ -15,7 +15,7 @@ class Order extends Model
         'shipping_region',
         'additional_info',
         'delivery_method',
-        'payement_status',
+        'status',
         'customer_id',
 
     ];
@@ -25,10 +25,14 @@ class Order extends Model
         '2' => 'Pickup',
     ];
 
-    public static $payementOptions =[
+    public static $statusOptions =[
         '1' => 'pending',
         '2' => 'paid'
     ];
+
+    public function getStatus(){
+        return self::$statusOptions[$this->status];
+    }
 
     public function products(){
         return $this->belongsToMany(Product::class)->withPivot('quantity');
@@ -37,4 +41,6 @@ class Order extends Model
     public function customer(){
         return $this->belongsTo(Customer::class);
     }
+
+
 }

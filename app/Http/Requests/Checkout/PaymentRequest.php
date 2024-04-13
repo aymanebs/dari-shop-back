@@ -23,11 +23,11 @@ class PaymentRequest extends FormRequest
     {
         return [
             'card_holder' => 'required|string|min:3',
-            'card_number' => 'required|numeric|digits:16',
+            'card_number' => 'required|string|digits:16',
             'exp_month' => 'required|numeric|digits:2',
-            'exp_year' => 'required|numeric|digits:4',
+            'exp_year' => 'required|numeric|digits:2',
             'cvc' => 'required|numeric|digits:3',
-            
+
 
         ];
     }

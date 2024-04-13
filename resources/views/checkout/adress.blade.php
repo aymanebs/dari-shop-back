@@ -53,7 +53,7 @@
                             <label class="flex" for="name">Adresse<span
                                     class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
                             <input class="w-full border px-4 py-2 outline-pink-400" type="text" placeholder="Adresse"
-                                name="shipping_adress" value="{{old('shipping_adress')}}" />
+                                name="shipping_adress" value="{{ $order->shipping_adress ?? old('shipping_adress') }}" />
                         @error('shipping_adress')
                                 <span class="text-red-500">{{ $message }}</span>
                         @enderror
@@ -68,7 +68,7 @@
                                 <label class="flex" for="name">Region<span
                                         class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
                                 <input x-mask="999999" class="w-full border px-4 py-2 outline-pink-400" placeholder="176356"
-                                    name="shipping_region" value="{{old('shipping_region')}}"/>
+                                    name="shipping_region" value="{{ $order->shipping_region ?? old('shipping_region') }}"/>
                                 @error('shipping_region')
                                     <span class="text-red-500">{{ $message }}</span>
                                 @enderror
@@ -78,7 +78,7 @@
                                 <label class="flex" for="name">Ville<span
                                         class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
                                 <input class="w-full border px-4 py-2 outline-pink-400" type="text" placeholder="Ville"
-                                    name="shipping_city" id="" value="{{old('shipping_city')}}"/>
+                                    name="shipping_city" id="" value="{{ $order->shipping_city ?? old('shipping_city') }}"/>
                                 @error('shipping_city')
                                     <span class="text-red-500">{{ $message }}</span>
                                 @enderror   
@@ -91,7 +91,7 @@
 
                         <div class="flex flex-col">
                             <label for="">Information supplémentaire</label>
-                            <textarea class="border px-4 py-2 outline-pink-400" type="text" name="additional_info">{{old('additional_info')}}</textarea>
+                            <textarea class="border px-4 py-2 outline-pink-400" type="text" name="additional_info">{{ $order->additional_info ?? old('additional_info') }}</textarea>
                             @error('additional_info')
                                 <span class="text-red-500">{{ $message }}</span>
                             @enderror    

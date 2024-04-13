@@ -72,10 +72,11 @@ Route::resource('seller/products',SellerProductController::class);
 Route::get('/profile',[ProfileController::class,'index'])->name('profile');
 Route::get('/profile/edit',[ProfileController::class,'edit'])->name('profile.edit');
 Route::get('/profile/wishlist',[ProfileController::class,'wishlist'])->name('profile.wishlist');
-Route::resource('orders',OrderController::class);
+
 Route::get('/profile/edit-adress',[ProfileController::class,'editAdress'])->name('profile.edit-adress');
 Route::get('/profile/edit-password',[ProfileController::class,'editPassword'])->name('profile.edit-password');
 Route::patch('/profile/update/{customer}',[ProfileController::class,'update'])->name('profile.update');
+Route::get('/profile/orders',[ProfileController::class,'listOrders'])->name('profile.orders');
 Route::get('/cart',[UserCartController::class,'index'])->name('cart.index');
 Route::post('/cart/add/{product}',[UserCartController::class,'store'])->name('cart.store');
 Route::delete('/cart/remove/{product}',[UserCartController::class,'removeFromCart'])->name('cart.remove');

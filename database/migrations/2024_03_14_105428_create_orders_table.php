@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('additional_info')->nullable();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->integer('delivery_method')->default(1);
-            $table->integer('payement_status')->default(1);
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

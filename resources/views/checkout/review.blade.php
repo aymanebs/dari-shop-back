@@ -212,41 +212,34 @@
               <!-- Product table  -->
   
               <table class="mt-3 hidden w-full lg:table">
-                <thead class="h-16 bg-neutral-100">
-                  <tr>
-                    <th>ITEM</th>
-                    <th>PRICE</th>
-                    <th>QUANTITY</th>
-                    <th>TOTAL</th>
-                  </tr>
+                <thead class="h-16 bg-neutral-100 ">
+                    <tr >
+                        <th class="text-left pl-5 ">ITEM</th>
+                        <th >PRICE</th>
+                        <th>QUANTITY</th>
+                        <th>TOTAL</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <!-- 1 -->
-                  @foreach($order->products as $product)
-                 
-                  <tr class="h-[100px] border-b">
-                    <td class="align-middle">
-                      <div class="flex">
-                        <img
-                          class="w-[90px]"
-                          src="{{$product->getFirstMediaUrl('products')}}"
-                          alt="bedroom image"
-                        />
-                        <div class="ml-3 flex flex-col justify-center">
-                          <p class="text-xl font-bold">{{$product->name}}</p>
-                          <p class="text-sm text-gray-400">Size: XL</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="mx-auto text-center">&#36;{{$product->price}}</td>
-                    <td class="text-center align-middle">{{$product->pivot->quantity}}</td>
-                    <td class="mx-auto text-center">&#36;{{$totals[$product->id]}}</td>
-                  </tr>
-  
-                  @endforeach
-                 
+                    <!-- 1 -->
+                    @foreach($order->products as $product)
+                    <tr class="h-[100px] border-b  ">
+                        <td class="align-middle">
+                            <div class="flex items-center"> <!-- Updated -->
+                                <img class="w-[90px] mr-3" src="{{$product->getFirstMediaUrl('products')}}" alt="image" /> <!-- Updated -->
+                                <div class="flex flex-col justify-center">
+                                    <p class="text-xl font-bold">{{$product->name}}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-auto text-center align-middle">&#36;{{$product->price}}</td> <!-- Updated -->
+                        <td class="text-center align-middle">{{$product->pivot->quantity}}</td> <!-- Updated -->
+                        <td class="mx-auto text-center align-middle">&#36;{{$totals[$product->id]}}</td> <!-- Updated -->
+                    </tr>
+                    @endforeach
                 </tbody>
-              </table>
+            </table>
+
               <!-- /Product table  -->
   
               <div class="flex w-full items-center justify-between">
@@ -257,11 +250,6 @@
                 >
   
                 <div class="mx-auto flex justify-center gap-2 lg:mx-0">
-                  <a
-                    href="checkout-payment.html"
-                    class="bg-purple-900 px-4 py-2 text-white"
-                    >Previous step</a
-                  >
   
                   <a
                     href="{{route('checkout.payment')}}"

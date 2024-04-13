@@ -39,4 +39,10 @@ class ProfileController extends Controller
         return redirect()->route('profile');
 
     }
+
+    public function listOrders(){
+        $customer = auth()->user()->customer;
+        $orders = $customer->orders()->with('products')->get();
+        return view('profile.orders',compact('orders'));
+    }
 }

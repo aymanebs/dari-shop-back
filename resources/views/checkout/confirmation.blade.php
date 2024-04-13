@@ -23,12 +23,12 @@
             />
           </svg>
 
-          <p>Thank you, <span class="font-bold">Sarah Johnson!</span></p>
+          <p>Thank you, <span class="font-bold">{{auth()->user()->customer->name}}</span></p>
           <p>You can check your order status on your orders list!</p>
 
           <div class="mt-10">
             <a
-              href="my-order-history.html"
+              href="{{route('profile.orders')}}"
               class="mx-auto bg-pink-400 px-4 py-2"
               >My Orders history</a
             >
