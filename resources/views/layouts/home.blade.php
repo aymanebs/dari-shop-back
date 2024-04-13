@@ -605,8 +605,8 @@
       alt="company logo"
     />
     <p class="pl-0">
-      Lorem ipsum dolor sit amet consectetur <br />
-      adipisicing elit.
+      Produits Fait maison<br />
+      partout au Maroc
     </p>
     <div class="mt-10 flex gap-3">
       <a href="https://github.com/bbulakh">

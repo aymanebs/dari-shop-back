@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/logo.png" />
     <link rel="stylesheet" href="{{ asset('css/register-style.css') }}">
     <title>Document</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 </head>
 
-<body>
+<body class="bg-pink-100">
   <div id="loading-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-60" style="display: none">
     
     <svg class="animate-spin h-8 w-8 text-white mr-3" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -25,7 +27,7 @@
 
 </div>
 
-    <h1 class="text-lg font-bold text-gray-700 leading-tight text-center mt-12 mb-5">Form Wizard - Multi Step Form</h1>
+    <h1 class="text-lg font-bold text-gray-700 leading-tight text-center mt-12 mb-5">Create your account</h1>
     <form action="{{ route('register') }}" method="post" id="signUpForm"
         class="p-12 shadow-md rounded-2xl bg-white mx-auto border-solid border-2 border-gray-100 mb-8"
         enctype="multipart/form-data">
@@ -33,7 +35,7 @@
         <!-- start step indicators -->
         <div class="form-header flex gap-3 mb-4 text-xs text-center">
             <span class="stepIndicator flex-1 pb-8 relative">Account Setup</span>
-            <span class="stepIndicator flex-1 pb-8 relative">Social Profiles</span>
+            <span class="stepIndicator flex-1 pb-8 relative">Buyer or seller ?</span>
             <span class="stepIndicator flex-1 pb-8 relative">Personal Details</span>
         </div>
         <!-- end step indicators -->

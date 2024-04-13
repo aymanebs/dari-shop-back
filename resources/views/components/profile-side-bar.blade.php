@@ -6,7 +6,7 @@
           height="40px"
           class="rounded-full object-cover"
           src="{{auth()->user()->customer->getFirstMediaUrl('avatars')}}"
-          alt="Red woman portrait"
+          alt="portrait"
         />
         <div class="ml-5">
           <p class="font-medium text-gray-500">Hello,</p>

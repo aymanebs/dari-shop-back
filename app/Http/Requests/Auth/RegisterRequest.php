@@ -29,8 +29,8 @@ class RegisterRequest extends FormRequest
             'role' => 'required',
             'phone' => 'required',
             'adress' => 'required',
-            'justify' => 'required|max:10240',
-            // 'city' => 'required',
+            'justify' => 'required',
+           
             
 
         ];

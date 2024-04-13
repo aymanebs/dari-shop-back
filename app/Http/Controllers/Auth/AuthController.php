@@ -28,7 +28,7 @@ class AuthController extends Controller
     }
 
 
-    public function register(AuthRegisterRequest $request)
+    public function register(Request $request)
     {
 
         /*
@@ -52,13 +52,9 @@ class AuthController extends Controller
                     'phone' => $request->phone,
                     'adress' => $request->adress,
                 ]);
-                // try{
-                //     $customer->addMedia(public_path('img/default_avatar.png'))->preservingOriginal()->toMediaCollection('avatars');
-                // }
-                // catch(\Exception $e){
-                //     dd($e->getMessage());
-                // }
-
+                $defaultAvatarPath = public_path('img/default_avatar.png');
+                Storage::putFileAs('avatars', $defaultAvatarPath, 'default_avatar.png');
+                $customer->addMedia(Storage::path('avatars/default_avatar.png'))->toMediaCollection('avatars');
             } 
             else if ($request->role == '2') {
 
@@ -100,10 +96,8 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()->route('home');
         } else {
-            // return back()->withErrors([
-            //     'email' => 'Invalid email or password',
-            // ]);
-            echo ('Invalid email or password');
+            return back()->with('error', 'Les informations d\'identification fournies ne correspondent pas à nos enregistrements.');
+            
         }
     }
 
@@ -120,10 +114,10 @@ class AuthController extends Controller
             return redirect()->route('login');
         } else {
 
-            // return back()->withErrors([
-            //     'error' => 'There might be an issue with logout',
-            // ]);
-            echo 'There might be an issue with logout';
+            return back()->withErrors([
+                'error' => 'There might be an issue with logout',
+            ]);
+            
         }
     }
 }
