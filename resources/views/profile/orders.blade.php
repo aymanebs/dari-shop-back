@@ -39,163 +39,50 @@
       <x-profile-side-bar/>
       <!-- /sidebar  -->
 
-      <!-- Mobile order table  -->
-      <section
-        class="container mx-auto my-3 flex w-full flex-col gap-3 px-4 md:hidden"
-      >
-        <!-- 1 -->
+   
 
-        <div class="flex w-full border px-4 py-4">
-          <div class="ml-3 flex w-full flex-col justify-center">
-            <div class="flex items-center justify-between">
-              <p class="text-xl font-bold">Order &numero; 1245</p>
-              <div class="border border-green-500 px-2 py-1 text-green-500">
-                Delivered
-              </div>
-            </div>
-            <p class="text-sm text-gray-400">22/06/2023</p>
-            <p class="py-3 text-xl font-bold text-violet-900">$620</p>
-            <div class="mt-2 flex w-full items-center justify-between">
-              <div class="flex items-center justify-center">
-                <a
-                  href="order-overview.html"
-                  class="flex cursor-text items-center justify-center bg-rose-500 px-2 py-2 active:ring-gray-500"
-                >
-                  View order
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2 -->
-
-        <div class="flex w-full border px-4 py-4">
-          <div class="ml-3 flex w-full flex-col justify-center">
-            <div class="flex items-center justify-between">
-              <p class="text-xl font-bold">Order &numero; 1232</p>
-              <div class="border border-orange-500 px-2 py-1 text-orange-500">
-                Progress
-              </div>
-            </div>
-            <p class="text-sm text-gray-400">20/05/2023</p>
-            <p class="py-3 text-xl font-bold text-violet-900">$320</p>
-            <div class="mt-2 flex w-full items-center justify-between">
-              <div class="flex items-center justify-center">
-                <a
-                  href="order-overview.html"
-                  class="flex cursor-text items-center justify-center bg-rose-500 px-2 py-2 active:ring-gray-500"
-                >
-                  View order
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3 -->
-
-        <div class="flex w-full border px-4 py-4">
-          <div class="ml-3 flex w-full flex-col justify-center">
-            <div class="flex items-center justify-between">
-              <p class="text-xl font-bold">Order &numero; 3246</p>
-              <div class="border border-red-500 px-2 py-1 text-red-500">
-                Declined
-              </div>
-            </div>
-            <p class="text-sm text-gray-400">03/03/2022</p>
-            <p class="py-3 text-xl font-bold text-violet-900">$2500</p>
-            <div class="mt-2 flex w-full items-center justify-between">
-              <div class="flex items-center justify-center">
-                <a
-                  href="order-overview.html"
-                  class="flex cursor-text items-center justify-center bg-rose-500 px-2 py-2 active:ring-gray-500"
-                >
-                  View order
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4 -->
-
-        <div class="flex w-full border px-4 py-4">
-          <div class="ml-3 flex w-full flex-col justify-center">
-            <div class="flex items-center justify-between">
-              <p class="text-xl font-bold">Order &numero; 9827</p>
-              <div class="border border-blue-500 px-2 py-1 text-blue-500">
-                Need Payment
-              </div>
-            </div>
-            <p class="text-sm text-gray-400">31/01/20</p>
-            <p class="py-3 text-xl font-bold text-violet-900">$1700</p>
-            <div class="mt-2 flex w-full items-center justify-between">
-              <div class="flex items-center justify-center">
-                <a
-                  href="order-overview.html"
-                  class="flex cursor-text items-center justify-center bg-rose-500 px-2 py-2 active:ring-gray-500"
-                >
-                  View order
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- /Mobile order table  -->
-
-      <!-- Order table  -->
-      <section
-        class="hidden h-[600px] w-full max-w-[1200px] grid-cols-1 gap-3 px-5 pb-10 lg:grid"
-      >
-        <table class="table-fixed">
+ <!-- Order table  -->
+<section class=" sm:block w-full max-w-[1200px] grid-cols-1 gap-3 px-5 pb-10 md:grid">
+  <div class="overflow-x-auto">
+      <table class="w-full lg:table">
           <thead class="h-16 bg-neutral-100">
-            <tr>
-              <th>ORDER</th>
-              <th>DATE</th>
-              <th>TOTAL</th>
-              <th>STATUS</th>
-              <th>ACTION</th>
-            </tr>
+              <tr>
+                  <th class="px-4">ORDER</th>
+                  <th class="px-4">DATE</th>
+                  <th class="px-4">TOTAL</th>
+                  <th class="px-4">STATUS</th>
+                  <th class="px-4">ACTION</th>
+              </tr>
           </thead>
           <tbody>
-            <!-- 1 -->
-            @foreach($orders as $order)
-            <tr class="h-[100px] border-b">
-              <td class="text-center align-middle">&#8470; {{$order->id}}</td>
-              <td class="mx-auto text-center">{{$order->updated_at->format('d/m/Y')}}</td>
-              <td class="text-center align-middle">&#36;620</td>
-
-              <td class="mx-auto text-center">
-
-                @switch($order->status)
-                @case(1)
-                <span
-                  class="border-2 border-orange-500 py-1 px-3 text-orange-500"
-                  >{{$order->getStatus()}}</span
-                >
-                @break
-                @case(2)
-
-                <span
-                  class="border-2 border-green-500 py-1 px-3 text-green-500"
-                  >{{$order->getStatus()}}</span
-                >
-                @break
-                @endswitch
-              </td>
-              <td class="text-center align-middle">
-                <a href="order-overview.html" class="bg-rose-400 px-4 py-2"
-                  ><button class="text-center">View</button></a
-                >
-              </td>
-            </tr>
-            @endforeach
-
+              <!-- 1 -->
+              @foreach ($orders as $order)
+              <tr class="h-[100px] border-b">
+                  <td class="text-center align-middle px-4">&#8470; {{ $order->id }}</td>
+                  <td class="mx-auto text-center px-4">{{ $order->updated_at->format('d/m/Y') }}</td>
+                  <td class="text-center align-middle px-4">&#36;620</td>
+                  <td class="mx-auto text-center px-4">
+                      @switch($order->status)
+                          @case(1)
+                              <span class="border-2 border-orange-500 py-1 px-3 text-orange-500">{{ $order->getStatus() }}</span>
+                              @break
+                          @case(2)
+                              <span class="border-2 border-green-500 py-1 px-3 text-green-500">{{ $order->getStatus() }}</span>
+                              @break
+                      @endswitch
+                  </td>
+                  <td class="text-center align-middle px-4">
+                      <a href="order-overview.html" class="bg-rose-400 px-4 py-2">
+                          <button class="text-center">View</button>
+                      </a>
+                  </td>
+              </tr>
+              @endforeach
           </tbody>
-        </table>
-      </section>
-      <!-- /Order table  -->
+      </table>
+  </div>
+</section>
+<!-- /Order table  -->
     </section>
+
 @endsection

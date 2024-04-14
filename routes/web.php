@@ -87,10 +87,11 @@ Route::post('/update-cart',[UserCartController::class,'updateCart'])->name('cart
 // Checkout routes
 Route::get('/checkout/adress',[CheckoutController::class,'adressIndex'])->name('checkout.adress');
 Route::get('/checkout/delivery',[CheckoutController::class,'deliveryIndex'])->name('checkout.delivery');
-Route::get('/checkout/payment',[CheckoutController::class,'paymentIndex'])->name('checkout.payment');
+Route::get('/checkout/payment/{orderId}',[CheckoutController::class,'paymentView'])->name('checkout.paymentView');
 
 Route::get('/checkout/confirm',[CheckoutController::class,'confirmIndex'])->name('checkout.confirmation');
-Route::post('/payment',[PayementController::class,'payment'])->name('payment');
+Route::post('/checkout/payment',[CheckoutController::class,'payment'])->name('checkout.payment');
+// Route::post('/payment',[PayementController::class,'payment'])->name('payment');
 
 Route::get('/checkout/create',[CheckoutController::class,'create'])->name('checkout.create');
 Route::post('/checkout/save-adress',[CheckoutController::class,'saveAdress'])->name('checkout.save-adress');

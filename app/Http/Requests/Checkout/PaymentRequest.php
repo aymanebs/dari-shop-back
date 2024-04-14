@@ -22,6 +22,7 @@ class PaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'orderId' => 'required',
             'card_holder' => 'required|string|min:3',
             'card_number' => 'required|string|digits:16',
             'exp_month' => 'required|numeric|digits:2',

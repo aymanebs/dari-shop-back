@@ -54,10 +54,12 @@
                   </tr>
                 </thead>
               </table>
-  
+    
               <div class="py-5">
-                <form class="flex w-full flex-col gap-3" action="{{route('payment')}}" method="POST">
+                <form class="flex w-full flex-col gap-3" action="{{route('checkout.payment')}}" method="POST">
                   @csrf
+                
+                  <input type="hidden" name="orderId" value="{{$orderId}}">
                   <div class="flex w-full flex-col">
                     <label class="flex" for="name">Payment Card Number</label>
                     <input
@@ -174,7 +176,7 @@
                   <!-- another payment-methods -->
 
                   <button type="submit"  class="bg-pink-400 px-4 py-2"
-                  >Checkout review</button
+                  >Confirm payment</button
                 >
                 </form>
               </div>
@@ -201,10 +203,10 @@
               <div class="">
                 <div class="border py-5 px-4 shadow-md">
                   <p class="font-bold">ORDER SUMMARY</p>
-  
+                  
                   <div class="flex justify-between border-b py-5">
                     <p>Subtotal</p>
-                    <p>$1280</p>
+                    <p>${{$subtotal}}</p>
                   </div>
   
                   <div class="flex justify-between border-b py-5">
@@ -214,7 +216,7 @@
   
                   <div class="flex justify-between py-5">
                     <p>Total</p>
-                    <p>$1280</p>
+                    <p>${{$subtotal}}</p>
                   </div>
                 </div>
               </div>
