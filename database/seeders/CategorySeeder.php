@@ -24,7 +24,7 @@ class CategorySeeder extends Seeder
         ],
 
         [
-            "name" => "Produits de beauté"
+            "name" => "Produits de beaute"
         ],
 
         [
@@ -32,7 +32,7 @@ class CategorySeeder extends Seeder
         ],
 
         [
-            "name" => "Produits de beauté"
+            "name" => "Decoration Interieure"
         ],
 
        ];

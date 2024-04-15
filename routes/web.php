@@ -10,6 +10,7 @@ use App\Http\Controllers\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Seller\CartController;
 use App\Http\Controllers\User\CartController as UserCartController;
+use App\Http\Controllers\User\CatalogController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\PayementController;
@@ -97,5 +98,13 @@ Route::get('/checkout/create',[CheckoutController::class,'create'])->name('check
 Route::post('/checkout/save-adress',[CheckoutController::class,'saveAdress'])->name('checkout.save-adress');
 Route::post('/checkout/save-delivery',[CheckoutController::class,'saveDelivery'])->name('checkout.save-delivery');
 Route::get('/checkout/review/{orderId}',[CheckoutController::class,'review'])->name('checkout.review');
+
+// Catalog routes
+
+Route::get('/catalog/alimentation',[CatalogController::class,'alimentation'])->name('catalog.alimentation');
+Route::get('/catalog/textiles',[CatalogController::class,'textiles'])->name('catalog.textiles');
+Route::get('/catalog/artisanat',[CatalogController::class,'artisanat'])->name('catalog.artisanat');
+Route::get('/catalog/beaute',[CatalogController::class,'beaute'])->name('catalog.beaute');
+Route::get('/catalog/decoration',[CatalogController::class,'decoration'])->name('catalog.decoration');
 
 
