@@ -40,6 +40,7 @@ class AuthController extends Controller
             $user = User::create([
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                
             ]);
             // dd($request->address);
             if ($request->role == '1') {

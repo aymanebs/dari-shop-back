@@ -27,12 +27,10 @@
 
     <div class="flex-grow">
         <section class="container mx-auto max-w-[1200px] py-5 lg:flex lg:flex-row lg:py-10">
-            <h2 class="mx-auto px-5 text-2xl font-bold md:hidden">
-                Complete Address
-            </h2>
-            <!-- form  -->
+
+            <!-- Steps guide  -->
             <section class="grid w-full max-w-[1200px] grid-cols-1 gap-3 px-5 pb-10">
-                <table class="hidden lg:table">
+                <table class="hidden lg:table" id="orderTable">
                     <thead class="h-16 bg-neutral-100">
                         <tr>
                             <th class="bg-neutral-600 text-white">ADDRESS</th>
@@ -43,20 +41,20 @@
                         </tr>
                     </thead>
                 </table>
-
-                <div class="py-5">
-                    <form class="flex w-full flex-col gap-3" action="{{ route('checkout.save-adress') }}" method="POST">
+                {{--  step 1 --}}
+                <div class="form-section py-5" style="display: block">
+                    <form class="flex w-full flex-col gap-3">
                         @csrf
-                       
-                        <input type="hidden" name="orderId" value='{{ $orderId }}'>
+
+                        {{-- <input type="hidden" name="orderId" value='{{ $orderId }}'> --}}
                         <div class="flex  flex-col">
                             <label class="flex" for="name">Adresse<span
                                     class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
                             <input class="w-full border px-4 py-2 outline-pink-400" type="text" placeholder="Adresse"
-                                name="shipping_adress" value="{{ $order->shipping_adress ?? old('shipping_adress') }}" />
-                        @error('shipping_adress')
+                                name="shipping_adress" value="" />
+                            @error('shipping_adress')
                                 <span class="text-red-500">{{ $message }}</span>
-                        @enderror
+                            @enderror
 
                         </div>
 
@@ -68,7 +66,7 @@
                                 <label class="flex" for="name">Region<span
                                         class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
                                 <input x-mask="999999" class="w-full border px-4 py-2 outline-pink-400" placeholder="176356"
-                                    name="shipping_region" value="{{ $order->shipping_region ?? old('shipping_region') }}"/>
+                                    name="shipping_region" value="" />
                                 @error('shipping_region')
                                     <span class="text-red-500">{{ $message }}</span>
                                 @enderror
@@ -78,10 +76,10 @@
                                 <label class="flex" for="name">Ville<span
                                         class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
                                 <input class="w-full border px-4 py-2 outline-pink-400" type="text" placeholder="Ville"
-                                    name="shipping_city" id="" value="{{ $order->shipping_city ?? old('shipping_city') }}"/>
+                                    name="shipping_city" value="" />
                                 @error('shipping_city')
                                     <span class="text-red-500">{{ $message }}</span>
-                                @enderror   
+                                @enderror
                             </div>
 
 
@@ -91,24 +89,218 @@
 
                         <div class="flex flex-col">
                             <label for="">Information supplémentaire</label>
-                            <textarea class="border px-4 py-2 outline-pink-400" type="text" name="additional_info">{{ $order->additional_info ?? old('additional_info') }}</textarea>
+                            <textarea class="border px-4 py-2 outline-pink-400" type="text" name="additional_info"></textarea>
                             @error('additional_info')
                                 <span class="text-red-500">{{ $message }}</span>
-                            @enderror    
+                            @enderror
                         </div>
+                    </form>
+
+                </div>
+                {{-- /  step  1 --}}
+
+                {{--  step 2 --}}
+
+                <div class="form-section py-5 " style="display: none;">
+                    <form class="grid w-full grid-cols-1 gap-3 lg:grid-cols-2"
+                        action="{{ route('checkout.save-delivery') }}" method="POST">
+                        @csrf
+                        {{-- <input type="hidden" name="orderId" value='{{ $orderId }}'> --}}
+                        <div class="flex w-full justify-between gap-2">
+                            <div class="flex w-full cursor-pointer flex-col border">
+                                <div class="flex bg-pink-400 px-4 py-2">
+                                    <input class="outline-pink-400" type="radio" name="delivery_method" value="1" />
+
+                                    <p class="ml-3 font-bold">Livraison a domicile</p>
+                                </div>
+
+                                <div class="px-4 py-3">
+                                    <p class="pb-3 font-bold text-violet-900">FREE</p>
+                                    <p class="text-sm">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Qui nulla dolorum obcaecati, sequi, quidem quo eligendi
+                                        soluta modi accusamus esse explicabo exercitationem!
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="flex w-full cursor-pointer flex-col border">
+                            <div class="flex bg-pink-400 px-4 py-2">
+                                <input class="outline-pink-400" type="radio" name="delivery_method" value="2" />
+
+                                <p class="ml-3 cursor-pointer font-bold">Point relais</p>
+                            </div>
+
+                            <div class="px-4 py-3">
+                                <p class="pb-3 font-bold text-violet-900">&dollar;300</p>
+                                <p class="text-sm">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Qui nulla dolorum obcaecati, sequi, quidem quo eligendi
+                                    soluta modi accusamus esse explicabo exercitationem!
+                                </p>
+                            </div>
+
+                        </div>
+
+                        @error('delivery_method')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+
+
 
                 </div>
 
+                {{-- / step 2  --}}
+
+                {{--  step 3 --}}
+                <div class="form-section overflow-x-auto" style="display: none;">
+                    <table class="w-full lg:table">
+                        <thead class="h-16 bg-neutral-100">
+                            <tr>
+                                <th class="pl-5 md:pl-8 text-left">ITEM</th>
+                                <th>PRICE</th>
+                                <th>QUANTITY</th>
+                                <th>TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table_body">
+                            <!-- 1 -->
+
+                            <tr class="h-[100px] border-b">
+                                <td class="align-middle">
+                                    <div class="flex items-center">
+                                        <img class="w-[70px] md:w-[120px] mr-3" src="" alt="image" />
+                                        <div class="flex flex-col justify-center">
+                                            <p class="text-lg md:text-xl font-bold md:whitespace-nowrap">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="mx-auto text-center align-middle">&#36;</td>
+                                <td class="text-center align-middle"></td>
+                                <td class="mx-auto text-center align-middle">&#36;</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                {{-- / step 3 --}}
+
+                {{-- step 4 --}}
+
+                <div class=" form-section py-5 " style="display: none" >
+                    <form class="flex w-full flex-col gap-3" id="paymentForm" action="{{route('checkout.payment')}}" method="POST">
+                        @csrf
+
+                        <input type="hidden" name="orderId" id="orderId"  value="">
+                        <div class="flex w-full flex-col">
+                            <label class="flex" for="name">Payment Card Number</label>
+                            <input x-mask="9999 9999 9999 9999" class="w-full border px-4 py-2 lg:w-1/2"
+                                placeholder="4242 4242 4242 4242" name="card_number" />
+                            @error('card_number')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="flex w-full flex-col">
+                            <label class="flex" for="name">Card Holder</label>
+                            <input class="w-full border px-4 py-2 lg:w-1/2" type="text" placeholder="SARAH JOHNSON"
+                                name="card_holder" />
+                            @error('card_holder')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="flex items-center gap-5 lg:w-1/2">
+                            <div class="flex flex-col">
+                                <label class="flex" for="name">Expiry Date</label>
+
+                                <div class="flex w-[150px] items-center gap-1">
+                                    <input x-mask="99" class="w-1/2 border px-4 py-2 text-center" name="exp_month"
+                                        placeholder="10" />
+
+
+                                    <span>&bsol;</span>
+
+                                    <input x-mask="99" class="w-1/2 border px-4 py-2 text-center" name="exp_year"
+                                        placeholder="36" />
+                                </div>
+
+                            </div>
+
+                            <div class="flex flex-col w-[60px] lg:w-[110px]">
+                                <label class="flex" for="">CVC</label>
+                                <input name="cvc" x-mask="999" class="w-full border py-2 text-center lg:w-1/2"
+                                    type="password" placeholder="&bull;&bull;&bull;" />
+
+                            </div>
+
+
+                        </div>
+
+                        @error('exp_month')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+
+                        @error('exp_year')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+                        @error('cvc')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+
+                        <!-- another payment-methods -->
+
+                        <h2 class="mt-10 text-left text-xl font-medium">
+                            Another methods:
+                        </h2>
+                        <section class="my-4 grid w-fit grid-cols-3 gap-4 lg:grid-cols-5">
+                            <img class="w-[100px] cursor-pointer" src="{{ asset('img/payment-method-bitcoin.svg') }}"
+                                alt="bitcoin icon" />
+                            <img class="w-[100px] cursor-pointer" src="{{ asset('img/payment-method-paypal.svg') }}"
+                                alt="paypal icon" />
+                            <img class="w-[100px] cursor-pointer" src="{{ asset('img/payment-method-stripe.svg') }}"
+                                alt="stripe icon" />
+                            <img class="w-[100px] cursor-pointer" src="{{ asset('img/payment-method-visa.svg') }}"
+                                alt="visa icon" />
+                            <img class="w-[100px] cursor-pointer" src="{{ asset('img/payment-method-mastercard.svg') }}"
+                                alt="mastercard icon" />
+                        </section>
+                        <!-- another payment-methods -->
+
+
+                    </form>
+                </div>
+
+
+
+                {{--  /step 4    --}}
+
+
+
+
+
+
+
+
+
+
+                {{-- buttons --}}
                 <div class="flex w-full items-center justify-between">
                     <a href="catalog.html" class="text-sm text-violet-900">&larr; Back to the shop</a>
 
-                    <button type="submit" class="bg-pink-400 px-4 py-2">Place an order
-                    </button>
+                    <button id="prev-btn" type="button" class="bg-pink-400 px-4 py-2">Previous</button>
+                    <button id="next-btn" type="button" class="bg-pink-400 px-4 py-2">Next</button>
+
+
 
                 </div>
                 </form>
             </section>
-            <!-- /form  -->
+            <!-- /buttons  -->
 
             <!-- Summary  -->
 
@@ -186,10 +378,243 @@
 
         <!-- /Cons bages  -->
     </div>
-
-
-
-
     </main>
     <!-- /Payment and copyright  -->
+
+    <script>
+        const formSections = document.querySelectorAll(".form-section");
+        const prevtBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const paymentForm =  document.querySelector('#paymentForm');
+        let formData = {};
+        let currentStep = 0;
+        prevtBtn.style.display = "none";
+
+
+
+        // function that displays each step of the form
+
+        function showStep(currentStep) {
+            for (let i = 0; i < formSections.length; i++) {
+                if (i === currentStep) {
+                    formSections[i].style.display = "block";
+                } else {
+                    formSections[i].style.display = "none";
+                }
+
+                if (currentStep === 0) {
+                    prevtBtn.style.display = "none";
+                } else {
+                    prevtBtn.style.display = "inline";
+                }
+
+                if (currentStep === formSections.length - 1) {
+                    nextBtn.textContent = "Submit";
+                } else {
+                    nextBtn.textContent = "Next";
+                }
+            }
+        }
+
+        // function that saves the data from the forms
+        function saveData() {
+            formData.shipping_adress = document.querySelector('input[name="shipping_adress"]').value;
+            formData.shipping_region = document.querySelector('input[name="shipping_region"]').value;
+            formData.shipping_city = document.querySelector('input[name="shipping_city"]').value;
+            formData.additional_info = document.querySelector('textarea[name="additional_info"]').value;
+
+            const deliveryMethodRadios = document.querySelectorAll('input[name="delivery_method"]');
+            for (const radio of deliveryMethodRadios) {
+                if (radio.checked) {
+                    formData.delivery_method = radio.value;
+                    break;
+                }
+            }
+        }
+
+        // function that fetches the order data from the database
+        function fetchOrderData() {
+
+            fetch('http://127.0.0.1:8000/cartData')
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the received data here
+
+                    const table_body = document.getElementById("table_body");
+                    table_body.innerHTML = "";
+                    data.forEach(product => {
+                        let totalPrice = product.price * product.pivot.quantity;
+                        const row = `
+                    <tr class="h-[100px] border-b">
+                        <td class="align-middle">
+                            <div class="flex items-center">
+                                <img class="w-[70px] md:w-[120px] mr-3" src="${product.image}" alt="image" />
+                                <div class="flex flex-col justify-center">
+                                    <p class="text-lg md:text-xl font-bold md:whitespace-nowrap">
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mx-auto text-center align-middle">&#36; ${product.price}</td>
+                        <td class="text-center align-middle">${product.pivot.quantity}</td>
+                        <td class="mx-auto text-center align-middle">&#36;${totalPrice}</td>
+                    </tr>
+                    `;
+
+                        table_body.insertAdjacentHTML('beforeend', row);
+                    })
+
+                })
+                .catch(error => {
+                    console.error('Error fetching cart data:', error);
+                });
+
+        }
+
+        // function to create order 
+
+        async function createOrder() {
+
+            const response = await fetch('/orderCreate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "X-CSRF-TOKEN": document
+                        .querySelector('meta[name="csrf-token"]')
+                        .getAttribute("content"),
+                },
+
+                body: JSON.stringify(formData),
+            })
+
+
+            if (!response.ok) {
+                console.log('Failed to submit order');
+            }
+
+            const data = await response.json();
+            return orderId = data.orderId;
+
+        }
+
+
+        // function to handle payment
+        function payment(orderId) {
+            fetch('/checkout/payment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "X-CSRF-TOKEN": document
+                            .querySelector('meta[name="csrf-token"]')
+                            .getAttribute("content"),
+                    },
+
+                    body: JSON.stringify({
+                        orderId: orderId
+                    }),
+                })
+                .then(response => {
+                    console.log(response)
+
+                    if (!response.ok) {
+                        console.log('Failed to submit payment');
+                    }
+                    return response.json();
+                })
+
+        }
+
+        let orderId = 0;
+        // Event lisener on the next button
+        nextBtn.addEventListener("click", async function() {
+            event.preventDefault();
+
+
+
+            console.log("step before incrementation :", currentStep);
+
+            currentStep++;
+
+            console.log("step after incrementation: ", currentStep);
+
+            // if (currentStep >= formSections.length) {
+            //     currentStep = formSections.length - 1;
+            // }
+
+            if (currentStep == 2) {
+                await saveData();
+                await fetchOrderData();
+            }
+
+            if (currentStep == 3) {
+                
+                orderId = await createOrder();
+                
+            }
+
+
+            // console.log("order id from createorder: ", orderId);
+
+          
+            // orderIdInput = document.getElementById('orderId');
+            //     orderIdInput.value = orderId;
+                
+            
+
+            if (currentStep >= formSections.length) {
+
+                try {
+                const response = await fetch('/checkout/payment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        "X-CSRF-TOKEN": document
+                            .querySelector('meta[name="csrf-token"]')
+                            .getAttribute("content"),
+                    },
+
+                    body: JSON.stringify({
+                        orderId: orderId
+                    }),
+                });
+
+                if (response.ok) {
+                    console.log('Request sent successfully');
+
+                    // Fetch the session URL from the response
+                    const { url } = await response.json();
+
+                    // Redirect the user to the Stripe Checkout page
+                    window.location.href = url;
+                } else {
+                     console.log('Request failed');
+                }
+                }catch (error) {
+                    console.log('Error occurred during the request', error);
+                }
+                return false;
+            }
+
+
+
+
+
+
+
+
+            showStep(currentStep);
+        });
+
+        // Event listener on the previous button
+        prevtBtn.addEventListener("click", function() {
+            currentStep--;
+            if (currentStep < 0) {
+                currentStep = 0;
+            }
+            showStep(currentStep);
+        });
+    </script>
+
+
 @endsection

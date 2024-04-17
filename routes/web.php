@@ -33,6 +33,10 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 //     return view('welcome');
 // });
 
+Route::post('/orderCreate',[CheckoutController::class,'createOrder'])->name('order.create');
+
+
+
 Route::get('/login',[AuthAuthController::class,'login'])->name('login_page');
 Route::get('/registration',[AuthAuthController::class,'registration'])->name('registration');
 Route::post('/register',[AuthAuthController::class,'register'])->name('register');
@@ -92,12 +96,17 @@ Route::get('/checkout/payment/{orderId}',[CheckoutController::class,'paymentView
 
 Route::get('/checkout/confirm',[CheckoutController::class,'confirmIndex'])->name('checkout.confirmation');
 Route::post('/checkout/payment',[CheckoutController::class,'payment'])->name('checkout.payment');
+Route::get('/checkout/confirmation',[CheckoutController::class,'confirmation'])->name('checkout.confirmation');
+Route::get('/checkout/failure',[CheckoutController::class,'failure'])->name('checkout.failure');
+
 // Route::post('/payment',[PayementController::class,'payment'])->name('payment');
 
 Route::get('/checkout/create',[CheckoutController::class,'create'])->name('checkout.create');
 Route::post('/checkout/save-adress',[CheckoutController::class,'saveAdress'])->name('checkout.save-adress');
 Route::post('/checkout/save-delivery',[CheckoutController::class,'saveDelivery'])->name('checkout.save-delivery');
 Route::get('/checkout/review/{orderId}',[CheckoutController::class,'review'])->name('checkout.review');
+
+
 
 // Catalog routes
 
@@ -106,5 +115,10 @@ Route::get('/catalog/textiles',[CatalogController::class,'textiles'])->name('cat
 Route::get('/catalog/artisanat',[CatalogController::class,'artisanat'])->name('catalog.artisanat');
 Route::get('/catalog/beaute',[CatalogController::class,'beaute'])->name('catalog.beaute');
 Route::get('/catalog/decoration',[CatalogController::class,'decoration'])->name('catalog.decoration');
+
+
+Route::get('/cartData',[UserCartController::class,'getCartData'])->name('cart.data');
+
+
 
 

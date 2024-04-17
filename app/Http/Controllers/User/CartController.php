@@ -33,6 +33,16 @@ class CartController extends Controller
         }
     }
 
+    public function getCartData(){
+        $customer = auth()->user()->customer;
+        $cart = $customer->cart;
+        $cartProducts = $cart->products()->withPivot('quantity')->get();
+        foreach ($cartProducts as $product) {
+            $product->image = $product->getFirstMediaUrl('products'); 
+        }
+        return response()->json($cartProducts);
+    }
+
 
     public function store(Product $product)
     {
