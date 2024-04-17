@@ -17,7 +17,7 @@
                 />
                 <div class="ml-5">
                   <p class="font-medium text-gray-500">Hello,</p>
-                  <p class="font-bold">Sarah Johnson</p>
+                  <p class="font-bold">{{auth()->user()->customer->name}}</p>
                 </div>
               </div>
             </div>

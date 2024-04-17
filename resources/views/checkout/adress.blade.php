@@ -33,10 +33,10 @@
                 <table class="hidden lg:table" id="orderTable">
                     <thead class="h-16 bg-neutral-100">
                         <tr>
-                            <th class="bg-neutral-600 text-white">ADDRESS</th>
-                            <th>DELIVERY METHOD</th>
-                            <th>ORDER REVIEW</th>
-                            <th>PAYMENT METHOD</th>
+                            <th class=" stepIndicator bg-neutral-600 text-white  ">ADDRESS</th>
+                            <th class="stepIndicator">DELIVERY METHOD</th>
+                            <th class="stepIndicator">ORDER REVIEW</th>
+                            <th class="stepIndicator">GO TO PAYEMENT PAGE</th>
 
                         </tr>
                     </thead>
@@ -191,89 +191,28 @@
 
                 {{-- step 4 --}}
 
-                <div class=" form-section py-5 " style="display: none" >
-                    <form class="flex w-full flex-col gap-3" id="paymentForm" action="{{route('checkout.payment')}}" method="POST">
-                        @csrf
-
-                        <input type="hidden" name="orderId" id="orderId"  value="">
-                        <div class="flex w-full flex-col">
-                            <label class="flex" for="name">Payment Card Number</label>
-                            <input x-mask="9999 9999 9999 9999" class="w-full border px-4 py-2 lg:w-1/2"
-                                placeholder="4242 4242 4242 4242" name="card_number" />
-                            @error('card_number')
-                                <span class="text-red-500">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="flex w-full flex-col">
-                            <label class="flex" for="name">Card Holder</label>
-                            <input class="w-full border px-4 py-2 lg:w-1/2" type="text" placeholder="SARAH JOHNSON"
-                                name="card_holder" />
-                            @error('card_holder')
-                                <span class="text-red-500">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="flex items-center gap-5 lg:w-1/2">
-                            <div class="flex flex-col">
-                                <label class="flex" for="name">Expiry Date</label>
-
-                                <div class="flex w-[150px] items-center gap-1">
-                                    <input x-mask="99" class="w-1/2 border px-4 py-2 text-center" name="exp_month"
-                                        placeholder="10" />
-
-
-                                    <span>&bsol;</span>
-
-                                    <input x-mask="99" class="w-1/2 border px-4 py-2 text-center" name="exp_year"
-                                        placeholder="36" />
-                                </div>
-
-                            </div>
-
-                            <div class="flex flex-col w-[60px] lg:w-[110px]">
-                                <label class="flex" for="">CVC</label>
-                                <input name="cvc" x-mask="999" class="w-full border py-2 text-center lg:w-1/2"
-                                    type="password" placeholder="&bull;&bull;&bull;" />
-
-                            </div>
-
-
-                        </div>
-
-                        @error('exp_month')
-                            <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-
-                        @error('exp_year')
-                            <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-                        @error('cvc')
-                            <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-
-                        <!-- another payment-methods -->
-
-                        <h2 class="mt-10 text-left text-xl font-medium">
-                            Another methods:
-                        </h2>
-                        <section class="my-4 grid w-fit grid-cols-3 gap-4 lg:grid-cols-5">
-                            <img class="w-[100px] cursor-pointer" src="{{ asset('img/payment-method-bitcoin.svg') }}"
-                                alt="bitcoin icon" />
-                            <img class="w-[100px] cursor-pointer" src="{{ asset('img/payment-method-paypal.svg') }}"
-                                alt="paypal icon" />
-                            <img class="w-[100px] cursor-pointer" src="{{ asset('img/payment-method-stripe.svg') }}"
-                                alt="stripe icon" />
-                            <img class="w-[100px] cursor-pointer" src="{{ asset('img/payment-method-visa.svg') }}"
-                                alt="visa icon" />
-                            <img class="w-[100px] cursor-pointer" src="{{ asset('img/payment-method-mastercard.svg') }}"
-                                alt="mastercard icon" />
-                        </section>
-                        <!-- another payment-methods -->
-
-
-                    </form>
+                <div class="form-section py-5" style="display: none;">
+                    <h2 class="mt-10 text-left text-xl font-medium">
+                        Payment Method:
+                    </h2>
+                    <p class="mt-3 text-center text-gray-600">
+                        Secure Payment
+                    </p>
+                    <p class="mt-1 text-center text-gray-600">
+                        Complete Your Purchase
+                    </p>
+                    <section class="flex items-center justify-center mt-5">
+                        <img class="w-48 cursor-pointer" src="{{ asset('img/payment-method-stripe.svg') }}" alt="Stripe icon">
+                    </section>
+                    <div class="mt-5 flex items-center justify-center">
+                        <input type="checkbox" id="acceptTerms" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+                        <label for="acceptTerms" class="ml-2 block text-sm leading-5 text-gray-900">
+                            I accept the <a href="#" class="text-indigo-600 hover:text-indigo-900">Terms and Conditions</a>
+                        </label>
+                    </div>
                 </div>
+                
+                
 
 
 
@@ -290,7 +229,7 @@
 
                 {{-- buttons --}}
                 <div class="flex w-full items-center justify-between">
-                    <a href="catalog.html" class="text-sm text-violet-900">&larr; Back to the shop</a>
+                    <a href="catalog.html" id="catalog_link" class="text-sm text-violet-900">&larr; Back to the shop</a>
 
                     <button id="prev-btn" type="button" class="bg-pink-400 px-4 py-2">Previous</button>
                     <button id="next-btn" type="button" class="bg-pink-400 px-4 py-2">Next</button>
@@ -385,7 +324,9 @@
         const formSections = document.querySelectorAll(".form-section");
         const prevtBtn = document.getElementById("prev-btn");
         const nextBtn = document.getElementById("next-btn");
-        const paymentForm =  document.querySelector('#paymentForm');
+        const paymentForm = document.querySelector('#paymentForm');
+        const stepIndicators = document.getElementsByClassName('stepIndicator');
+
         let formData = {};
         let currentStep = 0;
         prevtBtn.style.display = "none";
@@ -404,16 +345,30 @@
 
                 if (currentStep === 0) {
                     prevtBtn.style.display = "none";
+                    catalog_link.style.display = "inline";
                 } else {
                     prevtBtn.style.display = "inline";
+                    catalog_link.style.display = "none";
                 }
 
                 if (currentStep === formSections.length - 1) {
-                    nextBtn.textContent = "Submit";
+                    nextBtn.textContent = "Finish";
                 } else {
                     nextBtn.textContent = "Next";
                 }
             }
+        }
+
+        function stepIndicator(currentStep) {
+
+            for (let i = 0; i < stepIndicators.length; i++) {
+                if (i == currentStep) {
+                    stepIndicators[i].classList.add('bg-neutral-600', 'text-white');
+                } else {
+                    stepIndicators[i].classList.remove('bg-neutral-600', 'text-white');
+                }
+            }
+
         }
 
         // function that saves the data from the forms
@@ -475,6 +430,10 @@
 
         async function createOrder() {
 
+            if (orderId !== 0) {
+                return orderId;
+            }
+
             const response = await fetch('/orderCreate', {
                 method: 'POST',
                 headers: {
@@ -527,6 +486,8 @@
         let orderId = 0;
         // Event lisener on the next button
         nextBtn.addEventListener("click", async function() {
+
+
             event.preventDefault();
 
 
@@ -547,50 +508,47 @@
             }
 
             if (currentStep == 3) {
-                
+
                 orderId = await createOrder();
-                
+
             }
 
 
-            // console.log("order id from createorder: ", orderId);
+            console.log("step after createOrder:", currentStep);
 
-          
-            // orderIdInput = document.getElementById('orderId');
-            //     orderIdInput.value = orderId;
-                
-            
 
             if (currentStep >= formSections.length) {
 
                 try {
-                const response = await fetch('/checkout/payment', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*',
-                        "X-CSRF-TOKEN": document
-                            .querySelector('meta[name="csrf-token"]')
-                            .getAttribute("content"),
-                    },
+                    const response = await fetch('/checkout/payment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*',
+                            "X-CSRF-TOKEN": document
+                                .querySelector('meta[name="csrf-token"]')
+                                .getAttribute("content"),
+                        },
 
-                    body: JSON.stringify({
-                        orderId: orderId
-                    }),
-                });
+                        body: JSON.stringify({
+                            orderId: orderId
+                        }),
+                    });
 
-                if (response.ok) {
-                    console.log('Request sent successfully');
+                    if (response.ok) {
+                        console.log('Request sent successfully');
 
-                    // Fetch the session URL from the response
-                    const { url } = await response.json();
+                        // Fetch the session URL from the response
+                        const {
+                            url
+                        } = await response.json();
 
-                    // Redirect the user to the Stripe Checkout page
-                    window.location.href = url;
-                } else {
-                     console.log('Request failed');
-                }
-                }catch (error) {
+                        // Redirect the user to the Stripe Checkout page
+                        window.location.href = url;
+                    } else {
+                        console.log('Request failed');
+                    }
+                } catch (error) {
                     console.log('Error occurred during the request', error);
                 }
                 return false;
@@ -602,7 +560,7 @@
 
 
 
-
+            stepIndicator(currentStep);
             showStep(currentStep);
         });
 
@@ -612,6 +570,7 @@
             if (currentStep < 0) {
                 currentStep = 0;
             }
+            stepIndicator(currentStep);
             showStep(currentStep);
         });
     </script>

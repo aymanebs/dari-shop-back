@@ -268,9 +268,12 @@
                 </div>
 
                 <div>
+                  <form action="{{route('cart.store',['product'=>$product->id])}}" method="POST">
+                    @csrf
                   <button class="my-5 h-10 w-full bg-violet-900 text-white">
                     Add to cart
                   </button>
+                  </form>
                 </div>
               </div>
             </div>
