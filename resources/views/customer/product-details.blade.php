@@ -45,38 +45,18 @@
             />
   
             <div class="mt-3 grid grid-cols-4 gap-4">
+              @foreach($product->getMedia('products') as $image)
               <div>
                 <img
                   class="cursor-pointer"
-                  src="./assets/images/kitchen.png"
+                  src="{{$image->getUrl()}}"
                   alt="kitchen image"
                 />
               </div>
-  
-              <div>
-                <img
-                  class="cursor-pointer"
-                  src="./assets/images/living-room.png"
-                  alt="kitchen image"
-                />
-              </div>
-  
-              <div>
-                <img
-                  class="cursor-pointer"
-                  src="./assets/images/outdoors.png"
-                  alt="kitchen image"
-                />
-              </div>
-  
-              <div>
-                <img
-                  class="cursor-pointer"
-                  src="./assets/images/product-chair.png"
-                  alt="kitchen image"
-                />
-              </div>
+              @endforeach
+   
             </div>
+            
             <!-- /image gallery  -->
           </div>
   

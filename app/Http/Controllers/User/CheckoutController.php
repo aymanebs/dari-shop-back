@@ -288,9 +288,6 @@ class CheckoutController extends Controller
             $order->products()->attach($cartProduct->id, [
                 'quantity' => $cartProduct->pivot->quantity,
                 'price' => $cartProduct->price,
-
-
-
             ]);
         }
 

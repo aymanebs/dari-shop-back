@@ -115,6 +115,10 @@ Route::get('/catalog/textiles',[CatalogController::class,'textiles'])->name('cat
 Route::get('/catalog/artisanat',[CatalogController::class,'artisanat'])->name('catalog.artisanat');
 Route::get('/catalog/beaute',[CatalogController::class,'beaute'])->name('catalog.beaute');
 Route::get('/catalog/decoration',[CatalogController::class,'decoration'])->name('catalog.decoration');
+Route::get('/catalog',[CatalogController::class,'index'])->name('catalog.index');
+
+Route::post('/catalog/filterByPrice',[CatalogController::class,'filterByPrice'])->name('catalog.filterByPrice');
+Route::post('/catalog/filterByCategory',[CatalogController::class,'filterByCategory'])->name('catalog.filterByCategory');
 
 
 Route::get('/cartData',[UserCartController::class,'getCartData'])->name('cart.data');

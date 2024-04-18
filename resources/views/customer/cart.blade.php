@@ -45,13 +45,13 @@
                                             class="flex h-8 w-8 cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500 decrement-btn"
                                             data-product-id="{{ $product->id }}">&minus;</button>
                                         <div class="flex h-8 w-8 cursor-text items-center justify-center border-t border-b active:ring-gray-500 quantity"
-                                            id="quantity_{{ $product->id }}" data-product-id="{{ $product->id }}"
-                                            >
-                                           
+                                            id="quantity_{{ $product->id }}" data-product-id="{{ $product->id }}">
+
                                             {{ $product->pivot->quantity }} </div>
                                         <button
                                             class="flex h-8 w-8 cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500 increment-btn"
-                                            data-product-id="{{ $product->id }}" data-stock="{{$product->stock}}">&#43;</button>
+                                            data-product-id="{{ $product->id }}"
+                                            data-stock="{{ $product->stock }}">&#43;</button>
                                     </div>
                                 </td>
                                 <td class="mx-auto text-center px-4">&#36;{{ $totals[$product->id] }}</td>
@@ -106,11 +106,11 @@
 
                 // Disable increment button if quantity exceeds stock
                 const stock = parseInt(this.dataset.stock);
-                
+
                 if (quantity >= stock) {
                     this.disabled = true;
                 }
-               
+
 
                 // Send AJAX request to update quantity on the server after a delay
                 setTimeout(() => {
@@ -152,16 +152,20 @@
                         productId: productId,
                         quantity: quantity
                     })
+
                 })
+
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to update quantity');
                     }
                     // Handle success if needed
-
+                })
+                .then(data => {
+                    console.log("data :", data);
                 })
                 .catch(error => {
-                    console.error('Error updating quantity:', error);
+                    console.error("Error:", error);
                 });
         }
     </script>

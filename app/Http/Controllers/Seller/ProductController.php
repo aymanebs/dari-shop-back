@@ -33,10 +33,16 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(Request $request)
+    
     {
+        // dd($request->all());
         $product=Product::create($request->all());
-        $product->addMediaFromRequest('image')->toMediaCollection('products');
+
+        foreach($request->file('images') as $image){
+            $product->addMedia($image)->toMediaCollection('products');
+        }
+        
         return redirect()->route('products.index');
         
 

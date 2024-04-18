@@ -26,6 +26,8 @@
     <link href="
     https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
     " rel="stylesheet">
+
+    
     {{-- title --}}
     <title>@yield('title','Dari shop')</title>
   </head>
@@ -252,7 +254,7 @@
         </form>
         <ul class="text-center font-medium">
           <li class="py-2"><a href="{{route('home')}}">Home</a></li>
-          <li class="py-2"><a href="catalog.html">Catalog</a></li>
+          <li class="py-2"><a href="{{route('catalog.index')}}">Catalog</a></li>
           <li class="py-2"><a href="{{route('about')}}">About Us</a></li>
           <li class="py-2"><a href="{{route('contact')}}">Contact Us</a></li>
         </ul>
@@ -299,7 +301,7 @@
           >
           <a
             class="font-light text-white duration-100 hover:text-rose-400 hover:underline"
-            href="catalog.html"
+            href="{{route('catalog.index')}}"
             >Catalog</a
           >
           <a

@@ -22,7 +22,7 @@ class HomeController extends Controller
       ];
       $products = Product::all();
       $latestProducts = Product::latest()->limit(6)->get();
-
+   
       $bestSellingProducts  = Product::whereHas('orders', function ($query) {
          $query->where('status', 2);
       })->take(4)->get();;

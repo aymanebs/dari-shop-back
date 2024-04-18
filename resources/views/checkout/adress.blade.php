@@ -202,17 +202,20 @@
                         Complete Your Purchase
                     </p>
                     <section class="flex items-center justify-center mt-5">
-                        <img class="w-48 cursor-pointer" src="{{ asset('img/payment-method-stripe.svg') }}" alt="Stripe icon">
+                        <img class="w-48 cursor-pointer" src="{{ asset('img/payment-method-stripe.svg') }}"
+                            alt="Stripe icon">
                     </section>
                     <div class="mt-5 flex items-center justify-center">
-                        <input type="checkbox" id="acceptTerms" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+                        <input type="checkbox" id="acceptTerms"
+                            class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
                         <label for="acceptTerms" class="ml-2 block text-sm leading-5 text-gray-900">
-                            I accept the <a href="#" class="text-indigo-600 hover:text-indigo-900">Terms and Conditions</a>
+                            I accept the <a href="#" class="text-indigo-600 hover:text-indigo-900">Terms and
+                                Conditions</a>
                         </label>
                     </div>
                 </div>
-                
-                
+
+
 
 
 
@@ -371,6 +374,32 @@
 
         }
 
+        function formValidation() {
+            const inputs = formSections[currentStep].querySelectorAll('input');
+            const radios = formSections[currentStep].querySelectorAll('input[type="radio"]:checked');
+            const textarea = document.querySelector('textarea');
+            let valid = true;
+
+            inputs.forEach(input =>{
+                console.log("value=",input.value);
+                
+                if (input.value === "") {
+                    valid = false;
+                    input.classList.add('border-red-500');
+                }
+            });
+            console.log("radios=",radios);
+            
+            
+            if (textarea.value === "") {
+                valid = false;
+                textarea.classList.add('border-red-500');
+            }
+
+            return valid;
+
+        }
+
         // function that saves the data from the forms
         function saveData() {
             formData.shipping_adress = document.querySelector('input[name="shipping_adress"]').value;
@@ -494,7 +523,9 @@
 
             console.log("step before incrementation :", currentStep);
 
+            if (formValidation()) {
             currentStep++;
+            }
 
             console.log("step after incrementation: ", currentStep);
 
@@ -554,14 +585,11 @@
                 return false;
             }
 
+            
+                stepIndicator(currentStep);
+                showStep(currentStep);
+            
 
-
-
-
-
-
-            stepIndicator(currentStep);
-            showStep(currentStep);
         });
 
         // Event listener on the previous button

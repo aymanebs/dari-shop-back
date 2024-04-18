@@ -114,7 +114,7 @@
                     class="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100"
                   >
                     <a
-                      href="product-overview.html"
+                      href="{{route('product.details', ['product' => $product->id])}}"
                       class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400"
                     >
                       <svg
@@ -231,9 +231,12 @@
                   </div>
   
                   <div>
-                    <button class="my-5 h-10 w-full bg-violet-900 text-white">
-                      Add to cart
-                    </button>
+                    <form action="{{route('cart.store',['product'=>$product->id]) }}" method="POST">
+                      @csrf
+                  <button class="my-5 h-10 w-full bg-violet-900 text-white">
+                    Add to cart
+                  </button>
+                  </form>
                   </div>
                 </div>
                 
