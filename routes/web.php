@@ -119,6 +119,7 @@ Route::get('/catalog',[CatalogController::class,'index'])->name('catalog.index')
 
 Route::post('/catalog/filterByPrice',[CatalogController::class,'filterByPrice'])->name('catalog.filterByPrice');
 Route::post('/catalog/filterByCategory',[CatalogController::class,'filterByCategory'])->name('catalog.filterByCategory');
+Route::get('/catalog/getProducts',[CatalogController::class,'getProducts'])->name('catalog.getProducts');
 
 
 Route::get('/cartData',[UserCartController::class,'getCartData'])->name('cart.data');

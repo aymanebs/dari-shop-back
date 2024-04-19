@@ -18,6 +18,15 @@ class CatalogController extends Controller
         return view('catalog.index', compact('products', 'categories'));
     }
 
+    public function getProducts()
+    {
+        $products = Product::all();
+        foreach ($products as $product) {
+            $product->image = $product->getFirstMediaUrl('products');
+        }
+        return response()->json(['products' => $products]);
+    }
+
     public function alimentation()
     {
         $category = Category::where('name', 'Alimentaion')->first();
@@ -76,8 +85,6 @@ class CatalogController extends Controller
 
     public function filterByCategory(Request $request)
     {
-
-
 
         $products = Product::whereHas('category', function ($query) use ($request) {
             $query->whereIn('id', $request->category_ids);

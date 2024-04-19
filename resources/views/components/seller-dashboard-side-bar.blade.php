@@ -1,13 +1,13 @@
 <!-- Desktop sidebar -->
 <aside
-class="z-20 flex-shrink-0 hidden w-64 overflow-y-auto bg-blue-500 dark:bg-gray-800 md:block"
+class=" z-20 flex-shrink-0 hidden w-64 overflow-y-auto  dark:bg-gray-800 md:block"
 >
 <div class="py-4  text-gray-500 dark:text-gray-400">
-  <div class="logo  pl-8">
+  <div class="logo  pl-20">
   <a class=" " href="{{route('home')}}">
     <img
-      class="cursor-pointer sm:h-auto sm:w-auto"
-      src="{{asset('img/logo1.png')}}"
+      class="cursor-pointer sm:h-auto sm:w-auto h-10 w-10"
+      src="{{asset('img/logo4.png')}}"
       alt="company logo"
     />
   </a>
@@ -264,4 +264,5 @@ class="z-20 flex-shrink-0 hidden w-64 overflow-y-auto bg-blue-500 dark:bg-gray-8
     </button>
   </div>
 </div>
+
 </aside>

@@ -116,9 +116,12 @@
                             ></path>
                           </svg>
                         </a>
+                        <form action="{{route('products.destroy',['product'=>$product->id])}}" method="POST">
+                          @csrf
+                          @method('DELETE')
                         <button
                           class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                          aria-label="Delete"
+                          aria-label="Delete" type="submit"
                         >
                           <svg
                             class="w-5 h-5"
@@ -133,6 +136,7 @@
                             ></path>
                           </svg>
                         </button>
+                      </form>
                       </div>
                     </td>
                   </tr>

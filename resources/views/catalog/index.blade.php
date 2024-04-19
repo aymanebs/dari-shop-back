@@ -272,18 +272,18 @@
 
         })
 
-        
+
         categoryInputs.forEach((input) => {
             input.addEventListener('change', function() {
 
                 let selectedCatgories = [];
-                categoryInputs.forEach((input)=>{
-                    if(input.checked){
-                    selectedCatgories.push(input.value);
-                }
+                categoryInputs.forEach((input) => {
+                    if (input.checked) {
+                        selectedCatgories.push(input.value);
+                    }
                 })
-               
-                console.log("selected: ",selectedCatgories);
+
+                console.log("selected: ", selectedCatgories);
                 fetch("{{ route('catalog.filterByCategory') }}", {
                         method: 'POST',
                         headers: {
@@ -307,6 +307,10 @@
                         console.log(error);
                     });
             });
+
+            if (selectedCatgories.length == 0) {
+                fetchAllProducts();
+            }
         });
 
 
@@ -400,6 +404,26 @@
                 `;
             })
 
+        }
+
+        function fetchAllProducts() {
+
+            fetch('/catalog/getProducts', {
+                    method: 'GET',
+                    header: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': '{{ csrf_token() }}'
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    let products = data.products;
+                    fetchProducts(products);
+                    console.log("products: ", products);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }
 
 
