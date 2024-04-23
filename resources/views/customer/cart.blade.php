@@ -9,7 +9,6 @@
     @endif
 
 
-
     <section class="container mx-auto flex-grow max-w-[1200px] border-b py-5 lg:flex lg:flex-row lg:py-10">
         <!-- Desktop cart table  -->
         <section class=" sm:block w-full max-w-[1200px] grid-cols-1 gap-3 px-5 pb-10 md:grid">
@@ -84,7 +83,7 @@
         <section class="mx-auto w-full px-4 md:max-w-[400px]">
             <div class="">
                 <div class="border py-5 px-4 shadow-md">
-                    <a href="{{ route('checkout.create') }}">
+                    <a href="{{ route('checkout') }}">
                         <button class="w-full bg-violet-900 px-5 py-2 text-white">
                             Proceed to checkout
                         </button>
@@ -100,22 +99,26 @@
                 const productId = this.dataset.productId;
                 const quantityElement = document.getElementById('quantity_' + productId);
                 let quantity = parseInt(quantityElement.innerText);
+
+                const stock = parseInt(this.dataset.stock);
+                if(stock <= quantity) {
+                    return;
+                }
                 quantity++;
                 quantityElement.innerText = quantity;
-                // localStorage.setItem("product_" + productId + "_quantity", quantity);
 
                 // Disable increment button if quantity exceeds stock
-                const stock = parseInt(this.dataset.stock);
+                
+                console.log("stock: ", stock);
+                console.log("quantity: ", quantity);
 
                 if (quantity >= stock) {
                     this.disabled = true;
                 }
-
-
-                // Send AJAX request to update quantity on the server after a delay
+                
                 setTimeout(() => {
                     updateQuantity(productId, quantity);
-                }, 500); // Delay in milliseconds (adjust as needed)
+                }, 500); 
             });
         });
 
@@ -127,21 +130,18 @@
                 if (quantity > 1) {
                     quantity--;
                     quantityElement.innerText = quantity;
-                    // localStorage.setItem("product_" + productId + "_quantity", quantity);
-
-                    // Send AJAX request to update quantity on the server after a delay
+                    // localStorage.setItem("product_" + productId + "_quantity", quantity);              
                     setTimeout(() => {
                         updateQuantity(productId, quantity);
-                    }, 500); // Delay in milliseconds (adjust as needed)
+                    }, 500); 
                 }
             });
         });
 
         function updateQuantity(productId, quantity)
-
         {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            // Send an AJAX request to update quantity on the server
+            
             fetch('/update-cart', {
                     method: 'POST',
                     headers: {
@@ -154,12 +154,11 @@
                     })
 
                 })
-
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to update quantity');
                     }
-                    // Handle success if needed
+                
                 })
                 .then(data => {
                     console.log("data :", data);

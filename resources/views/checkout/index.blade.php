@@ -6,7 +6,7 @@
     <nav class="mx-auto w-full mt-4 max-w-[1200px] px-5">
         <ul class="flex items-center">
             <li class="cursor-pointer">
-                <a href="index.html">
+                <a href="{{route('home')}}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
                         <path
                             d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
@@ -50,8 +50,8 @@
                         <div class="flex  flex-col">
                             <label class="flex" for="name">Adresse<span
                                     class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
-                            <input class="w-full border px-4 py-2 outline-pink-400" type="text" placeholder="Adresse"
-                                name="shipping_adress" value="" />
+                            <input  class="w-full border px-4 py-2 outline-pink-400" type="text"
+                                placeholder="Adresse" name="shipping_adress" value="" />
                             @error('shipping_adress')
                                 <span class="text-red-500">{{ $message }}</span>
                             @enderror
@@ -81,10 +81,6 @@
                                     <span class="text-red-500">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
-
-
                         </div>
 
                         <div class="flex flex-col">
@@ -101,56 +97,48 @@
 
                 {{--  step 2 --}}
 
-                <div class="form-section py-5 " style="display: none;">
-                    <form class="grid w-full grid-cols-1 gap-3 lg:grid-cols-2"
-                        action="{{ route('checkout.save-delivery') }}" method="POST">
+                <div class="form-section py-5" style="display: none;">
+                    <form class="grid w-full grid-cols-1 gap-3 lg:grid-cols-2" action="" method="POST">
                         @csrf
-                        {{-- <input type="hidden" name="orderId" value='{{ $orderId }}'> --}}
+
                         <div class="flex w-full justify-between gap-2">
                             <div class="flex w-full cursor-pointer flex-col border">
                                 <div class="flex bg-pink-400 px-4 py-2">
-                                    <input class="outline-pink-400" type="radio" name="delivery_method" value="1" />
-
-                                    <p class="ml-3 font-bold">Livraison a domicile</p>
+                                    <input  class="outline-pink-400" type="radio" name="delivery_method"
+                                        value="1" />
+                                    <p class="ml-3 font-bold">Home Delivery</p>
                                 </div>
 
                                 <div class="px-4 py-3">
                                     <p class="pb-3 font-bold text-violet-900">FREE</p>
                                     <p class="text-sm">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Qui nulla dolorum obcaecati, sequi, quidem quo eligendi
-                                        soluta modi accusamus esse explicabo exercitationem!
+                                        Get your items delivered right to your doorstep with our convenient home delivery
+                                        service.
                                     </p>
                                 </div>
-
                             </div>
                         </div>
 
                         <div class="flex w-full cursor-pointer flex-col border">
                             <div class="flex bg-pink-400 px-4 py-2">
                                 <input class="outline-pink-400" type="radio" name="delivery_method" value="2" />
-
-                                <p class="ml-3 cursor-pointer font-bold">Point relais</p>
+                                <p class="ml-3 cursor-pointer font-bold">Pick-Up Point</p>
                             </div>
 
                             <div class="px-4 py-3">
-                                <p class="pb-3 font-bold text-violet-900">&dollar;300</p>
+                                <p class="pb-3 font-bold text-violet-900">FREE</p>
                                 <p class="text-sm">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Qui nulla dolorum obcaecati, sequi, quidem quo eligendi
-                                    soluta modi accusamus esse explicabo exercitationem!
+                                    Collect your order from one of our convenient pick-up points near you.
                                 </p>
                             </div>
-
                         </div>
 
                         @error('delivery_method')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
-
-
-
+                    </form>
                 </div>
+
 
                 {{-- / step 2  --}}
 
@@ -206,39 +194,22 @@
                             alt="Stripe icon">
                     </section>
                     <div class="mt-5 flex items-center justify-center">
-                        <input type="checkbox" id="acceptTerms"
+                        <input id="terms_checkbox" type="checkbox" id="acceptTerms"
                             class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                        <label for="acceptTerms" class="ml-2 block text-sm leading-5 text-gray-900">
+                        <label  for="acceptTerms" class="ml-2 block text-sm leading-5 text-gray-900">
                             I accept the <a href="#" class="text-indigo-600 hover:text-indigo-900">Terms and
                                 Conditions</a>
                         </label>
                     </div>
                 </div>
-
-
-
-
-
                 {{--  /step 4    --}}
-
-
-
-
-
-
-
-
-
 
                 {{-- buttons --}}
                 <div class="flex w-full items-center justify-between">
-                    <a href="catalog.html" id="catalog_link" class="text-sm text-violet-900">&larr; Back to the shop</a>
-
+                    <a href="{{ route('catalog.index') }}" id="catalog_link" class="text-sm text-violet-900">&larr; Back
+                        to the shop</a>
                     <button id="prev-btn" type="button" class="bg-pink-400 px-4 py-2">Previous</button>
                     <button id="next-btn" type="button" class="bg-pink-400 px-4 py-2">Next</button>
-
-
-
                 </div>
                 </form>
             </section>
@@ -374,31 +345,28 @@
 
         }
 
-        function formValidation() {
-            const inputs = formSections[currentStep].querySelectorAll('input');
-            const radios = formSections[currentStep].querySelectorAll('input[type="radio"]:checked');
-            const textarea = document.querySelector('textarea');
-            let valid = true;
+        // function formValidation(currentStep) {
+        //     const inputs = formSections[currentStep].querySelectorAll('input:not([type="radio"]), textarea');
+        //     const radios = formSections[currentStep].querySelectorAll('input[type="radio"]');
+        //     const terms_checkbox = formSections[currentStep].querySelector('input[type="checkbox"]');
+        //     const currentFormSection = formSections[currentStep];
+    
+        //     let valid = true;
 
-            inputs.forEach(input =>{
-                console.log("value=",input.value);
+     
+        //     inputs.forEach(input => {
+        //         if (input.value.trim() === "") {
+        //             valid = false;
+        //             input.classList.add('border-red-500');
+        //         } else {
+        //             input.classList.remove('border-red-500');
+        //         }
+        //     });
                 
-                if (input.value === "") {
-                    valid = false;
-                    input.classList.add('border-red-500');
-                }
-            });
-            console.log("radios=",radios);
-            
-            
-            if (textarea.value === "") {
-                valid = false;
-                textarea.classList.add('border-red-500');
-            }
+        //     return valid;
+        // }
 
-            return valid;
 
-        }
 
         // function that saves the data from the forms
         function saveData() {
@@ -519,13 +487,21 @@
 
             event.preventDefault();
 
-
-
             console.log("step before incrementation :", currentStep);
+            // if (formValidation(currentStep)) {
+            //     console.log("validation passed");
+            //         
+            // }
+            
+            currentStep++; 
+            console.log("step after incrementation: ", currentStep);
+            
 
-            if (formValidation()) {
-            currentStep++;
-            }
+            // if (!formValidation(currentStep)) {
+            //     console.log("validation failed");
+            //     return;
+                
+            // }
 
             console.log("step after incrementation: ", currentStep);
 
@@ -539,9 +515,7 @@
             }
 
             if (currentStep == 3) {
-
-                orderId = await createOrder();
-
+            orderId = await createOrder();
             }
 
 
@@ -585,10 +559,12 @@
                 return false;
             }
 
+
+            showStep(currentStep);
             
-                stepIndicator(currentStep);
-                showStep(currentStep);
-            
+            stepIndicator(currentStep);
+
+
 
         });
 

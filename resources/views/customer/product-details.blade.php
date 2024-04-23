@@ -136,13 +136,21 @@
             </div>
   
             <p class="mt-5 font-bold">
+              @if($product->isInStock())
               Availability: <span class="text-green-600">In Stock</span>
+              
+              @else
+              Availability: <span class="text-red-600">Out of Stock</span>
+              @endif
             </p>
             {{-- <p class="font-bold">Brand: <span class="font-normal">Apex</span></p> --}}
             <p class="font-bold">
-              Cathegory: <span class="font-normal">{{$product->category->name}}
-            
-  
+              Category: <span class="font-normal">{{$product->category->name}}</span>
+            </p>  
+            <p class="font-bold">
+              Seller: <span class="font-normal">{{$product->seller->name}}</span>
+            </p>  
+          
             <p class="mt-4 text-4xl font-bold text-violet-900">
               {{$product->price}} $ 
             </p>
@@ -156,31 +164,14 @@
   
            
   
-            <div class="mt-6">
-              <p class="pb-2 text-xs text-gray-500">Quantity</p>
-  
-              <div class="flex">
-                <button
-                  class="flex h-8 w-8 cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500"
-                >
-                  &minus;
-                </button>
-                <div
-                  class="flex h-8 w-8 cursor-text items-center justify-center border-t border-b active:ring-gray-500"
-                >
-                  1
-                </div>
-                <button
-                  class="flex h-8 w-8 cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500"
-                >
-                  &#43;
-                </button>
-              </div>
-            </div>
-  
+           
+            @if($product->isInStock())
             <div class="mt-7 flex flex-row items-center gap-6">
+              <form action="{{route('cart.store',['product'=>$product->id])}}" method="POST">
+                @csrf
               <button
-                class="flex h-12 w-1/3 items-center justify-center bg-violet-900 text-white duration-100 hover:bg-blue-800"
+                class="flex h-12 px-3 items-center justify-center bg-violet-900 text-white duration-100 hover:bg-blue-800"
+                type="submit"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -199,27 +190,11 @@
   
                 Add to cart
               </button>
-              <button
-                class="flex h-12 w-1/3 items-center justify-center bg-rose-400 duration-100 hover:bg-rose-300"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="mr-3 h-4 w-4"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                  />
-                </svg>
-  
-                Wishlist
-              </button>
+              </form>
+
+             
             </div>
+            @endif
           </div>
         </section>
   

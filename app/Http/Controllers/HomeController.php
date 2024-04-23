@@ -13,12 +13,12 @@ class HomeController extends Controller
 
       $categories = Category::all();
       $categoryImages = [
-         'bedroom.png',
-         'matrass.png',
-         'outdoor.png',
-         'sofa.png',
-         'kitchen.png',
-         'living-room.png',
+         'alimentation_img.jpeg',
+         'cat_artisanat.jpg',
+         'category_beauty.jpg',
+         'textiles_img.jpg',
+         'decor_img.jpg',
+         'jewelry_img.jpeg'
       ];
       $products = Product::all();
       $latestProducts = Product::latest()->limit(6)->get();

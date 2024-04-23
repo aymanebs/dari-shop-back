@@ -66,7 +66,7 @@ Route::prefix('admin')->group(function(){
 Route::get('/',[HomeController::class,'index'])->name('home')->middleware('banCheck');
 Route::get('/about',[HomeController::class,'about'])->name('about');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
-Route::get('/cart',[HomeController::class,'cart'])->name('cart');
+
 
 // Seller routes
 
@@ -74,36 +74,27 @@ Route::resource('seller/products',SellerProductController::class);
 
 // Customer routes
 
+     // Profile routes
 Route::get('/profile',[ProfileController::class,'index'])->name('profile');
 Route::get('/profile/edit',[ProfileController::class,'edit'])->name('profile.edit');
-Route::get('/profile/wishlist',[ProfileController::class,'wishlist'])->name('profile.wishlist');
-
 Route::get('/profile/edit-adress',[ProfileController::class,'editAdress'])->name('profile.edit-adress');
 Route::get('/profile/edit-password',[ProfileController::class,'editPassword'])->name('profile.edit-password');
 Route::patch('/profile/update/{customer}',[ProfileController::class,'update'])->name('profile.update');
 Route::get('/profile/orders',[ProfileController::class,'listOrders'])->name('profile.orders');
+    
+     // Cart routes
 Route::get('/cart',[UserCartController::class,'index'])->name('cart.index');
 Route::post('/cart/add/{product}',[UserCartController::class,'store'])->name('cart.store');
 Route::delete('/cart/remove/{product}',[UserCartController::class,'removeFromCart'])->name('cart.remove');
-// Route::patch('/cart/update/{product}',[UserCartController::class,'update']);
 Route::get('/details/{product}',[SellerProductController::class,'show'])->name('product.details');
 Route::post('/update-cart',[UserCartController::class,'updateCart'])->name('cart.update');
 
-// Checkout routes
-Route::get('/checkout/adress',[CheckoutController::class,'adressIndex'])->name('checkout.adress');
-Route::get('/checkout/delivery',[CheckoutController::class,'deliveryIndex'])->name('checkout.delivery');
-Route::get('/checkout/payment/{orderId}',[CheckoutController::class,'paymentView'])->name('checkout.paymentView');
+     // Checkout routes
 
-Route::get('/checkout/confirm',[CheckoutController::class,'confirmIndex'])->name('checkout.confirmation');
+Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout');
 Route::post('/checkout/payment',[CheckoutController::class,'payment'])->name('checkout.payment');
 Route::get('/checkout/confirmation',[CheckoutController::class,'confirmation'])->name('checkout.confirmation');
 Route::get('/checkout/failure',[CheckoutController::class,'failure'])->name('checkout.failure');
-
-// Route::post('/payment',[PayementController::class,'payment'])->name('payment');
-
-Route::get('/checkout/create',[CheckoutController::class,'create'])->name('checkout.create');
-Route::post('/checkout/save-adress',[CheckoutController::class,'saveAdress'])->name('checkout.save-adress');
-Route::post('/checkout/save-delivery',[CheckoutController::class,'saveDelivery'])->name('checkout.save-delivery');
 Route::get('/checkout/review/{orderId}',[CheckoutController::class,'review'])->name('checkout.review');
 
 
@@ -120,6 +111,8 @@ Route::get('/catalog',[CatalogController::class,'index'])->name('catalog.index')
 Route::post('/catalog/filterByPrice',[CatalogController::class,'filterByPrice'])->name('catalog.filterByPrice');
 Route::post('/catalog/filterByCategory',[CatalogController::class,'filterByCategory'])->name('catalog.filterByCategory');
 Route::get('/catalog/getProducts',[CatalogController::class,'getProducts'])->name('catalog.getProducts');
+Route::post('/catalog/search',[CatalogController::class,'search'])->name('catalog.search');
+Route::post('/catalog/sort',[CatalogController::class,'sort'])->name('catalog.sort');
 
 
 Route::get('/cartData',[UserCartController::class,'getCartData'])->name('cart.data');

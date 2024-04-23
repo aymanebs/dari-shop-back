@@ -6,7 +6,7 @@
     <nav class="mx-auto w-full mt-4 max-w-[1200px] px-5">
         <ul class="flex items-center">
             <li class="cursor-pointer">
-                <a href="index.html">
+                <a href="{{route('home')}}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
                         <path
                             d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
@@ -27,13 +27,13 @@
 
 
     <div class="relative py-4 ">
-        <img class="w-full object-cover brightness-50 filter lg:h-[250px]" src="{{ asset('img/header-bg.jpeg') }}"
+        <img class="w-full object-cover brightness-50 filter lg:h-[250px]" src="{{ asset('img/catalog_banner2.jpg') }}"
             alt="Living room image" />
 
         <div
             class="absolute top-1/2 left-1/2 mx-auto flex w-11/12 max-w-[1200px] -translate-x-1/2 -translate-y-1/2 flex-col text-center text-white lg:ml-5">
-            <h1 class="text-4xl font-bold sm:text-5xl lg:text-left">
-                Best Collection for Home decoration
+            <h1 class="text-xl sm:text-5xl lg:text-left">
+                Best Collection of handmade products
             </h1>
 
 
@@ -41,71 +41,31 @@
     </div>
 
 
-
-    <div class="my-5 flex items-center justify-between px-5 mx-auto flex-grow max-w-[1200px]">
-        <div class="flex gap-3">
-            <div class="relative">
-                <select
-                    class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path
-                            d="M10 12a2 2 0 100-4 2 2 0 000 4zM3 10a7 7 0 1114 0 7 7 0 01-14 0zm16 0a9 9 0 10-18 0 9 9 0 0018 0z" />
-                    </svg>
-                </div>
+    <div class="py-5 flex justify-end items-center gap-3 mx-auto flex-grow max-w-[1200px]">
+        <div class="relative">
+            <select id="sort_select_list"
+                class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                <option value="price">Price: Low to High</option>
+                <option value="price" class="desc">Price: High to low</option>
+                <option value="name">Name: A to Z</option>
+                <option value="name" class="desc">Name: Z to A</option>
+                <option value="created_at">New arrivals</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M5 8l5 5 5-5"></path>
+                </svg>
+                
             </div>
-
-
-            <button class="flex items-center justify-center border px-6 py-2 md:hidden">
-                Filters
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="mx-2 h-4 w-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                </svg>
-            </button>
-        </div>
-
-        <div class="hidden gap-3 lg:flex">
-            <button class="border bg-rose-400 py-2 px-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="h-5 w-5">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
-                </svg>
-            </button>
-
-            <button class="border py-2 px-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="h-5 w-5">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                </svg>
-            </button>
         </div>
     </div>
 
 
 
-
-
-
-
-
-    <section class=" blueSection container mx-auto flex-grow max-w-[1200px] border-b py-5 lg:flex lg:flex-row lg:py-10 ">
-
-
-
-
-
-
-
-
+    <section class=" blueSection  container mx-auto flex-grow max-w-[1200px] border-b py-5 lg:flex lg:flex-row lg:py-10 ">
 
         <!-- sidebar  -->
+
         <section class="hidden w-[300px] flex-shrink-0 px-4 lg:block">
             <div class="flex border-b pb-5">
                 <div class="w-full">
@@ -121,18 +81,63 @@
                             </div>
                         </div>
                     @endforeach
-
-
                 </div>
             </div>
 
-
-
+            {{-- Price filter  --}}
+            
             <div class="flex border-b py-5">
                 <div class="w-full">
-                    <p class="mb-3 font-medium">PRICE</p>
+                    <p class=" mb-3 font-medium">PRICE</p>
 
-                    <div class="flex w-full">
+                    <div x-data="range()" x-init="mintrigger();
+                    maxtrigger()" class="relative max-w-xl w-full">
+                        <div>
+                            <input type="range" step="100" x-bind:min="min" x-bind:max="max"
+                                x-on:input="mintrigger" x-model="minprice"
+                                class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
+
+                            <input type="range" step="100" x-bind:min="min" x-bind:max="max"
+                                x-on:input="maxtrigger" x-model="maxprice"
+                                class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
+
+                            <div class="relative z-10 h-2">
+
+                                <div class="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-200"></div>
+
+                                <div class="absolute z-20 top-0 bottom-0 rounded-md bg-pink-400"
+                                    x-bind:style="'right:' + maxthumb + '%; left:' + minthumb + '%'"></div>
+
+                                <div class="absolute z-30 w-6 h-6 top-0 left-0 bg-pink-400 rounded-full -mt-2 -ml-1"
+                                    x-bind:style="'left: ' + minthumb + '%'"></div>
+
+                                <div class="absolute z-30 w-6 h-6 top-0 right-0 bg-pink-400 rounded-full -mt-2 -mr-3"
+                                    x-bind:style="'right: ' + maxthumb + '%'"></div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex justify-between items-center py-5">
+                            <form id="filter_form">
+                            <div>
+                                <input id="min-input" type="text" maxlength="5" x-on:input="mintrigger" x-model="minprice"
+                                    class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
+                            </div>
+                            <div>
+                                <input id="max-input" type="text" maxlength="5" x-on:input="maxtrigger" x-model="maxprice"
+                                    class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
+                            </div>
+                            <div>
+                            <button type="submit">ok</button>
+                            </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+
+                    {{-- <div class="flex w-full">
                         <form id="filter_form">
                             <div class="flex justify-between ">
 
@@ -144,13 +149,9 @@
                                 <button type="submit">filter</button>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
-
-
-
-
         </section>
         <!-- /sidebar  -->
 
@@ -259,22 +260,94 @@
     </section>
 
     <script>
+
         const filter_form = document.getElementById('filter_form');
         const cards_container = document.querySelector('.cards_container');
         const categoryInputs = document.querySelectorAll('.categoryInput');
+        const searchForm = document.getElementById('searchForm');
+        const sort_select_list = document.getElementById('sort_select_list');
 
 
-        filter_form.addEventListener('submit', function() {
-            const min = document.getElementById('min-input').value;
-            const max = document.getElementById('max-input').value;
-            event.preventDefault();
-            filterProducts(min, max);
+        // sort event listener
+        sort_select_list.addEventListener('change', function() {
+
+            let criteria = sort_select_list.value;
+            let option = sort_select_list.options[sort_select_list.selectedIndex];
+            let direction = '';
+            console.log('option', option)
+            option.classList.contains('desc') ? direction = 'desc' : direction = 'asc';
+
+            console.log("categoryInputs: ", categoryInputs);
+            console.log("direction: ", direction);
+            fetch('/catalog/sort', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content')
+                    },
+                    body: JSON.stringify({
+                        'criteria': criteria,
+                        'direction': direction
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    fetchProducts(data.products);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
 
         })
 
+        // search 
+        document.addEventListener('submit', function(event) {
+            event.preventDefault();
+            let searchValue = searchForm.querySelector('input').value;
 
+
+            fetch('/catalog/search', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content')
+                    },
+                    body: JSON.stringify({
+                        keyword: searchValue
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    fetchProducts(data.products);
+
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+            if (searchValue == '') {
+                fetchAllProducts();
+            }
+        });
+
+        // filter by price eventlistener
+        filter_form.addEventListener('submit', function() {
+            const min = document.getElementById('min-input').value;
+            const max = document.getElementById('max-input').value;
+            console.log("min: ", min, "max: ", max);
+            // event.preventDefault();
+            filterProductsByPrice(min, max);
+
+        })
+
+        
+        // filter by category
         categoryInputs.forEach((input) => {
             input.addEventListener('change', function() {
+
+                
 
                 let selectedCatgories = [];
                 categoryInputs.forEach((input) => {
@@ -283,7 +356,12 @@
                     }
                 })
 
-                console.log("selected: ", selectedCatgories);
+                console.log(" number selected: ", selectedCatgories.length);
+
+                if (selectedCatgories.length == 0) {
+                    fetchAllProducts();
+                    return;
+                }
                 fetch("{{ route('catalog.filterByCategory') }}", {
                         method: 'POST',
                         headers: {
@@ -299,24 +377,25 @@
                     .then(data => {
                         cards_container.innerHTML = '';
                         let products = data.products;
-                        console.log("products: ", products);
+
 
                         fetchProducts(products);
+
                     })
                     .catch(error => {
                         console.log(error);
                     });
             });
 
-            if (selectedCatgories.length == 0) {
-                fetchAllProducts();
-            }
+
         });
 
-
+        // fetch  products
         function fetchProducts(products = []) {
+         
             cards_container.innerHTML = '';
             products.forEach((product) => {
+               
                 cards_container.innerHTML += `
                 <div class="flex flex-col">
                      <div class="relative flex">
@@ -406,6 +485,7 @@
 
         }
 
+        // fetch all products
         function fetchAllProducts() {
 
             fetch('/catalog/getProducts', {
@@ -419,15 +499,17 @@
                 .then(data => {
                     let products = data.products;
                     fetchProducts(products);
-                    console.log("products: ", products);
+                    console.log(" all products: ", products);
+
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
         }
 
+        // filter by price function 
+        function filterProductsByPrice(min, max) {
 
-        function filterProducts(min, max) {
             fetch('/catalog/filterByPrice', {
                     method: 'POST',
                     headers: {
@@ -446,13 +528,38 @@
                     cards_container.innerHTML = '';
                     let products = data.products;
 
+                   console.log("products: ", products);
+
                     fetchProducts(products);
+
 
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     // Handle errors here
                 });
+        }
+
+        // price range slider
+        function range() {
+            return {
+                minprice: 1000,
+                maxprice: 7000,
+                min: 100,
+                max: 10000,
+                minthumb: 0,
+                maxthumb: 0,
+
+                mintrigger() {
+                    this.minprice = Math.min(this.minprice, this.maxprice - 500);
+                    this.minthumb = ((this.minprice - this.min) / (this.max - this.min)) * 100;
+                },
+
+                maxtrigger() {
+                    this.maxprice = Math.max(this.maxprice, this.minprice + 500);
+                    this.maxthumb = 100 - (((this.maxprice - this.min) / (this.max - this.min)) * 100);
+                },
+            }
         }
     </script>
 

@@ -18,9 +18,9 @@ class ProfileController extends Controller
         return view('profile.edit');
     }
 
-    public function wishlist(){
-        return view('profile.wishlist');
-    }
+    // public function wishlist(){
+    //     return view('profile.wishlist');
+    // }
 
     public function editAdress(){
         return view('profile.edit-adress');
@@ -42,7 +42,16 @@ class ProfileController extends Controller
 
     public function listOrders(){
         $customer = auth()->user()->customer;
-        $orders = $customer->orders()->with('products')->get();
+        $orders = $customer->orders()->with('products')->orderbyDesc('created_at')->get();
+        
+        foreach ($orders as $order){
+           
+            $total=0;
+            foreach ($order->products as $product){
+                $total += $product->price * $product->pivot->quantity;
+            }
+            $order->total = $total;
+        }
         return view('profile.orders',compact('orders'));
     }
 }

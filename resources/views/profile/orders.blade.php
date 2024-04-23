@@ -60,7 +60,9 @@
               <tr class="h-[100px] border-b">
                   <td class="text-center align-middle px-4">&#8470; {{ $order->id }}</td>
                   <td class="mx-auto text-center px-4">{{ $order->updated_at->format('d/m/Y') }}</td>
-                  <td class="text-center align-middle px-4">&#36;620</td>
+                  <td class="text-center align-middle px-4">&#36; 
+                    {{ $order->total}}
+                  </td>
                   <td class="mx-auto text-center px-4">
                       @switch($order->status)
                           @case(1)

@@ -16,15 +16,15 @@ class CategorySeeder extends Seeder
        $categories =[
 
         [
-            "name" => "Alimentaion"
+            "name" => "Food"
         ],
 
         [
-            "name" => "Artisanat "
+            "name" => "Handicrafts "
         ],
 
         [
-            "name" => "Produits de beaute"
+            "name" => "Beauty Products"
         ],
 
         [
@@ -32,8 +32,12 @@ class CategorySeeder extends Seeder
         ],
 
         [
-            "name" => "Decoration Interieure"
+            "name" => "Home Decor"
         ],
+
+        [
+            "name" => "Jewelry"
+        ]
 
        ];
 

@@ -12,7 +12,7 @@
                   width="40px"
                   height="40px"
                   class="rounded-full object-cover"
-                  src="./assets/images/avatar-photo.png"
+                  src="{{ auth()->user()->getFirstMediaUrl('avatars')}}"
                   alt="Red woman portrait"
                 />
                 <div class="ml-5">

@@ -27,12 +27,22 @@
     https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
     " rel="stylesheet">
 
+
+    <style>
+      input[type=range]::-webkit-slider-thumb {
+        pointer-events: all;
+        width: 24px;
+        height: 24px;
+        -webkit-appearance: none;
+      /* @apply w-6 h-6 appearance-none pointer-events-auto; */
+      }
+    </style> 
     
     {{-- title --}}
     <title>@yield('title','Dari shop')</title>
   </head>
 
-  <body x-data="{ desktopMenuOpen: false, mobileMenuOpen: false}">
+  <body class="bg-neutral-100" x-data="{ desktopMenuOpen: false, mobileMenuOpen: false}">
     <!-- Header -->
     <header
       class="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5"
@@ -42,7 +52,7 @@
       <a href="{{route('home')}}">
         <img
           class="cursor-pointer sm:h-auto sm:w-auto"
-          src="{{asset('img/logo1.png')}}"
+          src="{{asset('img/logo3.png')}}"
           alt="company logo"
         />
       </a>
@@ -68,7 +78,7 @@
 
       {{-- serach form --}}
 
-      <form class="hidden h-9 w-2/5 items-center border md:flex">
+      <form id="searchForm" class="hidden h-9 w-2/5 items-center border md:flex bg-neutral-100">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -85,9 +95,9 @@
         </svg>
 
         <input
-          class="hidden w-11/12 outline-none md:block"
+          class="hidden w-11/12 outline-none md:block bg-neutral-100"
           type="search"
-          placeholder="Search"
+          placeholder="Search" 
         />
 
         <button class="ml-auto h-full bg-rose-500 px-4 hover:bg-rose-300">
@@ -122,6 +132,36 @@
 
           <p class="text-xs">Cart</p>
         </a>
+
+        @if(Auth::user()->roles->first()->title =='Seller')
+        
+        <a
+          href="{{route('products.index')}}"
+          class="flex cursor-pointer flex-col items-center justify-center"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V5zm2 1v10h14V6H5zM8 8h8v2H8V8zm0 4h8v2H8v-2zm-3.5 2.5a.5.5 0 11-1 0 .5.5 0 011 0zm0-3a.5.5 0 11-1 0 .5.5 0 011 0zm7 3a.5.5 0 11-1 0 .5.5 0 011 0zm0-3a.5.5 0 11-1 0 .5.5 0 011 0zM6 19a1 1 0 011-1h10a1 1 0 011 1v1H6v-1zm14-2H4V6h16v11z" clip-rule="evenodd"/>
+        </svg>
+          <p class="text-xs">Dashboard</p>
+        </a>
+        @endif
+
+
+        @if(Auth::user()->roles->first()->title =='Admin')
+        
+        <a
+          href="{{route('users.index')}}"
+          class="flex cursor-pointer flex-col items-center justify-center"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V5zm2 1v10h14V6H5zM8 8h8v2H8V8zm0 4h8v2H8v-2zm-3.5 2.5a.5.5 0 11-1 0 .5.5 0 011 0zm0-3a.5.5 0 11-1 0 .5.5 0 011 0zm7 3a.5.5 0 11-1 0 .5.5 0 011 0zm0-3a.5.5 0 11-1 0 .5.5 0 011 0zM6 19a1 1 0 011-1h10a1 1 0 011 1v1H6v-1zm14-2H4V6h16v11z" clip-rule="evenodd"/>
+        </svg>
+          <p class="text-xs">Dashboard</p>
+        </a>
+        @endif
+
+
+
 
         <a
           href="{{route('profile')}}"
@@ -164,7 +204,7 @@
     <section
       x-show="mobileMenuOpen"
       @click.outside="mobileMenuOpen = false"
-      class="absolute left-0 right-0 z-50 h-screen w-full bg-white"
+      class="absolute left-0 right-0 z-50 h-screen w-full bg-neutral-100"
       style="display: none"
     >
       <div class="mx-auto">
@@ -265,7 +305,7 @@
     <!-- Nav bar -->
     <!-- hidden on small devices -->
 
-    <nav class="relative bg-violet-900">
+    <nav class="relative bg-blue-900">
       <div
         class="mx-auto hidden h-12 w-full max-w-[1200px] items-center md:flex"
       >

@@ -15,7 +15,7 @@
               >
                 <img
                   class="ml-5 h-20 w-20 rounded-full"
-                  src="{{auth()->user()->customer->getFirstMediaUrl('avatars')}}"
+                  src="{{auth()->user()->getFirstMediaUrl('avatars')}}"
                   alt="Sarah Johnson image"
                 />
 

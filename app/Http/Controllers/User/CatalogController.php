@@ -14,7 +14,7 @@ class CatalogController extends Controller
     {
         $categories = Category::all();
 
-        $products = Product::all();
+        $products = Product::paginate(6);
         return view('catalog.index', compact('products', 'categories'));
     }
 
@@ -74,17 +74,20 @@ class CatalogController extends Controller
         $min = json_decode($request->min);
         $max = json_decode($request->max);
 
+       
+
 
         $products = Product::whereBetween('price', [$min, $max])->get();
         foreach ($products as $product) {
             $product->image = $product->getFirstMediaUrl('products');
         }
-
+        
         return response()->json(['products' => $products]);
     }
 
     public function filterByCategory(Request $request)
-    {
+    {   
+        
 
         $products = Product::whereHas('category', function ($query) use ($request) {
             $query->whereIn('id', $request->category_ids);
@@ -98,6 +101,35 @@ class CatalogController extends Controller
             'products' => $products
 
 
+        ]);
+    }
+
+    public function search(Request $request){
+
+        $keyword = $request->keyword;
+        
+        $products = Product::where('name', 'like', '%' . $keyword . '%')
+                            ->orWhereHas('category', function($query) use ($keyword){
+                                $query->where('name', 'like', '%' . $keyword . '%');
+                            })->get();
+        foreach($products as $product){
+            $product->image = $product->getFirstMediaUrl('products');
+        }
+        return response()->json([
+            'products' => $products,
+        ]);
+    }
+
+    public function sort(){
+
+        $criteria = request()->criteria;
+        $direction =request()->direction;
+        $products = Product::OrderBy($criteria,$direction)->get();
+        foreach($products as $product){
+            $product->image = $product->getFirstMediaUrl('products');
+        }
+        return response()->json([
+            'products' => $products
         ]);
     }
 }

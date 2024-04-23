@@ -40,24 +40,24 @@ class AuthController extends Controller
             $user = User::create([
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                
+
             ]);
+            $defaultAvatarPath = public_path('img/default_avatar.png');
+            Storage::putFileAs('avatars', $defaultAvatarPath, 'default_avatar.png');
+            $user->addMedia(Storage::path('avatars/default_avatar.png'))->toMediaCollection('avatars');
+            
             // dd($request->address);
             if ($request->role == '1') {
 
                 $user->roles()->attach(2);
 
-                $customer=Customer::create([
+                $customer = Customer::create([
                     'user_id' => $user->id,
                     'name' => $request->name,
                     'phone' => $request->phone,
                     'adress' => $request->adress,
                 ]);
-                $defaultAvatarPath = public_path('img/default_avatar.png');
-                Storage::putFileAs('avatars', $defaultAvatarPath, 'default_avatar.png');
-                $customer->addMedia(Storage::path('avatars/default_avatar.png'))->toMediaCollection('avatars');
-            } 
-            else if ($request->role == '2') {
+            } else if ($request->role == '2') {
 
                 $user->roles()->attach(3);
 
@@ -76,7 +76,6 @@ class AuthController extends Controller
 
             Auth::login($user);
             return redirect()->route('home');
-
         } catch (\Exception $e) {
 
             DB::rollBack();
@@ -98,7 +97,6 @@ class AuthController extends Controller
             return redirect()->route('home');
         } else {
             return back()->with('error', 'Les informations d\'identification fournies ne correspondent pas à nos enregistrements.');
-            
         }
     }
 
@@ -118,7 +116,6 @@ class AuthController extends Controller
             return back()->withErrors([
                 'error' => 'There might be an issue with logout',
             ]);
-            
         }
     }
 }

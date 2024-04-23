@@ -13,19 +13,21 @@
 </head>
 
 <body class="bg-pink-100">
-  <div id="loading-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-60" style="display: none">
-    
-    <svg class="animate-spin h-8 w-8 text-white mr-3" xmlns="http://www.w3.org/2000/svg" fill="none"
-        viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor"
-            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-        </path>
-    </svg>
+    <div id="loading-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-60"
+        style="display: none">
 
-    <span class="text-white text-3xl font-bold">Loading...</span>
+        <svg class="animate-spin h-8 w-8 text-white mr-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+            </circle>
+            <path class="opacity-75" fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+            </path>
+        </svg>
 
-</div>
+        <span class="text-white text-3xl font-bold">Loading...</span>
+
+    </div>
 
     <h1 class="text-lg font-bold text-gray-700 leading-tight text-center mt-12 mb-5">Create your account</h1>
     <form action="{{ route('register') }}" method="post" id="signUpForm"
@@ -50,28 +52,29 @@
                     class=" w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'"
                     value="{{ old('email') }}" />
-                    @error('email')
-                    <span class="text-red-500 text-xs">{{$message}}</span>
-                    @enderror
+                @error('email')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
             </div>
 
 
             <div class="mb-6">
-                <input  type="password" placeholder="Password" name="password" id="password"
+                <input type="password" placeholder="Password" name="password" id="password"
                     class=" w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'"
                     value="{{ old('password') }}" />
-                    @error('password')
-                    <span class="text-red-500 text-xs">{{$message}}</span>
-                    @enderror
+                @error('password')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-6">
-                <input type="password" placeholder="Confirm Password" name="password_confirmation" id="password_confirmation"
+                <input type="password" placeholder="Confirm Password" name="password_confirmation"
+                    id="password_confirmation"
                     class=" w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'" />
-                    @error('password_confirmation')
-                    <span class="text-red-500 text-xs">{{$message}}</span>
-                    @enderror
+                @error('password_confirmation')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
             </div>
 
         </div>
@@ -81,8 +84,8 @@
             <p class="text-md text-gray-700 leading-tight text-center mt-8 mb-5">Your presence on the social network</p>
             <ul class="grid w-full gap-6 md:grid-cols-2 mt-8 mb-5">
                 <li>
-                    <input type="radio" id="buyer-radio" name="role" value="1" {{old('role') == 1 ? 'checked' : ''}} class="hidden peer"
-                        required="">
+                    <input type="radio" id="buyer-radio" name="role" value="1"
+                        {{ old('role') == 1 ? 'checked' : '' }} class="hidden peer" required="">
                     <label for="buyer-radio"
                         class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                         <div class="block">
@@ -102,7 +105,7 @@
                 </li>
                 <li>
                     <input type="radio" id="seller-radio" name="role" onchange="toggleSellerFields()"
-                        value="2" {{old('role') == 2 ? 'checked' : ''}}  class="hidden peer">
+                        value="2" {{ old('role') == 2 ? 'checked' : '' }} class="hidden peer">
                     <label for="seller-radio"
                         class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                         <div class="block">
@@ -123,7 +126,7 @@
                         </div>
                     </label>
                     @error('role')
-                    <span class="text-red-500 text-xs">{{$message}}</span>
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
                     @enderror
                 </li>
 
@@ -148,9 +151,9 @@
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'" />
                 <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PDF, SVG, PNG, JPG or
                     GIF (MAX. 800x400px).</p>
-                    @error('justify')
-                    <span class="text-red-500 text-xs">{{$message}}</span>
-                    @enderror
+                @error('justify')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
             </div>
 
             <div class="mb-6">
@@ -158,28 +161,28 @@
                     class="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'"
                     value="{{ old('name') }}" />
-                    @error('name')
-                    <span class="text-red-500 text-xs">{{$message}}</span>
-                    @enderror
+                @error('name')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-6">
                 <input type="text" placeholder="Mobile" name="phone"
                     class="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
                     oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'"
-                    value="{{ old('phone')}}" />
-                    @error('phone')
-                    <span class="text-red-500 text-xs">{{$message}}</span>
-                    @enderror
+                    value="{{ old('phone') }}" />
+                @error('phone')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-8">
                 <input type="text" placeholder="Address" name="adress"
                     class="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
-                    oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'" 
-                    value="{{old('adress')}}"/>
-                    @error('adress')
-                    <span class="text-red-500 text-xs">{{$message}}</span>
-                    @enderror
-                 
+                    oninput="this.className = 'w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200'"
+                    value="{{ old('adress') }}" />
+                @error('adress')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+
             </div>
         </div>
 
@@ -202,131 +205,131 @@
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <script>
-      var currentTab = 0; // Current tab is set to be the first tab (0)
-      showTab(currentTab); // Display the current tab
+        var currentTab = 0; // Current tab is set to be the first tab (0)
+        showTab(currentTab); // Display the current tab
 
-      function showTab(n) {
-          // This function will display the specified tab of the form...
-          var x = document.getElementsByClassName("step");
-          x[n].style.display = "block";
-          //... and fix the Previous/Next buttons:
-          if (n == 0) {
-              document.getElementById("prevBtn").style.display = "none";
-          } else {
-              document.getElementById("prevBtn").style.display = "inline";
-          }
-          if (n == (x.length - 1)) {
-              document.getElementById("nextBtn").innerHTML = "Submit";
-          } else {
-              document.getElementById("nextBtn").innerHTML = "Next";
-          }
-          //... and run a function that will display the correct step indicator:
-          fixStepIndicator(n)
-      }
-
-      function nextPrev(n) {
-          // This function will figure out which tab to display
-          var x = document.getElementsByClassName("step");
-
-        
-          // Exit the function if any field in the current tab is invalid:
-          if (n == 1 && !validateForm()) return false;
-          // Hide the current tab:
-          x[currentTab].style.display = "none";
-          // Increase or decrease the current tab by 1:
-          currentTab = currentTab + n;
-
-          if (currentTab == 2) {
-              toggleSellerFields();
-          }
-         
-          // if you have reached the end of the form...
-          if (currentTab >= x.length) {
-              // ... the form gets submitted:
-              document.getElementById("loading-overlay").style.display = "flex";
-              document.getElementById("signUpForm").submit();
-              return false;
-          }
-
-
-          // Otherwise, display the correct tab:
-          showTab(currentTab);
-      }
-
-      function validateForm() {
-        // This function deals with validation of the form fields
-        var pass = document.getElementById("password");
-        var confirmPass = document.getElementById("password_confirmation");
-        var email = document.getElementById("email");
-        var x, y, i, valid = true;
-        x = document.getElementsByClassName("step");
-        y = x[currentTab].getElementsByTagName("input");
-
-
-
-         // Check the selected role
-         var buyerRadio = document.getElementById("buyer-radio");
-        if (buyerRadio.checked) {
-        var justifyInput = document.getElementById("justify");
-        
-        y = Array.from(y).filter(function(input) {
-            return input !== justifyInput;
-        });
-        console.log(y);
-    }
-
-        // A loop that checks every input field in the current tab:
-        for (i = 0; i < y.length; i++) {
-           
-          // If a field is empty...
-          if (y[i].value == "") {
-            // console.log("invalid field");
-            // add an "invalid" class to the field:
-            y[i].className += " invalid";
-            // and set the current valid status to false
-            valid = false;
-          }
-        }
-        
-        if(pass.value.length < 8 || pass.value != confirmPass.value){
-          pass.className += " invalid";
-          valid = false;
+        function showTab(n) {
+            // This function will display the specified tab of the form...
+            var x = document.getElementsByClassName("step");
+            x[n].style.display = "block";
+            //... and fix the Previous/Next buttons:
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (x.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+            //... and run a function that will display the correct step indicator:
+            fixStepIndicator(n)
         }
 
-        if(! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)){
-          email.className += " invalid";
-          valid = false;
+        function nextPrev(n) {
+            // This function will figure out which tab to display
+            var x = document.getElementsByClassName("step");
+
+
+            // Exit the function if any field in the current tab is invalid:
+            if (n == 1 && !validateForm()) return false;
+            // Hide the current tab:
+            x[currentTab].style.display = "none";
+            // Increase or decrease the current tab by 1:
+            currentTab = currentTab + n;
+
+            if (currentTab == 2) {
+                toggleSellerFields();
+            }
+
+            // if you have reached the end of the form...
+            if (currentTab >= x.length) {
+                // ... the form gets submitted:
+                document.getElementById("loading-overlay").style.display = "flex";
+                document.getElementById("signUpForm").submit();
+                return false;
+            }
+
+
+            // Otherwise, display the correct tab:
+            showTab(currentTab);
         }
-        // If the valid status is true, mark the step as finished and valid:
-        if (valid) {
-          document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
+
+        function validateForm() {
+            // This function deals with validation of the form fields
+            var pass = document.getElementById("password");
+            var confirmPass = document.getElementById("password_confirmation");
+            var email = document.getElementById("email");
+            var x, y, i, valid = true;
+            x = document.getElementsByClassName("step");
+            y = x[currentTab].getElementsByTagName("input");
+
+
+
+            // Check the selected role
+            var buyerRadio = document.getElementById("buyer-radio");
+            if (buyerRadio.checked) {
+                var justifyInput = document.getElementById("justify");
+
+                y = Array.from(y).filter(function(input) {
+                    return input !== justifyInput;
+                });
+                console.log(y);
+            }
+
+            // A loop that checks every input field in the current tab:
+            for (i = 0; i < y.length; i++) {
+
+                // If a field is empty...
+                if (y[i].value == "") {
+                    // console.log("invalid field");
+                    // add an "invalid" class to the field:
+                    y[i].className += " invalid";
+                    // and set the current valid status to false
+                    valid = false;
+                }
+            }
+
+            if (pass.value.length < 8 || pass.value != confirmPass.value) {
+                pass.className += " invalid";
+                valid = false;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                email.className += " invalid";
+                valid = false;
+            }
+            // If the valid status is true, mark the step as finished and valid:
+            if (valid) {
+                document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
+            }
+            return valid; // return the valid status
         }
-        return valid; // return the valid status
-      }
 
-      function fixStepIndicator(n) {
-          // This function removes the "active" class of all steps...
-          var i, x = document.getElementsByClassName("stepIndicator");
-          for (i = 0; i < x.length; i++) {
-              x[i].className = x[i].className.replace(" active", "");
-          }
-          //... and adds the "active" class on the current step:
-          x[n].className += " active";
-      }
+        function fixStepIndicator(n) {
+            // This function removes the "active" class of all steps...
+            var i, x = document.getElementsByClassName("stepIndicator");
+            for (i = 0; i < x.length; i++) {
+                x[i].className = x[i].className.replace(" active", "");
+            }
+            //... and adds the "active" class on the current step:
+            x[n].className += " active";
+        }
 
-      function toggleSellerFields() {
-          var sellerFields = document.getElementById("sellerFields");
-          var sellerRadio = document.getElementById("seller-radio");
-          var buyerRadio = document.getElementById("buyer-radio");
+        function toggleSellerFields() {
+            var sellerFields = document.getElementById("sellerFields");
+            var sellerRadio = document.getElementById("seller-radio");
+            var buyerRadio = document.getElementById("buyer-radio");
 
-          if (sellerRadio.checked) {
-              sellerFields.style.display = "block";
-          } else if (buyerRadio.checked) {
-              sellerFields.style.display = "none";
-          }
+            if (sellerRadio.checked) {
+                sellerFields.style.display = "block";
+            } else if (buyerRadio.checked) {
+                sellerFields.style.display = "none";
+            }
 
-      }
-  </script>
+        }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 
