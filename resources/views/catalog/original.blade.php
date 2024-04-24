@@ -4,16 +4,6 @@
     <!-- breadcrumbs  -->
 
     <nav class="mx-auto w-full mt-4 max-w-[1200px] px-5">
-        @if (session('success'))
-            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
-                <p>{{ session('success') }}</p>
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
-                <p>{{ session('error') }}</p>
-            </div>
-        @endif
         <ul class="flex items-center">
             <li class="cursor-pointer">
                 <a href="{{ route('home') }}">
@@ -96,82 +86,75 @@
 
         <section class="w-full lg:w-[300px] px-4 lg:px-0 lg:block">
 
-            <form id="filter_form">
+            <form id="filter_form" >
+            <div class="flex border-b pb-5">
+                <div class="w-full">
+                    <p class="mb-3 font-medium">CATEGORIES</p>
+                    @foreach ($categories as $category)
+                        <div class="flex w-full justify-between">
+                            <div class="flex justify-center items-center">
+                                <input type="checkbox" class="categoryInput" value="{{ $category->id }}" />
+                                <p class="ml-4">{{ $category->name }}</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">({{ $category->products->count() }})</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
 
+            {{-- Price filter  --}}
 
-                <div class="flex border-b pb-5">
+            <div class=" w-full">
+                <div class="flex border-b py-5">
                     <div class="w-full">
-                        <p class="mb-3 font-medium">CATEGORIES</p>
-                        @foreach ($categories as $category)
-                            <div class="flex w-full justify-between">
-                                <div class="flex justify-center items-center">
-                                    <input type="checkbox" class="categoryInput" value="{{ $category->id }}" />
-                                    <p class="ml-4">{{ $category->name }}</p>
-                                </div>
-                                <div>
-                                    <p class="text-gray-500">({{ $category->products->count() }})</p>
+                        <p class="mb-3 font-medium">PRICE</p>
+
+                        <div x-data="range()" x-init="mintrigger();
+                        maxtrigger()" class="relative max-w-xl w-full ">
+                            <div>
+                                <input type="range" step="100" x-bind:min="min"
+                                    x-bind:max="max" x-on:input="mintrigger" x-model="minprice"
+                                    class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
+
+                                <input type="range" step="100" x-bind:min="min"
+                                    x-bind:max="max" x-on:input="maxtrigger" x-model="maxprice"
+                                    class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
+
+                                <div class="relative z-10 h-2">
+                                    <div class="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-200"></div>
+                                    <div class="absolute z-20 top-0 bottom-0 rounded-md bg-pink-400"
+                                        x-bind:style="'right:' + maxthumb + '%; left:' + minthumb + '%'"></div>
+                                    <div class="absolute z-30 w-6 h-6 top-0 left-0 bg-pink-400 rounded-full -mt-2 -ml-1"
+                                        x-bind:style="'left: ' + minthumb + '%'"></div>
+                                    <div class="absolute z-30 w-6 h-6 top-0 right-0 bg-pink-400 rounded-full -mt-2 -mr-3"
+                                        x-bind:style="'right: ' + maxthumb + '%'"></div>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
-                </div>
 
-                {{-- Price filter  --}}
-
-                <div class=" w-full">
-                    <div class="flex border-b py-5">
-                        <div class="w-full">
-                            <p class="mb-3 font-medium">PRICE</p>
-
-                            <div x-data="range()" x-init="mintrigger();
-                            maxtrigger()" class="relative max-w-xl w-full ">
-                                <div>
-                                    <input type="range" step="100" x-bind:min="min"
-                                        x-bind:max="max" x-on:input="mintrigger" x-model="minprice"
-                                        class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
-
-                                    <input type="range" step="100" x-bind:min="min"
-                                        x-bind:max="max" x-on:input="maxtrigger" x-model="maxprice"
-                                        class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
-
-                                    <div class="relative z-10 h-2">
-                                        <div class="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-200">
-                                        </div>
-                                        <div class="absolute z-20 top-0 bottom-0 rounded-md bg-pink-400"
-                                            x-bind:style="'right:' + maxthumb + '%; left:' + minthumb + '%'"></div>
-                                        <div class="absolute z-30 w-6 h-6 top-0 left-0 bg-pink-400 rounded-full -mt-2 -ml-1"
-                                            x-bind:style="'left: ' + minthumb + '%'"></div>
-                                        <div class="absolute z-30 w-6 h-6 top-0 right-0 bg-pink-400 rounded-full -mt-2 -mr-3"
-                                            x-bind:style="'right: ' + maxthumb + '%'"></div>
+                            <div class="flex justify-between items-center py-5">
+                                <form  class="flex items-center">
+                                    <div>
+                                        <input id="min-input" type="text" maxlength="5" x-on:input="mintrigger"
+                                            x-model="minprice"
+                                            class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
                                     </div>
-                                </div>
-
-                                <div class="flex justify-between items-center py-5">
-                                    <div class="flex items-center">
-                                        <div>
-                                            <input id="min-input" type="text" maxlength="5" x-on:input="mintrigger"
-                                                x-model="minprice"
-                                                class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
-                                        </div>
-                                        <div>
-                                            <input id="max-input" type="text" maxlength="5" x-on:input="maxtrigger"
-                                                x-model="maxprice"
-                                                class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
-                                        </div>
-                                        {{-- <div>
+                                    <div>
+                                        <input id="max-input" type="text" maxlength="5" x-on:input="maxtrigger"
+                                            x-model="maxprice"
+                                            class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
+                                    </div>
+                                    <div>
                                         <button type="submit"
                                             class="ml-2 px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600">Ok</button>
-                                    </div> --}}
                                     </div>
-                                </div>
+                                </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
-
-            </form>
+            </div>
 
 
         </section>
@@ -182,7 +165,7 @@
 
 
 
-            {{-- @foreach ($products as $product)
+            @foreach ($products as $product)
                 <div class="flex flex-col">
 
 
@@ -270,7 +253,7 @@
 
 
                 </div>
-            @endforeach --}}
+            @endforeach
 
 
 
@@ -285,14 +268,14 @@
     <div class="pagination_container flex justify-center m-10 space-x-2">
 
 
-        {{-- {{ $products->links('vendor.pagination.custom') }} --}}
+        {{$products->links('vendor.pagination.custom')}}
 
 
     </div>
 
     {{-- pagination end --}}
 
-    {{-- <script>
+    <script>
         const filter_form = document.getElementById('filter_form');
         const cards_container = document.querySelector('.cards_container');
         const categoryInputs = document.querySelectorAll('.categoryInput');
@@ -516,7 +499,7 @@
                     </div>
                 `;
             })
-
+           
         }
 
 
@@ -596,201 +579,12 @@
                 },
             }
         }
-    </script> --}}
-
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            fetchAllProducts();
-            const filterForm = document.getElementById('filter_form');
-
-
-            filterForm.addEventListener('change', function() {
-                filterProducts();
-            });
-
-            function filterProducts() {
-                const categoyInputs = document.querySelectorAll('.categoryInput:checked');
-
-                const selectedCategories = Array.from(document.querySelectorAll('.categoryInput:checked')).map(
-                    input => input.value);
-
-                const minPrice = document.getElementById('min-input').value;
-                const maxPrice = document.getElementById('max-input').value;
-
-                // if (selectedCategories.length === 0) {
-                //     fetchAllProducts();
-                //     return;
-                // }
-
-                fetch("{{ route('catalog.filter') }}", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content')
-                        },
-                        body: JSON.stringify({
-                            category_ids: selectedCategories,
-                            min: minPrice,
-                            max: maxPrice
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        renderProducts(data.products);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            }
-
-            function fetchAllProducts() {
-                fetch('/catalog/getProducts', {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content')
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        renderProducts(data.products);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            }
-
-            function renderProducts(products) {
-                const cardsContainer = document.querySelector('.cards_container');
-                cardsContainer.innerHTML = '';
-
-                if (products.length === 0) {
-                    const noProductMessage = `
-            <div class="text-center text-gray-600">No products found</div>
-        `;
-                    cardsContainer.innerHTML = noProductMessage;
-                } else {
-
-                    products.forEach(product => {
-                        const card = `
-                    <div class="flex flex-col">
-                     <div class="relative flex">
-                        <img class="w-full h-60 object-cover" src=" ${product.image}"
-                            alt="sofa image" />
-                            <div
-                            class="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100">
-                            <a href="/details/${product.id}"
-                                class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                                </svg>
-                            </a>
-                            <span class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rose-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="h-4 w-4">
-                                    <path
-                                        d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                                </svg>
-                            </span>
-                        </div>
-
-                        <div class="absolute right-1 mt-3 flex items-center justify-center bg-rose-400">
-
-                        </div>
-                    </div>
-
-                    <div>
-                        <p class="mt-2">${product.name}</p>
-                        <p class="font-medium text-violet-900">
-                            ${product.price}
-
-                        </p>
-
-                        <div class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                class="h-4 w-4 text-rose-400">
-                                <path fill-rule="evenodd"
-                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                    clip-rule="evenodd" />
-                            </svg>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                class="h-4 w-4 text-rose-400">
-                                <path fill-rule="evenodd"
-                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                    clip-rule="evenodd" />
-                            </svg>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                class="h-4 w-4 text-rose-400">
-                                <path fill-rule="evenodd"
-                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                    clip-rule="evenodd" />
-                            </svg>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                class="h-4 w-4 text-rose-400">
-                                <path fill-rule="evenodd"
-                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                    clip-rule="evenodd" />
-                            </svg>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                class="h-4 w-4 text-gray-200">
-                                <path fill-rule="evenodd"
-                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            <p class="text-sm text-gray-400">(38)</p>
-                        </div>
-
-                        <div>
-                            <form action="cart/add/${product.id}" method="POST">
-                                @csrf
-                                <button class="my-5 h-10 w-full bg-violet-900 text-white">
-                                    Add to cart
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    </div>
-                    `;
-                        cardsContainer.innerHTML += card;
-                    });
-                }
-
-            }
-        });
-
-        // price range slider
-        function range() {
-            return {
-                minprice: 0,
-                maxprice: 1000,
-                min: 0,
-                max: 1300,
-                minthumb: 0,
-                maxthumb: 0,
-
-                mintrigger() {
-                    this.minprice = Math.min(this.minprice, this.maxprice - 50);
-                    this.minthumb = ((this.minprice - this.min) / (this.max - this.min)) * 100;
-                },
-
-                maxtrigger() {
-                    this.maxprice = Math.max(this.maxprice, this.minprice + 50);
-                    this.maxthumb = 100 - (((this.maxprice - this.min) / (this.max - this.min)) * 100);
-                },
-            }
-        }
     </script>
 
+    <script>
+       
+
+    </script>
 
 
 @endsection

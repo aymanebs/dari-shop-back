@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CatalogController extends Controller
 {
@@ -14,60 +15,19 @@ class CatalogController extends Controller
     {
         $categories = Category::all();
 
-        $products = Product::where('status',2)->paginate(10);
-        return view('catalog.index', compact('products', 'categories'));
+        $products = Product::where('status', 2)->get();
+        return view('catalog.index', compact('products','categories'));
     }
 
     public function getProducts()
     {
-        $products = Product::where('status',2)->paginate(10);
+        $products = Product::where('status', 2)->get();
         foreach ($products as $product) {
             $product->image = $product->getFirstMediaUrl('products');
         }
         return response()->json(['products' => $products]);
     }
 
-    // public function alimentation()
-    // {
-    //     $category = Category::where('name', 'Alimentaion')->first();
-
-    //     $products = $category->products()->get();
-
-    //     return view('catalog.alimentation', compact('products'));
-    // }
-
-    // public function beaute()
-    // {
-    //     $category = Category::where('name', 'Produits de beaute')->first();
-
-    //     $products = $category->products()->get();
-
-    //     return view('catalog.produit_beaute', compact('products'));
-    // }
-
-    // public function textiles()
-    // {
-
-    //     $category = Category::where('name', 'Textiles')->first();
-    //     $products = $category->products()->get();
-    //     return view('catalog.textiles', compact('products'));
-    // }
-
-    // public function decoration()
-    // {
-
-    //     $category = Category::where('name', 'Decoration Interieure')->first();
-    //     $products = $category->products()->get();
-    //     return view('catalog.decoration', compact('products'));
-    // }
-
-    // public function artisanat()
-    // {
-
-    //     $category = Category::where('name', 'Artisanat')->first();
-    //     $products = $category->products()->get();
-    //     return view('catalog.artisanat', compact('products'));
-    // }
 
     public function filterByPrice(Request $request)
     {
@@ -91,12 +51,16 @@ class CatalogController extends Controller
                 $query->whereIn('id', $request->category_ids);
             })->get();
 
+        // dd($products);
+        // $links = $products->links('vendor.pagination.custom')->toHtml();
+
         foreach ($products as $product) {
             $product->image = $product->getFirstMediaUrl('products');
         }
         return response()->json([
             'message' => 'success',
-            'products' => $products
+            'products' => $products,
+            // 'links' => $links
 
 
         ]);
@@ -130,6 +94,71 @@ class CatalogController extends Controller
         }
         return response()->json([
             'products' => $products
+        ]);
+    }
+ 
+
+    public function filter(Request $request)
+    {
+       
+
+        $min = json_decode($request->min);
+        $max = json_decode($request->max);
+        $category_ids = $request->category_ids;
+
+        
+
+       
+       
+
+        
+        if ($request->category_ids && $request->min && $request->max) {
+            $products = Product::where('status', 2)
+                ->whereBetween('price', [$min, $max])
+                ->whereHas('category', function ($query) use ($category_ids) {
+                    $query->whereIn('id', $category_ids);
+                })->get();
+        } elseif ($request->category_ids && $request->min) {
+            $products = Product::where('status', 2)
+                ->where('price', '>=', $min)
+                ->whereHas('category', function ($query) use ($category_ids) {
+                    $query->whereIn('id', $category_ids);
+                })->get();
+        } elseif ($request->category_ids && $request->max) {
+            $products = Product::where('status', 2)
+                ->where('price', '<=', $max)
+                ->whereHas('category', function ($query) use ($category_ids) {
+                    $query->whereIn('id', $category_ids);
+                })->get();
+        } elseif ($request->category_ids) {
+            $products = Product::where('status', 2)
+                ->whereHas('category', function ($query) use ($category_ids) {
+                    $query->whereIn('id', $category_ids);
+                })->get();
+        } elseif ($request->min && $request->max) {
+            $products = Product::where('status', 2)
+                ->whereBetween('price', [$min, $max])->get();
+        } elseif ($request->min) {
+            $products = Product::where('status', 2)
+                ->where('price', '>=', $min)->get();
+        } elseif ($request->max) {
+            $products = Product::where('status', 2)
+                ->where('price', '<=', $max)->get();
+        } else {
+            $products = Product::where('status', 2)->get();
+        }
+        
+        foreach ($products as $product) {
+            $product->image = $product->getFirstMediaUrl('products');
+        }
+       
+
+     
+
+        // Return the response or further process the data
+        return response()->json([
+            'products' => $products,
+            'message' => 'success'
         ]);
     }
 }

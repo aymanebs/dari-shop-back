@@ -5,19 +5,37 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function index(){
-        
-        return view('profile.index');
-    }
+    
 
     public function edit(){
 
         return view('profile.edit');
     }
 
+    
+    public function update(Request $request, Customer $customer){
+
+        $customer->user->update(
+            $request->only( 'email')
+        );
+        $customer->update([
+            'phone' => $request->input('phone'),
+            'name' => $request->input('name'),
+            'adress' => $request->input('adress')
+        ]);
+        if($request->hasFile('avatar')){
+            $customer->user->clearMediaCollection('avatars');
+            $customer->user->addMediaFromRequest('avatar')->toMediaCollection('avatars');
+        }
+        
+        return redirect()->route('profile.edit')->with('success','Profile updated successfully');
+
+    }
     
 
     public function editAdress(){
@@ -28,15 +46,42 @@ class ProfileController extends Controller
         return view('profile.edit-password');
     }
 
-    public function update(Request $request, Customer $customer){
+    public function updatePassword(Request $request){
 
-        $customer->user->update(
-            $request->only('name', 'email')
-        );
-        $customer->update($request->input('phone'));
-        return redirect()->route('profile');
-
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|confirmed'
+        ]);
+    
+        $user = auth()->user();
+       
+    
+        if (!Hash::check($request->input('current_password'), $user->password)) {
+            return back()->with('error', 'Old password is incorrect');
+        }
+    
+        $newPassword = $request->input('password');
+        $user->password = bcrypt($newPassword);
+        $user->update([
+            'password' => bcrypt($newPassword)
+        
+        ]);
+    
+        return redirect()->route('profile.edit-password')->with('success', 'Password updated successfully');
     }
+
+    public function updateAdress(Request $request){
+        $customer = auth()->user()->customer;
+        $customer->update([
+            'adress' => $request->input('adress'),
+            'region' => $request->input('region'),
+            'city' => $request->input('city'),
+
+        ]);
+        return redirect()->route('profile.edit-adress')->with('success','Adress updated successfully');
+    }
+
+  
 
     public function listOrders(){
         $customer = auth()->user()->customer;

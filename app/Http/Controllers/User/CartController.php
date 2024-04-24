@@ -59,11 +59,11 @@ class CartController extends Controller
 
         if ($cart->products->contains($product->id)) {
 
-            return redirect()->route('home')->with('error', 'Product already in cart');
+            return redirect()->back()->with('error', 'Product already in cart');
         }
 
         $cart->products()->attach($product->id);
-        return redirect()->route('home')->with('success', 'Product added to cart successfully');
+        return redirect()->back()->with('success', 'Product added to cart successfully');
     }
 
 

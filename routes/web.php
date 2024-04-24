@@ -8,6 +8,7 @@ use App\Http\Controllers\Seller\DashboardController as SellerDashboardController
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Seller\CartController;
 use App\Http\Controllers\User\CartController as UserCartController;
 use App\Http\Controllers\User\CatalogController;
@@ -48,10 +49,11 @@ Route::middleware('authCheck')->group(function () {
     Route::get('/logout',[AuthAuthController::class,'logout'])->name('logout');
 });
 
-Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+// Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
 // Admin routes 
 Route::prefix('admin')->group(function(){
+    Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('admin.dashboard');
     Route::resource('categories',CategoryController::class);
     Route::post('/users/ban/{user}',[AdminUserController::class,'banUser'])->name('users.ban');
     Route::post('/users/unban/{user}',[AdminUserController::class,'unbanUser'])->name('users.unban');
@@ -78,11 +80,13 @@ Route::get('/seller/dashboard',[SellerDashboardController::class,'index'])->name
 // Customer routes
 
      // Profile routes
-Route::get('/profile',[ProfileController::class,'index'])->name('profile');
+// Route::get('/profile',[ProfileController::class,'index'])->name('profile');
 Route::get('/profile/edit',[ProfileController::class,'edit'])->name('profile.edit');
-Route::get('/profile/edit-adress',[ProfileController::class,'editAdress'])->name('profile.edit-adress');
-Route::get('/profile/edit-password',[ProfileController::class,'editPassword'])->name('profile.edit-password');
 Route::patch('/profile/update/{customer}',[ProfileController::class,'update'])->name('profile.update');
+Route::get('/profile/edit-adress',[ProfileController::class,'editAdress'])->name('profile.edit-adress');
+Route::post('/profile/update-password',[ProfileController::class,'updatePassword'])->name('profile.update-password');
+Route::get('/profile/edit-password',[ProfileController::class,'editPassword'])->name('profile.edit-password');
+Route::patch('/profile/update-adress',[ProfileController::class,'updateAdress'])->name('profile.update-adress');
 Route::get('/profile/orders',[ProfileController::class,'listOrders'])->name('profile.orders');
     
      // Cart routes
@@ -110,6 +114,7 @@ Route::get('/catalog/artisanat',[CatalogController::class,'artisanat'])->name('c
 Route::get('/catalog/beaute',[CatalogController::class,'beaute'])->name('catalog.beaute');
 Route::get('/catalog/decoration',[CatalogController::class,'decoration'])->name('catalog.decoration');
 Route::get('/catalog',[CatalogController::class,'index'])->name('catalog.index');
+Route::post('/catalog/filter',[CatalogController::class,'filter'])->name('catalog.filter');
 
 Route::post('/catalog/filterByPrice',[CatalogController::class,'filterByPrice'])->name('catalog.filterByPrice');
 Route::post('/catalog/filterByCategory',[CatalogController::class,'filterByCategory'])->name('catalog.filterByCategory');

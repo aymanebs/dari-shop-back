@@ -20,7 +20,7 @@
         <div class="flex w-full">
           <div class="flex flex-col gap-2">
             <a
-              href="{{route('profile')}}"
+              href="{{route('profile.edit')}}"
               class="flex items-center gap-2 font-medium active:text-violet-900"
             >
               <svg
@@ -39,11 +39,7 @@
               </svg>
               Manage account</a
             >
-            <a
-              href="{{route('profile.edit')}}"
-              class="text-gray-500 duration-100 hover:text-rose-400"
-              >Profile information</a
-            >
+         
             <a
               href="{{route('profile.edit-adress')}}"
               class="text-gray-500 duration-100 hover:text-rose-400"
