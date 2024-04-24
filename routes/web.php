@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AuthController as AuthAuthController;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Seller\DashboardController as SellerDashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
@@ -14,6 +14,7 @@ use App\Http\Controllers\User\CatalogController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\PayementController;
+use App\Http\Controllers\Seller\PaymentController as SellerPaymentController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -71,6 +72,8 @@ Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 // Seller routes
 
 Route::resource('seller/products',SellerProductController::class);
+Route::get('/seller/dashboard',[SellerDashboardController::class,'index'])->name('seller.dashboard');
+
 
 // Customer routes
 

@@ -21,7 +21,7 @@ class HomeController extends Controller
          'jewelry_img.jpeg'
       ];
       $products = Product::all();
-      $latestProducts = Product::latest()->limit(6)->get();
+      $latestProducts = Product::where('status', 2)->latest()->limit(6)->get();
    
       $bestSellingProducts  = Product::whereHas('orders', function ($query) {
          $query->where('status', 2);

@@ -26,6 +26,7 @@
     <link href="
     https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
     " rel="stylesheet">
+    
 
 
     <style>
@@ -76,36 +77,7 @@
         </button>
       </div>
 
-      {{-- serach form --}}
-
-      <form id="searchForm" class="hidden h-9 w-2/5 items-center border md:flex bg-neutral-100">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="mx-3 h-4 w-4"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-          />
-        </svg>
-
-        <input
-          class="hidden w-11/12 outline-none md:block bg-neutral-100"
-          type="search"
-          placeholder="Search" 
-        />
-
-        <button class="ml-auto h-full bg-rose-500 px-4 hover:bg-rose-300">
-          Search
-        </button>
-      </form>
-
-      {{-- /serach form --}}
+     
 
    
       {{-- wishlist Cart Account --}}
@@ -595,5 +567,6 @@
 https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 "></script>
 <script type="module" src="{{asset('js/script.js')}}"></script>
+
 </body>
 </html>

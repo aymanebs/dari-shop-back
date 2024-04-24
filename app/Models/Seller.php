@@ -29,4 +29,9 @@ class Seller extends Model implements HasMedia
     public function products(){
         return $this->hasMany(Product::class);
     }
+
+    public function payments()
+    {
+        return $this->hasManyThrough(Payment::class, Product::class);
+    }
 }

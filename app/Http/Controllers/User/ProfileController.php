@@ -18,9 +18,7 @@ class ProfileController extends Controller
         return view('profile.edit');
     }
 
-    // public function wishlist(){
-    //     return view('profile.wishlist');
-    // }
+    
 
     public function editAdress(){
         return view('profile.edit-adress');

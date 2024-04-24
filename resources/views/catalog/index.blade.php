@@ -6,7 +6,7 @@
     <nav class="mx-auto w-full mt-4 max-w-[1200px] px-5">
         <ul class="flex items-center">
             <li class="cursor-pointer">
-                <a href="{{route('home')}}">
+                <a href="{{ route('home') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
                         <path
                             d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
@@ -26,6 +26,9 @@
     </div>
 
 
+
+
+
     <div class="relative py-4 ">
         <img class="w-full object-cover brightness-50 filter lg:h-[250px]" src="{{ asset('img/catalog_banner2.jpg') }}"
             alt="Living room image" />
@@ -37,11 +40,26 @@
             </h1>
 
 
+
+
         </div>
     </div>
 
 
-    <div class="py-5 flex justify-end items-center gap-3 mx-auto flex-grow max-w-[1200px]">
+    <div class="py-5  flex justify-end items-center gap-3 mx-auto flex-grow max-w-[1200px]">
+
+        {{-- serach form --}}
+
+        <form id="searchForm" class="hidden h-9 w-1/4 items-center border md:flex bg-neutral-100">
+            <button class="h-full bg-rose-500 px-2 md:px-4 hover:bg-rose-300">
+                Search
+            </button>
+            <input class="hidden ml-5 w-11/12 md:w-auto outline-none md:block bg-neutral-100" type="search"
+                placeholder="Search" />
+        </form>
+
+
+        {{-- /serach form --}}
         <div class="relative">
             <select id="sort_select_list"
                 class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
@@ -55,7 +73,7 @@
                 <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M5 8l5 5 5-5"></path>
                 </svg>
-                
+
             </div>
         </div>
     </div>
@@ -66,7 +84,7 @@
 
         <!-- sidebar  -->
 
-        <section class="hidden w-[300px] flex-shrink-0 px-4 lg:block">
+        <section class="w-full lg:w-[300px] px-4 lg:px-0 lg:block">
             <div class="flex border-b pb-5">
                 <div class="w-full">
                     <p class="mb-3 font-medium">CATEGORIES</p>
@@ -85,73 +103,58 @@
             </div>
 
             {{-- Price filter  --}}
-            
-            <div class="flex border-b py-5">
-                <div class="w-full">
-                    <p class=" mb-3 font-medium">PRICE</p>
 
-                    <div x-data="range()" x-init="mintrigger();
-                    maxtrigger()" class="relative max-w-xl w-full">
-                        <div>
-                            <input type="range" step="100" x-bind:min="min" x-bind:max="max"
-                                x-on:input="mintrigger" x-model="minprice"
-                                class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
+            <div class=" w-full">
+                <div class="flex border-b py-5">
+                    <div class="w-full">
+                        <p class="mb-3 font-medium">PRICE</p>
 
-                            <input type="range" step="100" x-bind:min="min" x-bind:max="max"
-                                x-on:input="maxtrigger" x-model="maxprice"
-                                class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
+                        <div x-data="range()" x-init="mintrigger();
+                        maxtrigger()" class="relative max-w-xl w-full ">
+                            <div>
+                                <input type="range" step="100" x-bind:min="min"
+                                    x-bind:max="max" x-on:input="mintrigger" x-model="minprice"
+                                    class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
 
-                            <div class="relative z-10 h-2">
+                                <input type="range" step="100" x-bind:min="min"
+                                    x-bind:max="max" x-on:input="maxtrigger" x-model="maxprice"
+                                    class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
 
-                                <div class="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-200"></div>
-
-                                <div class="absolute z-20 top-0 bottom-0 rounded-md bg-pink-400"
-                                    x-bind:style="'right:' + maxthumb + '%; left:' + minthumb + '%'"></div>
-
-                                <div class="absolute z-30 w-6 h-6 top-0 left-0 bg-pink-400 rounded-full -mt-2 -ml-1"
-                                    x-bind:style="'left: ' + minthumb + '%'"></div>
-
-                                <div class="absolute z-30 w-6 h-6 top-0 right-0 bg-pink-400 rounded-full -mt-2 -mr-3"
-                                    x-bind:style="'right: ' + maxthumb + '%'"></div>
-
+                                <div class="relative z-10 h-2">
+                                    <div class="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-200"></div>
+                                    <div class="absolute z-20 top-0 bottom-0 rounded-md bg-pink-400"
+                                        x-bind:style="'right:' + maxthumb + '%; left:' + minthumb + '%'"></div>
+                                    <div class="absolute z-30 w-6 h-6 top-0 left-0 bg-pink-400 rounded-full -mt-2 -ml-1"
+                                        x-bind:style="'left: ' + minthumb + '%'"></div>
+                                    <div class="absolute z-30 w-6 h-6 top-0 right-0 bg-pink-400 rounded-full -mt-2 -mr-3"
+                                        x-bind:style="'right: ' + maxthumb + '%'"></div>
+                                </div>
                             </div>
 
+                            <div class="flex justify-between items-center py-5">
+                                <form id="filter_form" class="flex items-center">
+                                    <div>
+                                        <input id="min-input" type="text" maxlength="5" x-on:input="mintrigger"
+                                            x-model="minprice"
+                                            class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
+                                    </div>
+                                    <div>
+                                        <input id="max-input" type="text" maxlength="5" x-on:input="maxtrigger"
+                                            x-model="maxprice"
+                                            class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
+                                    </div>
+                                    <div>
+                                        <button type="submit"
+                                            class="ml-2 px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600">Ok</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-
-                        <div class="flex justify-between items-center py-5">
-                            <form id="filter_form">
-                            <div>
-                                <input id="min-input" type="text" maxlength="5" x-on:input="mintrigger" x-model="minprice"
-                                    class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
-                            </div>
-                            <div>
-                                <input id="max-input" type="text" maxlength="5" x-on:input="maxtrigger" x-model="maxprice"
-                                    class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
-                            </div>
-                            <div>
-                            <button type="submit">ok</button>
-                            </div>
-                            </form>
-                        </div>
-
                     </div>
-
-
-                    {{-- <div class="flex w-full">
-                        <form id="filter_form">
-                            <div class="flex justify-between ">
-
-                                <input id="min-input" x-mask="99999" type="number" class="h-8 w-[90px] border pl-2"
-                                    placeholder="50" />
-                                <span class="px-3">-</span>
-                                <input id="max-input" x-mask="999999" type="number" class="h-8 w-[90px] border pl-2"
-                                    placeholder="99999" />
-                                <button type="submit">filter</button>
-                            </div>
-                        </form>
-                    </div> --}}
                 </div>
             </div>
+
+
         </section>
         <!-- /sidebar  -->
 
@@ -258,9 +261,37 @@
 
 
     </section>
+    {{-- Pagination start --}}
+
+    <div class="flex justify-center m-10 space-x-2">
+
+
+        @if ($products->onFirstPage())
+            <span
+                class="px-2 py-1 sm:px-4 sm:py-2 ml-1 mt-2 text-gray-600 border rounded-lg focus:outline-none">&laquo;</span>
+        @else
+            <a href="{{ $products->previousPageUrl() }}"
+                class="ring ring-primary bg-primary/20 px-2 py-1 sm:px-4 sm:py-2 ml-1 mt-2 text-gray-600 border rounded-lg focus:outline-none">&laquo;</a>
+        @endif
+
+        <!-- Display specific page links -->
+        @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+            <a href="{{ $url }}"
+                class="hover:bg-gray-100 px-2 py-1 sm:px-4 sm:py-2 ml-1 mt-2 text-gray-600 border rounded-lg focus:outline-none">{{ $page }}</a>
+        @endforeach
+
+        @if ($products->hasMorePages())
+            <a href="{{ $products->nextPageUrl() }}"
+                class="px-2 py-1 sm:px-4 sm:py-2 mt-2 text-gray-600 border rounded-lg hover:bg-gray-100 focus:outline-none">&raquo;</a>
+        @else
+            <span class="px-2 py-1 sm:px-4 sm:py-2 mt-2 text-gray-600 rounded-lg focus:outline-none">&raquo;</span>
+        @endif
+
+    </div>
+
+    {{-- pagination end --}}
 
     <script>
-
         const filter_form = document.getElementById('filter_form');
         const cards_container = document.querySelector('.cards_container');
         const categoryInputs = document.querySelectorAll('.categoryInput');
@@ -302,7 +333,7 @@
         })
 
         // search 
-        document.addEventListener('submit', function(event) {
+        searchForm.addEventListener('submit', function(event) {
             event.preventDefault();
             let searchValue = searchForm.querySelector('input').value;
 
@@ -332,22 +363,20 @@
             }
         });
 
+
         // filter by price eventlistener
         filter_form.addEventListener('submit', function() {
             const min = document.getElementById('min-input').value;
             const max = document.getElementById('max-input').value;
             console.log("min: ", min, "max: ", max);
-            // event.preventDefault();
+            event.preventDefault();
             filterProductsByPrice(min, max);
-
         })
 
-        
+
         // filter by category
         categoryInputs.forEach((input) => {
             input.addEventListener('change', function() {
-
-                
 
                 let selectedCatgories = [];
                 categoryInputs.forEach((input) => {
@@ -355,8 +384,6 @@
                         selectedCatgories.push(input.value);
                     }
                 })
-
-                console.log(" number selected: ", selectedCatgories.length);
 
                 if (selectedCatgories.length == 0) {
                     fetchAllProducts();
@@ -392,10 +419,10 @@
 
         // fetch  products
         function fetchProducts(products = []) {
-         
+
             cards_container.innerHTML = '';
             products.forEach((product) => {
-               
+
                 cards_container.innerHTML += `
                 <div class="flex flex-col">
                      <div class="relative flex">
@@ -485,6 +512,8 @@
 
         }
 
+        console.log("heeeeeeeeeeeeeeeeeeeeeeeeeeeere");
+
         // fetch all products
         function fetchAllProducts() {
 
@@ -528,7 +557,7 @@
                     cards_container.innerHTML = '';
                     let products = data.products;
 
-                   console.log("products: ", products);
+                    console.log("products: ", products);
 
                     fetchProducts(products);
 
@@ -536,7 +565,7 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    // Handle errors here
+
                 });
         }
 
