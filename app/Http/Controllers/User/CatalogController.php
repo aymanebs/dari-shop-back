@@ -16,7 +16,7 @@ class CatalogController extends Controller
         $categories = Category::all();
 
         $products = Product::where('status', 2)->get();
-        return view('catalog.index', compact('products','categories'));
+        return view('catalog.index', compact('products', 'categories'));
     }
 
     public function getProducts()
@@ -25,9 +25,8 @@ class CatalogController extends Controller
         foreach ($products as $product) {
             $product->image = $product->getFirstMediaUrl('products');
         }
-      
+
         return response()->json(['products' => $products]);
-    
     }
 
 
@@ -44,27 +43,36 @@ class CatalogController extends Controller
         return response()->json(['products' => $products]);
     }
 
-    public function filterByCategory(Request $request)
+
+
+    public function productsByCategory(Category $category, Request $request)
     {
-
-
-        $products = Product::where('status', 2)
-            ->whereHas('category', function ($query) use ($request) {
-                $query->whereIn('id', $request->category_ids);
-            })->get();
-
-        // dd($products);
-        // $links = $products->links('vendor.pagination.custom')->toHtml();
+       
+        $query = Product::where('status', 2)->whereHas('category', function ($query) use ($category) {
+            $query->where('id', $category->id);
+        });
+    
+        // Apply price range filter
+        if ($request->has(['min', 'max'])) {
+            $query->whereBetween('price', [$request->min, $request->max]);
+        }
+    
+        // Apply search filter
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+    
+        $products = $query->get();
 
         foreach ($products as $product) {
             $product->image = $product->getFirstMediaUrl('products');
         }
+    
+        // Process products as needed
+    
         return response()->json([
             'message' => 'success',
             'products' => $products,
-            // 'links' => $links
-
-
         ]);
     }
 
@@ -98,22 +106,22 @@ class CatalogController extends Controller
             'products' => $products
         ]);
     }
- 
+
 
     public function filter(Request $request)
     {
-       
+
 
         $min = json_decode($request->min);
         $max = json_decode($request->max);
         $category_ids = $request->category_ids;
 
-        
 
-       
-       
 
-        
+
+
+
+
         if ($request->category_ids && $request->min && $request->max) {
             $products = Product::where('status', 2)
                 ->whereBetween('price', [$min, $max])
@@ -149,18 +157,27 @@ class CatalogController extends Controller
         } else {
             $products = Product::where('status', 2)->get();
         }
-        
+
         foreach ($products as $product) {
             $product->image = $product->getFirstMediaUrl('products');
         }
-       
 
-     
+
+
 
         // Return the response or further process the data
         return response()->json([
             'products' => $products,
             'message' => 'success'
         ]);
+    }
+
+    public function showCategory($category)
+
+    {
+
+        $category = Category::where('id', $category)->first();
+        $products = Product::where('category_id', $category)->get();
+        return view('catalog.category', compact('products', 'category'));
     }
 }

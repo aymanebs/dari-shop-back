@@ -106,7 +106,7 @@
     <section class="mx-auto grid max-w-[1200px] grid-cols-2 px-5 lg:grid-cols-3 lg:gap-5">
       <!-- 1 -->
       @foreach ($categories as $key => $category)
-          <a href="#" class="flex justify-center items-center">
+          <a href="{{route('catalog.category',$category->id)}}" class="flex justify-center items-center">
               <div class="relative cursor-pointer">
                   <img class="object-cover w-[348.8px] h-[232.53px] brightness-50 duration-300 hover:brightness-100"
                       src="{{ asset('img/' . $categoryImages[$key]) }}" alt="Category image" />

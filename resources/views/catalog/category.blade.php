@@ -98,24 +98,6 @@
 
             <form id="filter_form">
 
-
-                <div class="flex border-b pb-5">
-                    <div class="w-full">
-                        <p class="mb-3 font-medium">CATEGORIES</p>
-                        @foreach ($categories as $category)
-                            <div class="flex w-full justify-between">
-                                <div class="flex justify-center items-center">
-                                    <input type="checkbox" class="categoryInput" value="{{ $category->id }}" />
-                                    <p class="ml-4">{{ $category->name }}</p>
-                                </div>
-                                <div>
-                                    <p class="text-gray-500">({{ $category->products->count() }})</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-
                 {{-- Price filter  --}}
 
                 <div class=" w-full">
@@ -149,19 +131,16 @@
                                 <div class="flex justify-between items-center py-5">
                                     <div class="flex items-center">
                                         <div>
-                                            <input id="min-input" type="text" maxlength="5" x-on:input="mintrigger"
+                                            <input id="min-input" type="number" maxlength="5" x-on:input="mintrigger"
                                                 x-model="minprice"
                                                 class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
                                         </div>
                                         <div>
-                                            <input id="max-input" type="text" maxlength="5" x-on:input="maxtrigger"
+                                            <input id="max-input" type="number" maxlength="5" x-on:input="maxtrigger"
                                                 x-model="maxprice"
                                                 class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
                                         </div>
-                                        {{-- <div>
-                                        <button type="submit"
-                                            class="ml-2 px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600">Ok</button>
-                                    </div> --}}
+
                                     </div>
                                 </div>
                             </div>
@@ -184,6 +163,10 @@
 
 
 
+
+
+
+
         </section>
 
 
@@ -199,6 +182,7 @@
 
 
 
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -206,98 +190,61 @@
             const searchForm = document.getElementById('searchForm');
             const searchInput = searchForm.querySelector('input[type="search"]');
 
-            fetchAllProducts();
 
 
-            filterForm.addEventListener('change', function() {
-                filterProducts();
-            });
+
+            const searchValue = searchInput.value.trim();
+
+
+            const categoryId = window.location.pathname.split('/').pop();
+
+            fetchCategoryProducts(categoryId);
+
 
             searchForm.addEventListener('submit', function(event) {
-
-
+                const searchInput = searchForm.querySelector('input[type="search"]');
                 event.preventDefault();
                 const searchValue = searchInput.value.trim();
-
-                filterProducts(searchValue);
-
-
+                fetchCategoryProducts(categoryId, null, null, searchValue);
             });
 
-            function filterProducts(searchValue = "") {
-                const categoyInputs = document.querySelectorAll('.categoryInput:checked');
-
-                const selectedCategories = Array.from(document.querySelectorAll('.categoryInput:checked')).map(
-                    input => input.value);
-
+            filterForm.addEventListener('change', function(event) {
                 const minPrice = document.getElementById('min-input').value;
                 const maxPrice = document.getElementById('max-input').value;
-
                 console.log('minPrice', minPrice);
                 console.log('maxPrice', maxPrice);
+                fetchCategoryProducts(categoryId, minPrice, maxPrice, searchValue);
+            });
 
 
-                fetch("{{ route('catalog.filter') }}", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content')
-                        },
-                        body: JSON.stringify({
-                            category_ids: selectedCategories,
-                            min: minPrice,
-                            max: maxPrice
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        let filteredProducts = data.products;
-                        if (searchValue) {
-                            console.log('data', data.products);
 
-                            filteredProducts = filteredProducts.filter(product =>
-                                product.name.toLowerCase().includes(searchValue.toLowerCase())
-                            );
-                        }
-                        renderProducts(filteredProducts);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            }
 
-            function fetchAllProducts() {
-                fetch('/catalog/getProducts', {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content')
-                        }
-                    })
+            function fetchCategoryProducts(categoryId, minPrice = null, maxPrice = null, searchInput = null) {
+                let url = `/catalog/${categoryId}/getProducts`;
+
+                // Append optional filters to the URL if provided
+                if (minPrice !== null && maxPrice !== null) {
+                    url += `?min=${minPrice}&max=${maxPrice}`;
+                }
+                if (searchInput !== null) {
+                    url += `${minPrice !== null || maxPrice !== null ? '&' : '?'}search=${searchInput}`;
+                }
+
+                fetch(url)
                     .then(response => response.json())
                     .then(data => {
                         renderProducts(data.products);
-
                     })
                     .catch(error => {
-                        console.error('Error:', error);
+                        console.error('Error fetching products:', error);
                     });
             }
-
-
-
-
 
 
 
 
             function renderProducts(products) {
                 const cardsContainer = document.querySelector('.cards_container');
-
-
-
                 cardsContainer.innerHTML = '';
 
                 if (products.length === 0) {

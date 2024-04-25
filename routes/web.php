@@ -117,10 +117,12 @@ Route::get('/catalog',[CatalogController::class,'index'])->name('catalog.index')
 Route::post('/catalog/filter',[CatalogController::class,'filter'])->name('catalog.filter');
 
 Route::post('/catalog/filterByPrice',[CatalogController::class,'filterByPrice'])->name('catalog.filterByPrice');
-Route::post('/catalog/filterByCategory',[CatalogController::class,'filterByCategory'])->name('catalog.filterByCategory');
 Route::get('/catalog/getProducts',[CatalogController::class,'getProducts'])->name('catalog.getProducts');
 Route::post('/catalog/search',[CatalogController::class,'search'])->name('catalog.search');
 Route::post('/catalog/sort',[CatalogController::class,'sort'])->name('catalog.sort');
+
+Route::get('catalog/{category}',[CatalogController::class,'showCategory'])->name('catalog.category');
+Route::get('catalog/{category}/getProducts',[CatalogController::class,'productsByCategory'])->name('catalog.getProductsByCategory');
 
 
 Route::get('/cartData',[UserCartController::class,'getCartData'])->name('cart.data');

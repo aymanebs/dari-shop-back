@@ -360,84 +360,27 @@
     <section
       x-show="desktopMenuOpen"
       @click.outside="desktopMenuOpen = false"
-      class="absolute left-0 right-0 z-10 w-full "
+      class=" fixed  left-0 right-0 z-10 w-full "
       style="display: none"
     >
-      <div class=" hidden md:flex absolute left-44 mx-auto flex max-w-[300px] py-5 bg-rose-500 ">
+      <div class="  hidden md:flex absolute left-44 mx-auto flex max-w-[300px] py-5 bg-rose-500 ">
         <div class="w-[300px] ">
           <ul class="px-5">
+
+            @foreach($categories as $category)
             <li
               class=" flex items-center gap-2 bg-rose-500 py-2 px-3 active:bg-rose-500 cursor-pointer hover:bg-neutral-100"
     
             >
-            <a href="{{route('catalog.alimentation')}}" class="flex items-center gap-2">
-              <img
-                width="15px"
-                height="15px"
-                src="{{asset('img/alimentation.svg')}}"
-                alt="Bedroom icon"
-              />   
+            <a href="{{route('catalog.category',$category->id)}}" class="flex items-center gap-2">
   
-             Alimentaion
+              {{$category->name}}
+             
             </a>
             </li>
+            @endforeach
 
-            <li
-              class="active:blue-900 flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-rose-500 cursor-pointer"
-            >
-            <a href="{{route('catalog.artisanat')}}" class="flex items-center gap-2">
-              <img
-                width="15px"
-                height="15px"
-                src="{{asset('img/artisanat.svg')}}"
-                alt="bedroom icon"
-              />
-              Artisanat
-            </a>
-            </li>
-
-
-            <li
-              class=" flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-rose-500 cursor-pointer"
-            >
-            <a href="{{route('catalog.beaute')}}" class="flex items-center gap-2">
-              <img
-                width="15px"
-                height="15px"
-                src="{{asset('img/beauty.svg')}}"
-                alt="bedroom icon"
-              />
-              Produits de beauté
-            </a>
-            </li>
-
-            <li
-              class="flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-rose-500 cursor-pointer"
-            >
-            <a href="{{route('catalog.textiles')}}" class="flex items-center gap-2">
-              <img
-                width="15px"
-                height="15px"
-                src="{{asset('img/textiles.svg')}}"
-                alt="bedroom icon"
-              />
-              Textiles
-            </a>
-            </li>
             
-            <li
-              class="active:blue-900 flex items-center gap-2 py-2 px-3 hover:bg-neutral-100 active:bg-rose-500 cursor-pointer"
-            >
-            <a href="{{route('catalog.decoration')}}" class="flex items-center gap-2">
-              <img
-                width="15px"
-                height="15px"
-                src="{{asset('img/decor.svg')}}"
-                alt="bedroom icon"
-              />
-              Decoration Interieure
-            </a>
-            </li>
             
 
            
