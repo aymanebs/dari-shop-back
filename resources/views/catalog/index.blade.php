@@ -284,10 +284,6 @@
 
     <div class="pagination_container flex justify-center m-10 space-x-2">
 
-
-        {{-- {{ $products->links('vendor.pagination.custom') }} --}}
-
-
     </div>
 
     {{-- pagination end --}}
@@ -658,20 +654,29 @@
                     .then(response => response.json())
                     .then(data => {
                         renderProducts(data.products);
+
                     })
                     .catch(error => {
                         console.error('Error:', error);
                     });
             }
 
+
+
+
+
+
             function renderProducts(products) {
                 const cardsContainer = document.querySelector('.cards_container');
+
+
+
                 cardsContainer.innerHTML = '';
 
                 if (products.length === 0) {
                     const noProductMessage = `
-            <div class="text-center text-gray-600">No products found</div>
-        `;
+                <div class="text-center text-gray-600">No products found</div>
+                `;
                     cardsContainer.innerHTML = noProductMessage;
                 } else {
 
@@ -762,7 +767,11 @@
                     </div>
                     `;
                         cardsContainer.innerHTML += card;
+
                     });
+
+
+
                 }
 
             }

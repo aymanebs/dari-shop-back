@@ -25,7 +25,9 @@ class CatalogController extends Controller
         foreach ($products as $product) {
             $product->image = $product->getFirstMediaUrl('products');
         }
+      
         return response()->json(['products' => $products]);
+    
     }
 
 
