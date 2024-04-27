@@ -32,7 +32,7 @@ class Product extends Model implements HasMedia
     ];
 
     public function isInStock(){
-        return $this->stock!=0 ?  true : false;
+        return $this->stock>0 ?  true : false;
     }
     public function getStatus(){
         return self::$statusOptions[$this->status];

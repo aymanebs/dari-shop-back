@@ -15,10 +15,10 @@ class PermissionSeeder extends Seeder
     {
         $permissions=[
 
-            ['name'=>'access-admin-dashboard'],
-            ['name'=>'access-seller-dashboard'],
+            ['name'=>'access-admin-dashboard'], 
             ['name' =>'access-cart'],
-            ['name' =>'access-user-profile']
+            ['name' =>'access-user-profile'],
+            ['name'=>'access-seller-dashboard']
 
         ];
 

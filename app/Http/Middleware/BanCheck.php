@@ -18,7 +18,7 @@ class BanCheck
     {
         if ( Auth::check() && Auth::user()->status == 2){
             Auth::logout();
-            abort(403,'Your account has been banned');
+            abort(403,'Your account has been banned, please contact the administrator.');
             
         }
         return $next($request);

@@ -81,7 +81,7 @@
 
         <!-- step two -->
         <div class="step">
-            <p class="text-md text-gray-700 leading-tight text-center mt-8 mb-5">Your presence on the social network</p>
+            <p class="text-md text-gray-700 leading-tight text-center mt-8 mb-5"></p>
             <ul class="grid w-full gap-6 md:grid-cols-2 mt-8 mb-5">
                 <li>
                     <input type="radio" id="buyer-radio" name="role" value="1"
@@ -140,7 +140,7 @@
 
         <!-- step three -->
         <div class="step">
-            <p class="text-md text-gray-700 leading-tight text-center mt-8 mb-5">We will never sell it</p>
+            <p class="text-md text-gray-700 leading-tight text-center mt-8 mb-5"></p>
 
 
             <div class="mb-6" id="sellerFields" style="display: none">
@@ -205,14 +205,14 @@
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <script>
-        var currentTab = 0; // Current tab is set to be the first tab (0)
-        showTab(currentTab); // Display the current tab
+        var currentTab = 0; 
+        showTab(currentTab); 
 
         function showTab(n) {
-            // This function will display the specified tab of the form...
+            
             var x = document.getElementsByClassName("step");
             x[n].style.display = "block";
-            //... and fix the Previous/Next buttons:
+            
             if (n == 0) {
                 document.getElementById("prevBtn").style.display = "none";
             } else {
@@ -223,29 +223,29 @@
             } else {
                 document.getElementById("nextBtn").innerHTML = "Next";
             }
-            //... and run a function that will display the correct step indicator:
+   
             fixStepIndicator(n)
         }
 
         function nextPrev(n) {
-            // This function will figure out which tab to display
+       
             var x = document.getElementsByClassName("step");
 
 
-            // Exit the function if any field in the current tab is invalid:
+          
             if (n == 1 && !validateForm()) return false;
-            // Hide the current tab:
+           
             x[currentTab].style.display = "none";
-            // Increase or decrease the current tab by 1:
+           
             currentTab = currentTab + n;
 
             if (currentTab == 2) {
                 toggleSellerFields();
             }
 
-            // if you have reached the end of the form...
+           
             if (currentTab >= x.length) {
-                // ... the form gets submitted:
+        
                 document.getElementById("loading-overlay").style.display = "flex";
                 document.getElementById("signUpForm").submit();
                 return false;
@@ -257,7 +257,7 @@
         }
 
         function validateForm() {
-            // This function deals with validation of the form fields
+          
             var pass = document.getElementById("password");
             var confirmPass = document.getElementById("password_confirmation");
             var email = document.getElementById("email");
@@ -267,7 +267,7 @@
 
 
 
-            // Check the selected role
+       
             var buyerRadio = document.getElementById("buyer-radio");
             if (buyerRadio.checked) {
                 var justifyInput = document.getElementById("justify");
@@ -278,7 +278,7 @@
                 console.log(y);
             }
 
-            // A loop that checks every input field in the current tab:
+        
             for (i = 0; i < y.length; i++) {
 
                 // If a field is empty...
@@ -300,11 +300,11 @@
                 email.className += " invalid";
                 valid = false;
             }
-            // If the valid status is true, mark the step as finished and valid:
+         
             if (valid) {
                 document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
             }
-            return valid; // return the valid status
+            return valid; 
         }
 
         function fixStepIndicator(n) {

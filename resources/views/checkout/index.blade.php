@@ -387,7 +387,7 @@
         // function that fetches the order data from the database
         function fetchOrderData() {
 
-            fetch('http://127.0.0.1:8000/cartData')
+            fetch('http://127.0.0.1:8000/cart/cartData')
                 .then(response => response.json())
                 .then(data => {
                     // Handle the received data here

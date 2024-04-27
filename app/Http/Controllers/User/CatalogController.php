@@ -30,18 +30,18 @@ class CatalogController extends Controller
     }
 
 
-    public function filterByPrice(Request $request)
-    {
-        $min = json_decode($request->min);
-        $max = json_decode($request->max);
+    // public function filterByPrice(Request $request)
+    // {
+    //     $min = json_decode($request->min);
+    //     $max = json_decode($request->max);
 
-        $products = Product::where('status', 2)->whereBetween('price', [$min, $max])->get();
-        foreach ($products as $product) {
-            $product->image = $product->getFirstMediaUrl('products');
-        }
+    //     $products = Product::where('status', 2)->whereBetween('price', [$min, $max])->get();
+    //     foreach ($products as $product) {
+    //         $product->image = $product->getFirstMediaUrl('products');
+    //     }
 
-        return response()->json(['products' => $products]);
-    }
+    //     return response()->json(['products' => $products]);
+    // }
 
 
 
@@ -76,36 +76,24 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function search(Request $request)
-    {
+    // public function search(Request $request)
+    // {
 
-        $keyword = $request->keyword;
+    //     $keyword = $request->keyword;
 
-        $products = Product::where('status', 2)->where('name', 'like', '%' . $keyword . '%')
-            ->orWhereHas('category', function ($query) use ($keyword) {
-                $query->where('name', 'like', '%' . $keyword . '%');
-            })->get();
-        foreach ($products as $product) {
-            $product->image = $product->getFirstMediaUrl('products');
-        }
-        return response()->json([
-            'products' => $products,
-        ]);
-    }
+    //     $products = Product::where('status', 2)->where('name', 'like', '%' . $keyword . '%')
+    //         ->orWhereHas('category', function ($query) use ($keyword) {
+    //             $query->where('name', 'like', '%' . $keyword . '%');
+    //         })->get();
+    //     foreach ($products as $product) {
+    //         $product->image = $product->getFirstMediaUrl('products');
+    //     }
+    //     return response()->json([
+    //         'products' => $products,
+    //     ]);
+    // }
 
-    public function sort()
-    {
-
-        $criteria = request()->criteria;
-        $direction = request()->direction;
-        $products = Product::OrderBy($criteria, $direction)->get();
-        foreach ($products as $product) {
-            $product->image = $product->getFirstMediaUrl('products');
-        }
-        return response()->json([
-            'products' => $products
-        ]);
-    }
+ 
 
 
     public function filter(Request $request)

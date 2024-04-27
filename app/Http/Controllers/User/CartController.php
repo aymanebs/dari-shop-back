@@ -71,29 +71,30 @@ class CartController extends Controller
     {
         $productId = $request->productId;
         $quantity = $request->quantity;
+        
         $cart = auth()->user()->customer->cart;
        
-
-        // Retrieve the product from the database
         $product = Product::findOrFail($productId);
-        
 
-        // Check if the requested quantity exceeds the available stock
+
+        
         if ($quantity > $product->stock) {
             return response()->json(['error' => 'Requested quantity exceeds available stock']);
         }
 
-        // Update the quantity in the database
-        $cartProduct = CartProduct::where('cart_id', $cart->id)->first();
-       
+  
+        $cartProduct = CartProduct::where('cart_id', $cart->id)
+                                     ->where('product_id', $productId)
+                                    ->first();
+
+
 
         if ($cartProduct) {
             $cartProduct->quantity = $quantity;
             $cartProduct->save();
         }
       
-
-        // You can return a success response if needed
+  
         return response()->json(['message' => 'Quantity updated successfully', 'quantity' => $request->quantity]);
     }
 

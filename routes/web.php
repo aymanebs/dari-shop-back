@@ -35,98 +35,95 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 //     return view('welcome');
 // });
 
-Route::post('/orderCreate',[CheckoutController::class,'createOrder'])->name('order.create');
+Route::post('/orderCreate', [CheckoutController::class, 'createOrder'])->name('order.create');
 
 
 
-Route::get('/login',[AuthAuthController::class,'login'])->name('login_page');
-Route::get('/registration',[AuthAuthController::class,'registration'])->name('registration');
-Route::post('/register',[AuthAuthController::class,'register'])->name('register');
-Route::post('/login',[AuthAuthController::class,'loginUser'])->name('login');
+Route::get('/login', [AuthAuthController::class, 'login'])->name('login_page');
+Route::get('/registration', [AuthAuthController::class, 'registration'])->name('registration');
+Route::post('/register', [AuthAuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthAuthController::class, 'loginUser'])->name('login');
 
 Route::middleware('authCheck')->group(function () {
-    Route::get('/home',[Controller::class,'index'])->name('home');  
-    Route::get('/logout',[AuthAuthController::class,'logout'])->name('logout');
+     Route::get('/home', [Controller::class, 'index'])->name('home');
+     Route::get('/logout', [AuthAuthController::class, 'logout'])->name('logout');
 });
 
 // Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
 // Admin routes 
-Route::prefix('admin')->group(function(){
-    Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('admin.dashboard');
-    Route::resource('categories',CategoryController::class);
-    Route::post('/users/ban/{user}',[AdminUserController::class,'banUser'])->name('users.ban');
-    Route::post('/users/unban/{user}',[AdminUserController::class,'unbanUser'])->name('users.unban');
-    Route::resource('users',AdminUserController::class);
-    Route::get('/products',[AdminProductController::class,'index'])->name('admin.products');
-    Route::post('/products/accept/{product}',[AdminProductController::class,'accept'])->name('products.accept');
-    Route::delete('/products/destroy/{product}',[AdminProductController::class,'destroy'])->name('products.destroy');
+Route::prefix('admin')->middleware(['authCheck', 'adminCheck'])->group(function () {
+     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+     Route::resource('categories', CategoryController::class);
+     Route::post('/users/ban/{user}', [AdminUserController::class, 'banUser'])->name('users.ban');
+     Route::post('/users/unban/{user}', [AdminUserController::class, 'unbanUser'])->name('users.unban');
+     Route::resource('users', AdminUserController::class);
+     Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products');
+     Route::post('/products/accept/{product}', [AdminProductController::class, 'accept'])->name('products.accept');
+     Route::delete('/products/destroy/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
 });
 
 
 // Home routes
 
-Route::get('/',[HomeController::class,'index'])->name('home')->middleware('banCheck');
-Route::get('/about',[HomeController::class,'about'])->name('about');
-Route::get('/contact',[HomeController::class,'contact'])->name('contact');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/details/{product}', [SellerProductController::class, 'show'])->name('product.details')->middleware('banCheck');
+// Catalog routes
+
+Route::prefix('catalog')->middleware('banCheck')->group(function () {
+
+     Route::get('/', [CatalogController::class, 'index'])->name('catalog.index');
+     Route::post('/filter', [CatalogController::class, 'filter'])->name('catalog.filter');
+     Route::get('/getProducts', [CatalogController::class, 'getProducts'])->name('catalog.getProducts');
+     Route::get('/{category}', [CatalogController::class, 'showCategory'])->name('catalog.category');
+     Route::get('/{category}/getProducts', [CatalogController::class, 'productsByCategory'])->name('catalog.getProductsByCategory');
+});
 
 
 // Seller routes
 
-Route::resource('seller/products',SellerProductController::class);
-Route::get('/seller/dashboard',[SellerDashboardController::class,'index'])->name('seller.dashboard');
+Route::prefix('seller')->middleware(['authCheck', 'banCheck', 'sellerCheck'])->group(function () {
+     Route::get('/dashboard', [SellerDashboardController::class, 'index'])->name('seller.dashboard');
+     Route::resource('/products', SellerProductController::class);
+});
+
+
 
 
 // Customer routes
 
-     // Profile routes
-// Route::get('/profile',[ProfileController::class,'index'])->name('profile');
-Route::get('/profile/edit',[ProfileController::class,'edit'])->name('profile.edit');
-Route::patch('/profile/update/{customer}',[ProfileController::class,'update'])->name('profile.update');
-Route::get('/profile/edit-adress',[ProfileController::class,'editAdress'])->name('profile.edit-adress');
-Route::post('/profile/update-password',[ProfileController::class,'updatePassword'])->name('profile.update-password');
-Route::get('/profile/edit-password',[ProfileController::class,'editPassword'])->name('profile.edit-password');
-Route::patch('/profile/update-adress',[ProfileController::class,'updateAdress'])->name('profile.update-adress');
-Route::get('/profile/orders',[ProfileController::class,'listOrders'])->name('profile.orders');
-    
-     // Cart routes
-Route::get('/cart',[UserCartController::class,'index'])->name('cart.index');
-Route::post('/cart/add/{product}',[UserCartController::class,'store'])->name('cart.store');
-Route::delete('/cart/remove/{product}',[UserCartController::class,'removeFromCart'])->name('cart.remove');
-Route::get('/details/{product}',[SellerProductController::class,'show'])->name('product.details');
-Route::post('/update-cart',[UserCartController::class,'updateCart'])->name('cart.update');
+// Profile routes
 
-     // Checkout routes
-
-Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout');
-Route::post('/checkout/payment',[CheckoutController::class,'payment'])->name('checkout.payment');
-Route::get('/checkout/confirmation',[CheckoutController::class,'confirmation'])->name('checkout.confirmation');
-Route::get('/checkout/failure',[CheckoutController::class,'failure'])->name('checkout.failure');
-Route::get('/checkout/review/{orderId}',[CheckoutController::class,'review'])->name('checkout.review');
+Route::prefix('profile')->middleware(['authCheck', 'banCheck', 'customerCheck'])->group(function () {
+     Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+     Route::patch('/update/{customer}', [ProfileController::class, 'update'])->name('profile.update');
+     Route::get('/edit-adress', [ProfileController::class, 'editAdress'])->name('profile.edit-adress');
+     Route::patch('/update-adress', [ProfileController::class, 'updateAdress'])->name('profile.update-adress');
+     Route::get('/edit-password', [ProfileController::class, 'editPassword'])->name('profile.edit-password');
+     Route::post('/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
+     Route::get('/orders', [ProfileController::class, 'listOrders'])->name('profile.orders');
+});
 
 
-
-// Catalog routes
-
-Route::get('/catalog/alimentation',[CatalogController::class,'alimentation'])->name('catalog.alimentation');
-Route::get('/catalog/textiles',[CatalogController::class,'textiles'])->name('catalog.textiles');
-Route::get('/catalog/artisanat',[CatalogController::class,'artisanat'])->name('catalog.artisanat');
-Route::get('/catalog/beaute',[CatalogController::class,'beaute'])->name('catalog.beaute');
-Route::get('/catalog/decoration',[CatalogController::class,'decoration'])->name('catalog.decoration');
-Route::get('/catalog',[CatalogController::class,'index'])->name('catalog.index');
-Route::post('/catalog/filter',[CatalogController::class,'filter'])->name('catalog.filter');
-
-Route::post('/catalog/filterByPrice',[CatalogController::class,'filterByPrice'])->name('catalog.filterByPrice');
-Route::get('/catalog/getProducts',[CatalogController::class,'getProducts'])->name('catalog.getProducts');
-Route::post('/catalog/search',[CatalogController::class,'search'])->name('catalog.search');
-Route::post('/catalog/sort',[CatalogController::class,'sort'])->name('catalog.sort');
-
-Route::get('catalog/{category}',[CatalogController::class,'showCategory'])->name('catalog.category');
-Route::get('catalog/{category}/getProducts',[CatalogController::class,'productsByCategory'])->name('catalog.getProductsByCategory');
+// Cart routes
+Route::prefix('cart')->middleware('authCheck', 'banCheck', 'customerCheck')->group(function () {
+     Route::get('/', [UserCartController::class, 'index'])->name('cart.index');
+     Route::post('/add/{product}', [UserCartController::class, 'store'])->name('cart.store');
+     Route::delete('/remove/{product}', [UserCartController::class, 'removeFromCart'])->name('cart.remove');
+     Route::post('/update-cart', [UserCartController::class, 'updateCart'])->name('cart.update');
+     Route::get('/cartData', [UserCartController::class, 'getCartData'])->name('cart.data');
+});
 
 
-Route::get('/cartData',[UserCartController::class,'getCartData'])->name('cart.data');
+// Checkout routes
 
+Route::prefix('checkout')->middleware('authCheck', 'banCheck', 'customerCheck')->group(function () {
 
-
-
+     Route::get('/', [CheckoutController::class, 'index'])->name('checkout');
+     Route::post('/payment', [CheckoutController::class, 'payment'])->name('checkout.payment');
+     Route::get('/confirmation', [CheckoutController::class, 'confirmation'])->name('checkout.confirmation');
+     Route::get('/failure', [CheckoutController::class, 'failure'])->name('checkout.failure');
+     Route::get('/review/{orderId}', [CheckoutController::class, 'review'])->name('checkout.review');
+});

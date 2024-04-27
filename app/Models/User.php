@@ -11,7 +11,7 @@ class User extends Authenticatable implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
-    
+
     protected $fillable = [
         'name',
         'email',
@@ -19,29 +19,36 @@ class User extends Authenticatable implements HasMedia
         'status'
     ];
 
-    public static $statusOptions=[
+    public static $statusOptions = [
         '1' => 'active',
         '2' => 'banned'
     ];
 
     //function to get the status
 
-    public function getStatus(){
+    public function getStatus()
+    {
         return self::$statusOptions[$this->status];
     }
 
 
     // Relations between models 
 
-    public function roles(){
+    public function roles()
+    {
         return $this->belongsToMany(Role::class);
     }
 
-    public function customer(){
+    public function customer()
+    {
         return $this->hasOne(Customer::class);
     }
 
-    public function seller(){
+    public function seller()
+    {
         return $this->hasOne(Seller::class);
     }
+
+
+    
 }

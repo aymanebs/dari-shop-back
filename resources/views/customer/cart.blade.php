@@ -53,7 +53,7 @@
                                             data-stock="{{ $product->stock }}">&#43;</button>
                                     </div>
                                 </td>
-                                <td class="mx-auto text-center px-4">&#36;{{ $totals[$product->id] }}</td>
+                                <td class="mx-auto text-center px-4 " id="totalPrice_{{ $product->id }}" data-price="{{$product->price}}">&#36;{{ $totals[$product->id] }}</td>
                                 <td class="align-middle px-4">
                                     <form action="{{ route('cart.remove', ['product' => $product->id]) }}" method="POST">
                                         @csrf
@@ -101,24 +101,31 @@
                 let quantity = parseInt(quantityElement.innerText);
 
                 const stock = parseInt(this.dataset.stock);
-                if(stock <= quantity) {
+                if (stock <= quantity) {
                     return;
                 }
                 quantity++;
                 quantityElement.innerText = quantity;
 
-                // Disable increment button if quantity exceeds stock
+                const totalPriceElement = document.getElementById('totalPrice_' + productId);
+                console.log("dtaset price",totalPriceElement.dataset
+                    .price);
                 
+                const price = parseFloat(totalPriceElement.dataset
+                    .price);
+                totalPriceElement.innerText = '$' + (quantity * price);
+                
+
                 console.log("stock: ", stock);
                 console.log("quantity: ", quantity);
 
                 if (quantity >= stock) {
                     this.disabled = true;
                 }
-                
+
                 setTimeout(() => {
                     updateQuantity(productId, quantity);
-                }, 500); 
+                }, 500);
             });
         });
 
@@ -130,19 +137,26 @@
                 if (quantity > 1) {
                     quantity--;
                     quantityElement.innerText = quantity;
+
+                    const totalPriceElement = document.getElementById('totalPrice_' + productId);
+                   
+                    const price = parseFloat(totalPriceElement.dataset
+                    .price);
+                    totalPriceElement.innerText = '$' + (quantity * price); 
+
+
                     // localStorage.setItem("product_" + productId + "_quantity", quantity);              
                     setTimeout(() => {
                         updateQuantity(productId, quantity);
-                    }, 500); 
+                    }, 500);
                 }
             });
         });
 
-        function updateQuantity(productId, quantity)
-        {
+        function updateQuantity(productId, quantity) {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            
-            fetch('/update-cart', {
+
+            fetch('cart/update-cart', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -158,7 +172,7 @@
                     if (!response.ok) {
                         throw new Error('Failed to update quantity');
                     }
-                
+
                 })
                 .then(data => {
                     console.log("data :", data);

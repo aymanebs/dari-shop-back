@@ -84,7 +84,7 @@
       @auth
       <div class="hidden gap-3 md:!flex">
       
-
+        @if(Auth::user()->roles->first()->title =='Customer')
         <a
           href="{{route('cart.index')}}"
           class="flex cursor-pointer flex-col items-center justify-center"
@@ -104,6 +104,7 @@
 
           <p class="text-xs">Cart</p>
         </a>
+        @endif
 
         @if(Auth::user()->roles->first()->title =='Seller')
         
@@ -134,7 +135,7 @@
 
 
 
-
+        @if(Auth::user()->roles->first()->title =='Customer')
         <a
           href="{{route('profile.edit')}}"
           class="relative flex cursor-pointer flex-col items-center justify-center"
@@ -165,6 +166,7 @@
 
           <p class="text-xs">Account</p>
         </a>
+        @endif
       </div>
       @endauth
       {{-- /wishlist Cart Account --}}

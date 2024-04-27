@@ -4,9 +4,13 @@
         <!-- breadcrumbs  -->
 
         <nav class="mx-auto w-full mt-4 max-w-[1200px] px-5">
+
+         
+
+
             <ul class="flex items-center">
               <li class="cursor-pointer">
-                <a href="index.html">
+                <a href="{{route('home')}}">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -31,10 +35,28 @@
           </nav>
           <!-- /breadcrumbs  -->
         </div>
+
+
+        @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+          <strong class="font-bold">Success!</strong>
+          <span class="block sm:inline">{{ session('success') }}</span>
+        </div>
+        @endif
+        @if (session('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong class="font-bold">Error!</strong>
+          <span class="block sm:inline">{{ session('error') }}</span>
+        
+        </div>
+        @endif
   
         <section
           class="container flex-grow mx-auto max-w-[1200px] border-b py-5 lg:grid lg:grid-cols-2 lg:py-10"
         >
+      
+
+
           <!-- image gallery -->
   
           <div class="container mx-auto px-4">
