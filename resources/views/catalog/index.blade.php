@@ -53,7 +53,7 @@
 
         {{-- serach form --}}
 
-        <form id="searchForm" class="w-full md:w-1/4 flex items-center border bg-neutral-100">
+        <form id="searchForm" class="w-full md:w-1/5 flex items-center border bg-neutral-100">
             <input class="ml-2 w-full md:w-auto px-2 outline-none bg-transparent" type="search" placeholder="Search" />
             <button class="h-full bg-rose-500 px-2 hover:bg-rose-300">
                 Search
@@ -61,23 +61,7 @@
         </form>
 
 
-        {{-- /serach form --}}
-        {{-- <div class="relative">
-            <select id="sort_select_list"
-                class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                <option value="price">Price: Low to High</option>
-                <option value="price" class="desc">Price: High to low</option>
-                <option value="name">Name: A to Z</option>
-                <option value="name" class="desc">Name: Z to A</option>
-                <option value="created_at">New arrivals</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M5 8l5 5 5-5"></path>
-                </svg>
-
-            </div>
-        </div> --}}
+    
     </div>
 
 

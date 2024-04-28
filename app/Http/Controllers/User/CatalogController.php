@@ -30,70 +30,40 @@ class CatalogController extends Controller
     }
 
 
-    // public function filterByPrice(Request $request)
-    // {
-    //     $min = json_decode($request->min);
-    //     $max = json_decode($request->max);
-
-    //     $products = Product::where('status', 2)->whereBetween('price', [$min, $max])->get();
-    //     foreach ($products as $product) {
-    //         $product->image = $product->getFirstMediaUrl('products');
-    //     }
-
-    //     return response()->json(['products' => $products]);
-    // }
-
-
-
     public function productsByCategory(Category $category, Request $request)
     {
-       
+
         $query = Product::where('status', 2)->whereHas('category', function ($query) use ($category) {
             $query->where('id', $category->id);
         });
-    
-        // Apply price range filter
+
+        
         if ($request->has(['min', 'max'])) {
             $query->whereBetween('price', [$request->min, $request->max]);
         }
-    
-        // Apply search filter
+
+        
         if ($request->has('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
-    
+
         $products = $query->get();
 
         foreach ($products as $product) {
             $product->image = $product->getFirstMediaUrl('products');
         }
-    
-        // Process products as needed
-    
+
+       
+
         return response()->json([
             'message' => 'success',
             'products' => $products,
         ]);
     }
 
-    // public function search(Request $request)
-    // {
+    
 
-    //     $keyword = $request->keyword;
 
-    //     $products = Product::where('status', 2)->where('name', 'like', '%' . $keyword . '%')
-    //         ->orWhereHas('category', function ($query) use ($keyword) {
-    //             $query->where('name', 'like', '%' . $keyword . '%');
-    //         })->get();
-    //     foreach ($products as $product) {
-    //         $product->image = $product->getFirstMediaUrl('products');
-    //     }
-    //     return response()->json([
-    //         'products' => $products,
-    //     ]);
-    // }
-
- 
 
 
     public function filter(Request $request)
@@ -103,12 +73,6 @@ class CatalogController extends Controller
         $min = json_decode($request->min);
         $max = json_decode($request->max);
         $category_ids = $request->category_ids;
-
-
-
-
-
-
 
         if ($request->category_ids && $request->min && $request->max) {
             $products = Product::where('status', 2)
@@ -150,10 +114,6 @@ class CatalogController extends Controller
             $product->image = $product->getFirstMediaUrl('products');
         }
 
-
-
-
-        // Return the response or further process the data
         return response()->json([
             'products' => $products,
             'message' => 'success'

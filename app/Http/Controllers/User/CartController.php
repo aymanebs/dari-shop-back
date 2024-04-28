@@ -106,7 +106,7 @@ class CartController extends Controller
         $order = auth()->user()->customer->orders()->where('status', 1)->first();
         // Check if the cart is empty after removing the product
         if ($cart->products->isEmpty()) {
-            $cart->delete(); // Delete the cart
+            $cart->delete(); 
         }
         if ($order) {
             $order->products()->detach($product->id);

@@ -141,14 +141,6 @@
         <section
             class="cards_container redSection flex-grow   mx-auto grid max-w-[1200px] grid-cols-2 gap-3 px-5 pb-10 lg:grid-cols-3 ">
 
-
-
-
-
-
-
-
-
         </section>
 
 
